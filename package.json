@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "For our final project in Tech Talent Pipeline at NYC College of Technology (City Tech), we created a debt tracking application \r that focuses on expense optimization and debt elimination.",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -14,7 +15,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/annarosecodes/DebtTracer/issues"
   },

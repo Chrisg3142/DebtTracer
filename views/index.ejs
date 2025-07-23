@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Finance AI</title>
+</head>
+<body>
+  <h1>Ask the Finance AI</h1>
+  <form method="POST" action="/ask">
+    <input type="text" name="question" placeholder="Ask about investing, stocks, etc" required />
+    <button type="submit">Ask</button>
+  </form>
+
+  <% if (response) { %>
+    <h2>Answer:</h2>
+    <p><%= response %></p>
+  <% } %>
+  </body>
+</html>

@@ -1,18 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Finance AI</title>
+  <meta charset="UTF-8">
+  <title>DebtTracer AI Chat</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 2rem;
+    }
+    #chat-box {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 1rem;
+      height: 500px;
+      overflow-y: auto;
+    }
+    .message {
+      margin: 1rem 0;
+    }
+    .user {
+      text-align: right;
+      color: #0074D9;
+    }
+    .bot {
+      text-align: left;
+      color: #333;
+    }
+    form {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    input[type="text"] {
+      width: 40%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      margin-left: 0.5rem;
+      font-size: 1rem;
+      background-color: #0074D9;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <h1>Ask the Finance AI</h1>
-  <form method="POST" action="/ask">
-    <input type="text" name="question" placeholder="Ask about investing, stocks, etc" required />
-    <button type="submit">Ask</button>
+  <h1>💬 Talk to DebtTracer AI</h1>
+
+  <div id="chat-box"></div>
+
+  <form id="chat-form">
+    <input type="text" id="user-input" placeholder="Ask your finance question..." autocomplete="off" required />
+    <button type="submit">Send</button>
   </form>
 
-  <% if (response) { %>
-    <h2>Answer:</h2>
-    <p><%= response %></p>
-  <% } %>
-  </body>
+  <script>
+    const chatBox = document.getElementById("chat-box");
+    const form = document.getElementById("chat-form");
+    const input = document.getElementById("user-input");
+
+    let chatHistory = [];
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const userMessage = input.value.trim();
+      if (!userMessage) return;
+
+      // Add user's message to chat box
+      chatHistory.push({ sender: "user", text: userMessage });
+      appendMessage("user", userMessage);
+      input.value = "";
+
+      try {
+        const res = await fetch("/ask", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ message: userMessage })
+        });
+
+        const data = await res.json();
+        const aiReply = data.response;
+        chatHistory.push({ sender: "bot", text: aiReply });
+        appendMessage("bot", aiReply);
+      } catch (err) {
+        appendMessage("bot", "⚠️ Error talking to AI");
+      }
+    });
+
+    function appendMessage(sender, text) {
+      const div = document.createElement("div");
+      div.className = `message ${sender}`;
+      div.textContent = text;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
 </html>

@@ -51,8 +51,10 @@ app.post("/ask", async (req, res) => {
 
     res.json({ response: botReply });
   } catch (error) {
+    console.error("AI API error:", error);
     res.status(500).json({ response: "Sorry, something went wrong." });
   }
+  
 });
 
 app.listen(port, () => {

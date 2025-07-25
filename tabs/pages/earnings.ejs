@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+
+<main>
+  <section class="earnings-section">
+    <h2>Earnings</h2>
+
+    <form action="/add-earning" method="POST" class="earnings-form">
+      <div>
+        <input name="source" placeholder="Source" required />
+      </div>
+      <div>
+        <input name="amount" type="number" step="0.01" placeholder="Amount" required />
+      </div>
+      <button type="submit">Add Earning</button>
+    </form>
+
+    <ul class="earnings-list">
+      <% if (earnings.length === 0) { %>
+        <li>No earnings yet.</li>
+      <% } else { %>
+        <% earnings.forEach(e => { %>
+          <li><strong><%= e.source %></strong>: $<%= e.amount.toFixed(2) %></li>
+        <% }) %>
+      <% } %>
+    </ul>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

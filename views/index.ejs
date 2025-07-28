@@ -11,7 +11,16 @@
   </head>
 
   <body>
-    <h1>hello world</h1>
+    <h1><%= title %></h1>
+    <!-- Renders "Movie Details" -->
+
+    <% if (movie) { %>
+    <!-- Only shows if movie exists -->
+    <h2><%= movie.title %></h2>
+    <p>Year: <%= movie.year %></p>
+    <% } else { %>
+    <p>No movie found</p>
+    <% } %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="index.js" charset="utf-8"></script>
   </body>

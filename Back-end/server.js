@@ -3,7 +3,11 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import Movie from "./models/movie.js";
+import User from "./models/User.js";
+import Income from "./models/Income.js";
+import Expense from "./models/Expense.js";
+import Movie from "./models/Movie.js";
+import Debt from "./models/Debt.js";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = 3000;
@@ -37,6 +41,48 @@ app.get("/", async (req, res) => {
       error: "Failed to load movie",
       message: err.message, // More detailed error
     });
+  }
+});
+app.get("/dashboard", async (req, res) => {
+  try {
+    const userId = "65a1b2c3d4e5f6a7b8c9d001"; // Assuming you have authentication
+    const user = await User.findById(userId);
+
+    const incomes = await Income.find({ userId });
+    const expenses = await Expense.find({ userId });
+
+    const totalIncome = incomes.reduce((sum, income) => sum + income.amount, 0);
+    const totalExpenses = expenses.reduce(
+      (sum, expense) => sum + expense.amount,
+      0
+    );
+
+    // Combine recent transactions
+    const transactions = [
+      ...incomes.map((i) => ({
+        type: "income",
+        description: i.source,
+        amount: i.amount,
+        date: i.createdAt,
+      })),
+      ...expenses.map((e) => ({
+        type: "expense",
+        description: e.name,
+        amount: -e.amount,
+        date: e.date,
+      })),
+    ]
+      .sort((a, b) => b.date - a.date)
+      .slice(0, 10);
+
+    res.render("dashboard.ejs", {
+      user,
+      totalIncome,
+      totalExpenses,
+      transactions,
+    });
+  } catch (err) {
+    res.status(500).render("error", { error: err.message });
   }
 });
 

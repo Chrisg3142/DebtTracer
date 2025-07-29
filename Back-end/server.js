@@ -1,10 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
-import { dirname } from "path";
+import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import Movie from "./models/Movie.js";
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = 3000;
@@ -12,19 +11,13 @@ const port = 3000;
 // Database Connection
 mongoose
   .connect(
-    "mongodb+srv://debtTracer:Secret123@debttracer.n8eexb1.mongodb.net/",
-
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000,
-    }
+    "mongodb+srv://debtTracer:Secret123@debttracer.n8eexb1.mongodb.net/?retryWrites=true&w=majority&appName=debtTracer"
   )
-  .then(() => console.log("Connected to MongoDB via Mongoose"))
+  .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Connection error:", err));
 
-app.set("view engine", "ejs");
-app.set("views", "./views");
+app.set("views", join(__dirname, "../views")); // Go up one level from Back-end
+app.use(express.static(join(__dirname, "../public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 

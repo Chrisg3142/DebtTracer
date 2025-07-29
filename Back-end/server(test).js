@@ -11,7 +11,7 @@ const port = 3000;
 // Database Connection
 mongoose
   .connect(
-    "mongodb+srv://debtTracer:Secret123@debttracer.n8eexb1.mongodb.net/debtTracer?retryWrites=true&w=majority&appName=debtTracer"
+    "mongodb+srv://debtTracer:Secret123@debttracer.n8eexb1.mongodb.net/sample_mflix?retryWrites=true&w=majority&appName=debtTracer"
   )
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Connection error:", err));

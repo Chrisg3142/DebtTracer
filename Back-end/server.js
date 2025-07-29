@@ -28,23 +28,6 @@ app.use(express.static("public"));
 // Updated route using Mongoose
 app.get("/", async (req, res) => {
   try {
-    const movie = await Movie.findOne({ title: "Back to the Future" });
-    console.log(movie);
-
-    res.render("index.ejs", {
-      title: "Movie Details",
-      movie: movie || null, // movie will be null if not found
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).render("error", {
-      error: "Failed to load movie",
-      message: err.message, // More detailed error
-    });
-  }
-});
-app.get("/dashboard", async (req, res) => {
-  try {
     const userId = "65a1b2c3d4e5f6a7b8c9d001"; // Assuming you have authentication
     const user = await User.findById(userId);
 

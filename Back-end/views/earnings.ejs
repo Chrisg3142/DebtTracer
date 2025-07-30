@@ -1,29 +1,198 @@
 <%- include('partials/header') %>
 
-<main>
+<main class="container">
   <section class="earnings-section">
-    <h2>Earnings</h2>
+    <h1 class="section-title">Income Tracker</h1>
 
-    <form action="/add-earning" method="POST" class="earnings-form">
-      <div>
-        <input name="source" placeholder="Source" required />
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert alert-danger">
+        <i class="fas fa-exclamation-circle"></i> <%= error %>
       </div>
-      <div>
-        <input name="amount" type="number" step="0.01" placeholder="Amount" required />
+    <% } %>
+    
+    <% if (typeof success !== 'undefined' && success) { %>
+      <div class="alert alert-success">
+        <i class="fas fa-check-circle"></i> <%= success %>
       </div>
-      <button type="submit">Add Earning</button>
-    </form>
+    <% } %>
 
-    <ul class="earnings-list">
-      <% if (earnings.length === 0) { %>
-        <li>No earnings yet.</li>
-      <% } else { %>
-        <% earnings.forEach(e => { %>
-          <li><strong><%= e.source %></strong>: $<%= e.amount.toFixed(2) %></li>
-        <% }) %>
-      <% } %>
-    </ul>
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 class="card-title">Add New Income</h2>
+      </div>
+      <div class="card-body">
+        <form action="/earnings" method="POST" class="income-form">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="source" class="form-label">Income Source*</label>
+              <div class="input-group">
+                <select class="form-select" id="source-select" name="source-select" required
+                  onchange="handleSourceChange(this)">
+                  <option value="" disabled <%= !formData || !formData.source ? 'selected' : '' %>>Select a source</option>
+                  <option value="Salary" <%= formData && formData.source === 'Salary' ? 'selected' : '' %>>Salary</option>
+                  <option value="Freelance" <%= formData && formData.source === 'Freelance' ? 'selected' : '' %>>Freelance</option>
+                  <option value="Bonus" <%= formData && formData.source === 'Bonus' ? 'selected' : '' %>>Bonus</option>
+                  <option value="Investment" <%= formData && formData.source === 'Investment' ? 'selected' : '' %>>Investment</option>
+                  <option value="Rental" <%= formData && formData.source === 'Rental' ? 'selected' : '' %>>Rental Income</option>
+                  <option value="Other" <%= formData && formData.source === 'Other' ? 'selected' : '' %>>Other (Specify Below)</option>
+                </select>
+                <input type="text" 
+                      class="form-control <%= formData && formData.source === 'Other' ? '' : 'd-none' %>" 
+                      id="source-custom" 
+                      name="source-custom" 
+                      placeholder="Enter custom source"
+                      value="<%= formData && formData.source === 'Other' ? formData.customSource : '' %>">
+              </div>
+              <input type="hidden" 
+                    id="source" 
+                    name="source" 
+                    value="<%= formData ? formData.source : '' %>"
+                    required>
+            </div>
+            
+            <div class="col-md-6">
+              <label for="amount" class="form-label">Amount*</label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="amount" 
+                  name="amount" 
+                  step="0.01" 
+                  min="0.01" 
+                  placeholder="0.00" 
+                  required
+                  value="<%= typeof formData !== 'undefined' ? formData.amount : '' %>"
+                >
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="date" class="form-label">Date*</label>
+              <input 
+                type="date" 
+                class="form-control" 
+                id="date" 
+                name="date" 
+                required
+                value="<%= typeof formData !== 'undefined' ? formData.date : new Date().toISOString().split('T')[0] %>"
+              >
+            </div>
+
+            <div class="col-md-4">
+              <label for="frequency" class="form-label">Frequency*</label>
+              <select class="form-select" id="frequency" name="frequency" required>
+                <option value="one-time" <%= typeof formData !== 'undefined' && formData.frequency === 'one-time' ? 'selected' : '' %>>One-time</option>
+                <option value="weekly" <%= typeof formData !== 'undefined' && formData.frequency === 'weekly' ? 'selected' : '' %>>Weekly</option>
+                <option value="biweekly" <%= typeof formData !== 'undefined' && formData.frequency === 'biweekly' ? 'selected' : '' %>>Bi-weekly</option>
+                <option value="monthly" <%= typeof formData !== 'undefined' && formData.frequency === 'monthly' ? 'selected' : '' %>>Monthly</option>
+              </select>
+            </div>
+
+            <div class="col-md-4 d-flex align-items-end">
+              <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-plus-circle"></i> Add Income
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <% if (typeof earnings !== 'undefined' && earnings.length > 0) { %>
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h2 class="card-title">Income History</h2>
+          <span class="badge bg-success fs-6">
+            Total: $<%= earnings.reduce((sum, e) => sum + e.amount, 0).toFixed(2) %>
+          </span>
+        </div>
+        
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Date</th>
+                  <th>Source</th>
+                  <th>Amount</th>
+                  <th>Frequency</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% earnings.forEach(income => { %>
+                  <tr>
+                    <td><%= income.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %></td>
+                    <td><%= income.source %></td>
+                    <td class="fw-bold">$<%= income.amount.toFixed(2) %></td>
+                    <td>
+                      <span class="badge bg-<%= 
+                        income.frequency === 'one-time' ? 'secondary' : 
+                        income.frequency === 'weekly' ? 'info' :
+                        income.frequency === 'biweekly' ? 'primary' : 'warning'
+                      %>">
+                        <%= income.frequency.charAt(0).toUpperCase() + income.frequency.slice(1) %>
+                      </span>
+                    </td>
+                    <td>
+                      <form action="/earnings/<%= income._id %>?_method=DELETE" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                          <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    <% } else { %>
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> No income records found. Add your first income above.
+      </div>
+    <% } %>
   </section>
 </main>
 
 <%- include('partials/footer') %>
+
+<script>
+  function handleSourceChange(select) {
+    const customInput = document.getElementById('source-custom');
+    const hiddenInput = document.getElementById('source');
+    
+    if (select.value === 'Other') {
+      customInput.classList.remove('d-none');
+      customInput.focus();
+      hiddenInput.value = customInput.value || 'Other';
+    } else {
+      customInput.classList.add('d-none');
+      hiddenInput.value = select.value;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const customInput = document.getElementById('source-custom');
+    const select = document.getElementById('source-select');
+    const hiddenInput = document.getElementById('source');
+    
+    // Initialize based on current selection
+    if (select.value === 'Other') {
+      customInput.classList.remove('d-none');
+    } else {
+      customInput.classList.add('d-none');
+    }
+    
+    // Update hidden field when custom input changes
+    customInput.addEventListener('input', function() {
+      if (select.value === 'Other') {
+        hiddenInput.value = this.value || 'Other';
+      }
+    });
+  });
+</script>
+

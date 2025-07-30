@@ -1,0 +1,33 @@
+{
+  "name": "debttracer",
+  "version": "1.0.0",
+  "description": "For our final project in Tech Talent Pipeline at NYC College of Technology (City Tech), we created a debt tracking application \r that focuses on expense optimization and debt elimination.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annarosecodes/DebtTracer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annarosecodes/DebtTracer/issues"
+  },
+  "homepage": "https://github.com/annarosecodes/DebtTracer#readme",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "method-override": "^3.0.0",
+    "mongodb": "6.17",
+    "mongoose": "^8.16.5"
+  }
+}

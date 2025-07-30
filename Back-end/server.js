@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+import session from "express-session";
+import authRoutes from "./routes/authRoutes.js";
+import ejs from "ejs";
+import { isAuthenticated } from "./middleware/authMiddleware.js";
 import User from "./models/User.js";
 import Income from "./models/Income.js";
 import Expense from "./models/Expense.js";
@@ -20,15 +24,39 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Connection error:", err));
 
-app.set("views", join(__dirname, "../views")); // Go up one level from Back-end
+app.set("view engine", "ejs");
+app.engine("ejs", ejs.renderFile);
+app.set("views", join(__dirname, "views")); // Go up one level from Back-end
 app.use(express.static(join(__dirname, "../public")));
+// Body parser
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+
+// Session middleware
+app.use(
+  session({
+    secret: "your-secret-key", // Should be in environment variables
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false, // Set to true in production with HTTPS
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+    },
+  })
+);
+
+app.use(async (req, res, next) => {
+  if (req.session.userId) {
+    res.locals.user = await User.findById(req.session.userId);
+  }
+  next();
+});
+
+app.use("/auth", authRoutes);
 
 // Updated route using Mongoose
-app.get("/", async (req, res) => {
+app.get("/dashboard", async (req, res) => {
   try {
-    const userId = "65a1b2c3d4e5f6a7b8c9d001"; // Assuming you have authentication
+    const userId = req.session.userId; // Assuming you have authentication
     const user = await User.findById(userId);
 
     const incomes = await Income.find({ userId });
@@ -67,6 +95,10 @@ app.get("/", async (req, res) => {
   } catch (err) {
     res.status(500).render("error", { error: err.message });
   }
+});
+
+app.get("/", (req, res) => {
+  res.redirect(req.session.userId ? "/dashboard" : "/auth/login");
 });
 
 app.listen(port, () => {

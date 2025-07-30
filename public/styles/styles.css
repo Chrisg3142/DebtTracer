@@ -1,3 +1,12 @@
-h1 {
-  color: red;
+html , body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+margin: 10px solid red;
+display: flex;
+justify-content: space-between;
+align-items: center;
 }

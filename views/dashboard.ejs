@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Debt Tracker - Dashboard</title>
-    <link rel="stylesheet" href="/styles/main.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Welcome, <%= user.name %></h1>
-    </header>
+
+
+
+    <%- include("partials/header.ejs") %>
+
 
     <main>
       <section class="summary">
@@ -46,6 +39,8 @@
           <% }) %>
         </div>
       </section>
-    </main>
-  </body>
-</html>
+    </body>
+  </main>
+    <%- include("partials/footer.ejs") %>
+
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles/auth.css" />
+  </head>
+  <body>
+    <div class="auth-container">
+      <h1>Register</h1>
+
+      <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert error"><%= error %></div>
+      <% } %>
+
+      <form action="/auth/register" method="POST">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input
+            type="text"
+            name="name"
+            value="<%= formData?.name || '' %>"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            value="<%= formData?.email || '' %>"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Password (min 8 characters)</label>
+          <input type="password" name="password" minlength="8" required />
+        </div>
+
+        <button type="submit">Register</button>
+      </form>
+
+      <p>Already have an account? <a href="/auth/login">Login here</a></p>
+    </div>
+  </body>
+</html>

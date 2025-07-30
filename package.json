@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -23,9 +23,14 @@
     "axios": "^1.10.0",
     "bcryptjs": "^3.0.2",
     "body-parser": "^2.2.0",
+<<<<<<< HEAD
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "mongodb": "6.17",
     "mongoose": "^8.16.5"
+=======
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+>>>>>>> a9e95b3cb32540c245bb6ee414fc93b49bc32015
   }
 }

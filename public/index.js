@@ -42,13 +42,18 @@ function appendMessage(sender, text) {
 
 window.addEventListener("DOMContentLoaded", async () => {
     try {
-    const res = await fetch("/welcome");
-    const data = await res.json();
-    const welcomeMessage = data.response;
-
-    chatHistory.push({ sender: "bot", text: welcomeMessage });
-    appendMessage("bot", welcomeMessage);
+      // Wake up backend/AI
+      await fetch("/wake");
+  
+      // Now fetch welcome message
+      const res = await fetch("/welcome");
+      const data = await res.json();
+      const welcomeMessage = data.response;
+  
+      chatHistory.push({ sender: "bot", text: welcomeMessage });
+      appendMessage("bot", welcomeMessage);
     } catch (err) {
-    appendMessage("bot", "⚠️ Failed to load welcome message.");
+      appendMessage("bot", "⚠️ Failed to load welcome message.");
     }
-});
+  });
+  

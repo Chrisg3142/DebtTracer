@@ -9,21 +9,22 @@ const proxyToken = process.env.PROXY_API_TOKEN;
 export default async function askAI(chatHistory) {
   try {
     const response = await axios.post(
-      proxyUrl,
+      proxyUrl, //proxy server url for sending requests 
       {
-        messages: chatHistory,
+        messages: chatHistory, //messages between user and ai 
         temperature: 0.7,
       },
       {
         headers: {
           "Content-Type": "application/json",
-          "x-api-token": proxyToken,
+          "x-api-token": proxyToken, //proxy server
         },
       }
     );
 
     return response.data.choices[0].message.content;
   } catch (error) {
+    //debugging for proxy server
     if (error.response) {
       console.error("AI API error status:", error.response.status);
       console.error("AI API error headers:", error.response.headers);

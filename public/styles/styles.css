@@ -10,3 +10,112 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 }
+/* login css */
+/* Login css *//* Global container */
+.auth-container {
+  background-color: #201e3f;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Inria Sans", sans-serif;
+}
+
+/* Main login/register box */
+.login-container {
+  background-color: white;
+  width: 580px;
+  padding: 40px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.login_logo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login_logo, .logo_title {
+  font-size: 10px;
+  color: white;
+  margin: 10px 0;
+}
+/* Logo */
+.login_logo , img {
+  width: 300px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Title styling */
+.logo_title {
+  font-size: 48px;
+  color: #1d2854;
+  margin: 10px 0;
+}
+
+
+
+/* Form layout */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+.form-group {
+  width: 100%;
+  text-align: left;
+}
+
+.form-group label {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 5px;
+  display: block;
+  color: #1d2854;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Button styling */
+.login-button {
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  background-color: #1d2854;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.login_button:hover {
+  background-color: #131b3d;
+}
+
+/* Link below button */
+.switch-link {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.switch-link a {
+  color: #1d2854;
+  text-decoration: underline;
+}

@@ -24,7 +24,18 @@ export default async function askAI(chatHistory) {
 
     return response.data.choices[0].message.content;
   } catch (error) {
-    console.error("AI API error:", error.response?.data || error.message);
+    if (error.response) {
+      console.error("AI API error status:", error.response.status);
+      console.error("AI API error headers:", error.response.headers);
+      console.error("AI API error data:", error.response.data);
+    } else if (error.request) {
+      console.error("No response received:", error.request);
+    } else {
+      console.error("Error setting up request:", error.message);
+    }
+    console.error(error.stack);
     throw new Error("AI service error");
   }
+  
 }
+

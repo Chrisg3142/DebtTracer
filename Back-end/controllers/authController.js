@@ -11,9 +11,10 @@ export const renderRegister = (req, res) => {
 
 // Handle registration
 export const registerUser = async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
+  // Destructure with default empty strings to ensure they're always defined added the empty strings
+  const { name = "", email = "", password } = req.body;
 
+  try {
     // Check if user exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -31,10 +32,11 @@ export const registerUser = async (req, res) => {
     req.session.userId = user._id;
     res.redirect("/dashboard");
   } catch (err) {
+    console.error("Registration error:", err);
     res.render("auth/register", {
       title: "Register",
-      error: "Registration failed",
-      formData: { name, email },
+      error: "Registration failed. Please try again.",
+      formData: { name: req.body.name || "", email: req.body.email || "" },
     });
   }
 };

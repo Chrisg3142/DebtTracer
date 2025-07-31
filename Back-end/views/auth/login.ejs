@@ -22,13 +22,15 @@
             type="email"
             name="email"
             value="<%= typeof formData !== 'undefined' ? formData.email || '' : '' %>"
+            placeholder="Email"
             required
           />
         </div>
 
         <div class="form-group" id="password-field">
           <label>Password:</label>
-          <input type="password" name="password" required />
+          <input type="password" name="password" placeholder="Password" required />
+          
         </div>
         <div class="submit-button">
           <button type="submit" class="login_button">Login</button>

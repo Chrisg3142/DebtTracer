@@ -16,4 +16,38 @@ body {
     max-width: 700px;
     margin-bottom: 20px;
   }
+
+  footer {
+    background-color: #f9f9f9;
+    padding: 20px;
+    text-align: center;
+    margin-top: 200px;
+    border-top: 1px solid #a2a2a2;
+  }
+  
+  .footer-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .footer-links {
+    margin-bottom: 10px;
+  }
+  
+  .footer-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+  }
+  
+  .footer-links a:hover {
+    text-decoration: underline;
+  }
+  
+  footer p {
+    font-size: 13px;
+    color: #666;
+  }
+  
   

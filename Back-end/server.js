@@ -4,14 +4,19 @@ import bodyParser from "body-parser";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import session from "express-session";
-import authRoutes from "./routes/authRoutes.js";
 import ejs from "ejs";
-import { isAuthenticated } from "./middleware/authMiddleware.js";
+import methodOverride from "method-override";
+
+//import models
 import User from "./models/User.js";
-import Income from "./models/Income.js";
-import Expense from "./models/Expense.js";
-import Movie from "./models/Movie.js";
-import Debt from "./models/Debt.js";
+
+//import routes
+import authRoutes from "./routes/authRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
+import earningsRoutes from "./routes/earningsRoutes.js";
+import expensesRoutes from "./routes/expensesRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = 3000;
@@ -30,6 +35,7 @@ app.set("views", join(__dirname, "views")); // Go up one level from Back-end
 app.use(express.static(join(__dirname, "../public")));
 // Body parser
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 // Session middleware
 app.use(
@@ -51,51 +57,12 @@ app.use(async (req, res, next) => {
   next();
 });
 
+// Route middleware
 app.use("/auth", authRoutes);
-
-// Updated route using Mongoose
-app.get("/dashboard", async (req, res) => {
-  try {
-    const userId = req.session.userId; // Assuming you have authentication
-    const user = await User.findById(userId);
-
-    const incomes = await Income.find({ userId });
-    const expenses = await Expense.find({ userId });
-
-    const totalIncome = incomes.reduce((sum, income) => sum + income.amount, 0);
-    const totalExpenses = expenses.reduce(
-      (sum, expense) => sum + expense.amount,
-      0
-    );
-
-    // Combine recent transactions
-    const transactions = [
-      ...incomes.map((i) => ({
-        type: "income",
-        description: i.source,
-        amount: i.amount,
-        date: i.createdAt,
-      })),
-      ...expenses.map((e) => ({
-        type: "expense",
-        description: e.name,
-        amount: -e.amount,
-        date: e.date,
-      })),
-    ]
-      .sort((a, b) => b.date - a.date)
-      .slice(0, 10);
-
-    res.render("dashboard.ejs", {
-      user,
-      totalIncome,
-      totalExpenses,
-      transactions,
-    });
-  } catch (err) {
-    res.status(500).render("error", { error: err.message });
-  }
-});
+app.use("/dashboard", dashboardRoutes);
+app.use("/earnings", earningsRoutes);
+app.use("/expenses", expensesRoutes);
+app.use("/profile", profileRoutes);
 
 app.get("/", (req, res) => {
   res.redirect(req.session.userId ? "/dashboard" : "/auth/login");

@@ -1,8 +1,14 @@
 import express from "express";
+import { isAuthenticated } from "../middleware/authMiddleware.js";
+import User from "../models/User.js";
+import Income from "../models/Income.js";
+import Expense from "../models/Expense.js";
 
-app.get("/dashboard", async (req, res) => {
+const router = express.Router();
+
+router.get("/", isAuthenticated, async (req, res) => {
   try {
-    const userId = req.session.userId; // Assuming you have authentication
+    const userId = req.session.userId;
     const user = await User.findById(userId);
 
     const incomes = await Income.find({ userId });
@@ -14,7 +20,6 @@ app.get("/dashboard", async (req, res) => {
       0
     );
 
-    // Combine recent transactions
     const transactions = [
       ...incomes.map((i) => ({
         type: "income",
@@ -32,7 +37,7 @@ app.get("/dashboard", async (req, res) => {
       .sort((a, b) => b.date - a.date)
       .slice(0, 10);
 
-    res.render("dashboard.ejs", {
+    res.render("dashboard", {
       user,
       totalIncome,
       totalExpenses,
@@ -42,3 +47,5 @@ app.get("/dashboard", async (req, res) => {
     res.status(500).render("error", { error: err.message });
   }
 });
+
+export default router;

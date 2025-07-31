@@ -10,7 +10,13 @@ const expenseSchema = new mongoose.Schema({
   name: { type: String, required: true },
   amount: { type: Number, required: true },
   isRecurring: { type: Boolean, default: false },
+  frequency: {
+    // NEW FIELD
+    type: String,
+    enum: ["one-time", "weekly", "monthly"],
+    default: "one-time",
+  },
+  nextOccurrence: { type: Date }, // NEW FIELD
   date: { type: Date, default: Date.now },
 });
-
 export default mongoose.model("Expense", expenseSchema);

@@ -2,7 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
+  height: 100%;
   font-family: Arial, sans-serif;
 }
 
@@ -238,13 +238,17 @@ footer {
 .social-links {
   height: 100%;
   width: 100%;
+  margin: 0;
 }
 
 .social-links li {
   display: inline-block;
-  margin: 0 20px;
   flex-direction: row;
   height: auto;
   width: auto;
+
   /* gap: 20px; */
+}
+footer p {
+  margin: 0;
 }

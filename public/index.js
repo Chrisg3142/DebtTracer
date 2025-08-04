@@ -59,6 +59,18 @@ window.addEventListener("DOMContentLoaded", async () => {
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
     }
+    // Load previous chat history
+    async function loadChatHistory() {
+        try {
+        const res = await fetch("/chat/history");
+        const data = await res.json();
+        data.history.forEach((msg) => {
+            appendMessage(msg.role === "user" ? "user" : "bot", msg.content);
+        });
+        } catch (err) {
+        console.error("Failed to load chat history:", err);
+        }
+    }
   
     // Wake + Load welcome message
     try {  
@@ -73,5 +85,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       console.error("Error loading welcome message:", err);
       appendMessage("bot", "⚠️ Failed to load welcome message.");
     }
+    await loadChatHistory();
+
   });
   

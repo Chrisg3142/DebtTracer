@@ -1,9 +1,10 @@
-html , body {
+html, body {
   margin: 0;
   padding: 0;
   height: 100vh;
   font-family: Arial, sans-serif;
 }
+
 
 /* login css */
 /* Login css *//* Global container */
@@ -212,6 +213,7 @@ footer {
   padding: 20px;
   /* position: relative; */
   bottom: 0;
+  height: 10%;
   width: 100%;
 }
 .footer-container {

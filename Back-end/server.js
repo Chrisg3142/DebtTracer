@@ -1,11 +1,12 @@
 import express from "express";
-import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import session from "express-session";
 import ejs from "ejs";
 import methodOverride from "method-override";
+import "dotenv/config";
+import connectDB from "./config/db.js";
 
 //import models
 import User from "./models/User.js";
@@ -22,17 +23,13 @@ const app = express();
 const port = 3000;
 
 // Database Connection
-mongoose
-  .connect(
-    "mongodb+srv://debtTracer:Secret123@debttracer.n8eexb1.mongodb.net/debtTracer?retryWrites=true&w=majority&appName=debtTracer"
-  )
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("Connection error:", err));
+await connectDB();
 
 app.set("view engine", "ejs");
 app.engine("ejs", ejs.renderFile);
 app.set("views", join(__dirname, "views")); // Go up one level from Back-end
 app.use(express.static(join(__dirname, "../public")));
+
 // Body parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -40,12 +37,12 @@ app.use(methodOverride("_method"));
 // Session middleware
 app.use(
   session({
-    secret: "your-secret-key", // Should be in environment variables
+    secret: process.env.SESSION_SECRET, // Should be in environment variables
     resave: false,
     saveUninitialized: false,
     cookie: {
       secure: false, // Set to true in production with HTTPS
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      maxAge: 30 * 60 * 1000, // half hour
     },
   })
 );

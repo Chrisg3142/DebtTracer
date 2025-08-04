@@ -7,6 +7,7 @@ import ejs from "ejs";
 import methodOverride from "method-override";
 import "dotenv/config";
 import connectDB from "./config/db.js";
+import resultsRoutes from "./routes/resultsRoutes.js";
 
 //import models
 import User from "./models/User.js";
@@ -60,6 +61,7 @@ app.use("/dashboard", dashboardRoutes);
 app.use("/earnings", earningsRoutes);
 app.use("/expenses", expensesRoutes);
 app.use("/profile", profileRoutes);
+app.use("/results", resultsRoutes);
 
 app.get("/", (req, res) => {
   res.redirect(req.session.userId ? "/dashboard" : "/auth/login");

@@ -1,0 +1,265 @@
+<%- include('partials/header') %>
+
+<main class="container">
+  <section class="expenses-section">
+    <h1 class="section-title">Expense Tracker</h1>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert alert-danger">
+        <i class="fas fa-exclamation-circle"></i> <%= error %>
+      </div>
+    <% } %>
+    
+    <% if (typeof success !== 'undefined' && success) { %>
+      <div class="alert alert-success">
+        <i class="fas fa-check-circle"></i> <%= success %>
+      </div>
+    <% } %>
+
+    <% if (typeof expenses !== 'undefined') { %>
+      <% const upcomingRecurring = expenses.filter(e => e.isRecurring && e.nextOccurrence && new Date(e.nextOccurrence) <= new Date(Date.now() + 7*24*60*60*1000)); %>
+      <% if (upcomingRecurring.length > 0) { %>
+        <div class="alert alert-warning">
+          <i class="fas fa-bell"></i> You have <%= upcomingRecurring.length %> recurring expenses due soon:
+          <ul class="mt-2 mb-0">
+            <% upcomingRecurring.forEach(expense => { %>
+              <li>
+                <strong><%= expense.name %></strong> ($<%= expense.amount.toFixed(2) %>) 
+                due <%= expense.nextOccurrence.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) %>
+                <% if (new Date(expense.nextOccurrence) < new Date()) { %>
+                  <span class="badge bg-danger ms-2">OVERDUE</span>
+                <% } %>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+    <% } %>
+
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 class="card-title">Add New Expense</h2>
+      </div>
+      <div class="card-body">
+        <form action="/expenses" method="POST" class="expense-form">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="category" class="form-label">Category*</label>
+              <select class="form-select" id="category" name="category" required>
+                <option value="" disabled <%= !formData || !formData.category ? 'selected' : '' %>>Select a category</option>
+                <option value="Housing" <%= formData && formData.category === 'Housing' ? 'selected' : '' %>>Housing</option>
+                <option value="Food" <%= formData && formData.category === 'Food' ? 'selected' : '' %>>Food</option>
+                <option value="Transportation" <%= formData && formData.category === 'Transportation' ? 'selected' : '' %>>Transportation</option>
+                <option value="Utilities" <%= formData && formData.category === 'Utilities' ? 'selected' : '' %>>Utilities</option>
+                <option value="Entertainment" <%= formData && formData.category === 'Entertainment' ? 'selected' : '' %>>Entertainment</option>
+              </select>
+            </div>
+            
+            <div class="col-md-4">
+              <label for="name" class="form-label">Expense Name*</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="name" 
+                name="name" 
+                placeholder="e.g. Groceries, Rent" 
+                required
+                value="<%= typeof formData !== 'undefined' ? formData.name : '' %>"
+              >
+            </div>
+
+            <div class="col-md-4">
+              <label for="amount" class="form-label">Amount*</label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="amount" 
+                  name="amount" 
+                  step="0.01" 
+                  min="0.01" 
+                  placeholder="0.00" 
+                  required
+                  value="<%= typeof formData !== 'undefined' ? formData.amount : '' %>"
+                >
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="date" class="form-label">Date*</label>
+              <input 
+                type="date" 
+                class="form-control" 
+                id="date" 
+                name="date" 
+                required
+                value="<%= typeof formData !== 'undefined' ? formData.date : new Date().toISOString().split('T')[0] %>"
+              >
+            </div>
+
+            <div class="col-md-4">
+              <label for="frequency" class="form-label">Frequency*</label>
+              <select class="form-select" id="frequency" name="frequency" <%= !formData || !formData.isRecurring ? 'disabled' : '' %>>
+                <option value="one-time" <%= formData && formData.frequency === 'one-time' ? 'selected' : '' %>>One-time</option>
+                <option value="weekly" <%= formData && formData.frequency === 'weekly' ? 'selected' : '' %>>Weekly</option>
+                <option value="monthly" <%= formData && formData.frequency === 'monthly' ? 'selected' : '' %>>Monthly</option>
+              </select>
+            </div>
+
+            <div class="col-md-4 d-flex align-items-center">
+              <div class="form-check form-switch">
+                <input 
+                  class="form-check-input" 
+                  type="checkbox" 
+                  id="isRecurring" 
+                  name="isRecurring"
+                  <%= formData && formData.isRecurring === 'on' ? 'checked' : '' %>
+                >
+                <label class="form-check-label" for="isRecurring">Recurring Expense</label>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus-circle"></i> Add Expense
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <% if (typeof expenses !== 'undefined' && expenses.length > 0) { %>
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h2 class="card-title">Expense History</h2>
+          <div>
+            <span class="badge bg-danger fs-6 me-2">
+              Total: $<%= expenses.reduce((sum, e) => sum + e.amount, 0).toFixed(2) %>
+            </span>
+            <span class="badge bg-info fs-6">
+              Recurring: <%= expenses.filter(e => e.isRecurring).length %>
+            </span>
+          </div>
+        </div>
+        
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Date</th>
+                  <th>Category</th>
+                  <th>Description</th>
+                  <th>Amount</th>
+                  <th>Recurrence</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% expenses.forEach(expense => { %>
+                  <tr class="<%= expense.isRecurring && expense.nextOccurrence && new Date(expense.nextOccurrence) < new Date() ? 'table-danger' : '' %>">
+                    <td>
+                      <%= expense.date.toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric',
+                        year: expense.date.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined
+                      }) %>
+                    </td>
+                    <td>
+                      <span class="badge bg-<%= 
+                        expense.category === 'Housing' ? 'primary' : 
+                        expense.category === 'Food' ? 'success' :
+                        expense.category === 'Transportation' ? 'info' :
+                        expense.category === 'Utilities' ? 'warning' : 'secondary'
+                      %>">
+                        <%= expense.category %>
+                      </span>
+                    </td>
+                    <td><%= expense.name %></td>
+                    <td class="fw-bold">$<%= expense.amount.toFixed(2) %></td>
+                    <td>
+                      <% if (expense.isRecurring) { %>
+                        <div class="recurrence-info">
+                          <span class="badge bg-<%= 
+                            expense.frequency === 'weekly' ? 'primary' : 
+                            expense.frequency === 'monthly' ? 'warning' : 'secondary'
+                          %> mb-1">
+                            <i class="fas fa-repeat me-1"></i>
+                            <%= typeof expense.frequency === 'string' ? expense.frequency.charAt(0).toUpperCase() + expense.frequency.slice(1) : 'Recurring' %>
+                          </span>
+                          
+                          <% if (expense.nextOccurrence) { %>
+                            <div class="next-occurrence mt-1">
+                              <% const today = new Date();
+                                 const nextDate = new Date(expense.nextOccurrence);
+                                 const isDueSoon = nextDate <= new Date(today.setDate(today.getDate() + 7));
+                                 const isOverdue = nextDate < new Date(); %>
+                                 
+                              <small class="text-<%= 
+                                isOverdue ? 'danger' : 
+                                isDueSoon ? 'warning' : 'muted'
+                              %>">
+                                <i class="fas fa-calendar-day me-1"></i>
+                                <% if (isOverdue) { %>
+                                  Overdue since <%= nextDate.toLocaleDateString() %>
+                                <% } else { %>
+                                  Due <%= nextDate.toLocaleDateString('en-US', { 
+                                    month: 'short', 
+                                    day: 'numeric',
+                                    year: nextDate.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined
+                                  }) %>
+                                <% } %>
+                              </small>
+                            </div>
+                          <% } %>
+                        </div>
+                      <% } else { %>
+                        <span class="badge bg-secondary">
+                          <i class="fas fa-times me-1"></i> One-time
+                        </span>
+                      <% } %>
+                    </td>
+                    <td>
+                      <form action="/expenses/<%= expense._id %>?_method=DELETE" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                          <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    <% } else { %>
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> No expense records found. Add your first expense above.
+      </div>
+    <% } %>
+  </section>
+</main>
+
+<%- include('partials/footer') %>
+
+
+<script>
+  // Enable/disable frequency based on recurring toggle
+  document.getElementById('isRecurring').addEventListener('change', function() {
+    const frequencySelect = document.getElementById('frequency');
+    frequencySelect.disabled = !this.checked;
+    if (!this.checked) {
+      frequencySelect.value = 'one-time';
+    }
+  });
+
+  // Initialize form state on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    const recurringCheckbox = document.getElementById('isRecurring');
+    const frequencySelect = document.getElementById('frequency');
+    frequencySelect.disabled = !recurringCheckbox.checked;
+  });
+</script>

@@ -64,7 +64,11 @@ app.use("/profile", profileRoutes);
 app.use("/results", resultsRoutes);
 
 app.get("/", (req, res) => {
-  res.redirect(req.session.userId ? "/dashboard" : "/auth/login");
+  if (req.session.userId) {
+    res.redirect("/dashboard"); // Redirect to dashboard if logged in
+  } else {
+    res.render("index"); // Render index.ejs if not logged in
+  }
 });
 
 app.listen(port, () => {

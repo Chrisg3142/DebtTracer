@@ -1,0 +1,124 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  padding: 2rem;
+}
+.circle-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: gold;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+.circle-container:hover{
+  cursor: pointer;
+}
+.rotate-up {
+  display: inline-block;
+  background-color: gold;
+  border-radius: 20%;
+  margin-right: 5px;
+  border: none;
+  transform: rotate(-90deg);
+}
+.aiSection{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  max-height: 500px; /* or more, depending on your layout */
+  overflow: hidden;
+  opacity: 1;
+  transform: translateY(0);
+  transition: max-height 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 500px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+}
+.collapsed {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+.hidden{
+  display: none;
+}
+.chat-bar {
+  height: 30px;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Close button inside bar */
+.close-chat {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: black;
+  cursor: pointer;
+}
+#chat-box {
+  display: flex;
+  padding: 5px 10px;
+  flex-direction: column;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.message {
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  max-width: 65%;
+  font-size: 11pt;
+  word-wrap: break-word;
+}
+.message.bot {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+}
+.message.user {
+  background-color: #8ea5ff;
+  align-self: flex-end;
+}
+
+form {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+input[type="text"] {
+  width: 70%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.submit-prompt {
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+  font-size: 1rem;
+  background-color: #0074D9;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

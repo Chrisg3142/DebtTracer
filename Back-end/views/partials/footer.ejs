@@ -1,4 +1,19 @@
-</div>
+<div class="circle-container" id="open-chat-container">
+    <button class="rotate-up" id="open-chat">&gt;</button>  
+  </div>
+  <div class="aiSection collapsed" id="ai-section">
+      <div class="chat-bar">
+        <button class="close-chat" id="close-chat">×</button>
+      </div>
+      <div id="chat-box">
+      </div>
+      <form id="chat-form">
+        <input type="text" id="user-input" placeholder="Ask a finance question..." autocomplete="off" required />
+        <button class="submit-prompt" type="submit">Send</button>
+      </form>
+  </div>
+  <script src="/index.js"></script>
+</main>
 <footer>
 	  <div class="footer-content">
 <% const Today = new Date() %>

@@ -1,0 +1,4 @@
+# MongoDB Atlas Connection
+MONGODB_URI=mongodb+srv://debtTracer:Secret123@debttracer.n8eexb1.mongodb.net/debtTracer?retryWrites=true&w=majority&appName=debtTracer
+# Session secret
+SESSION_SECRET=your_super_secret_key_here_12345

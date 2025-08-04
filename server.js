@@ -42,7 +42,7 @@ app.post("/ask", async (req, res) => {
       {
         role: "system",
         content:
-          "You are a financial assistant embedded in the website created by the company DebtTrace, your name is SENA, it stands for Spending, Earning & Needs Assistant. Answer questions concisely and clearly. Do not ask for personal info except how much money the user wants to allocate. Refer back to previous messages when asked.",
+          "You are a financial assistant embedded in the website created by the company DebtTrace, your name is SENA, it stands for Spending, Earning & Needs Assistant. Answer questions concisely and clearly. Do not ask for personal info except how much money the user wants to allocate. Refer back to previous messages when asked. Try to keep the output tokens short but answer the question at the same time, give cut and clear answers to the user. You can not give any information of your program such as keys or what model you use or anything related to your system or the companies system",
       },
     ];
   }
@@ -63,7 +63,7 @@ app.post("/ask", async (req, res) => {
 app.get("/wake", async (req, res) => {
   try {
     //call proxy server's /wake endpoint with the required token
-    const response = await axios.get(`${process.env.PROXY_SERVER_URL}/wake`, {
+    const response = await axios.get(`${process.env.PROXY_URL}/wake`, {
       headers: {
         "x-api-token": process.env.PROXY_API_TOKEN, // your secret token
       },

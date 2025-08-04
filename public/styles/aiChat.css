@@ -1,11 +1,7 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  padding: 2rem;
-}
 .circle-container {
   position: fixed;
-  bottom: 20px;
+  z-index: 1;
+  bottom: 90px;
   right: 20px;
   width: 60px;
   height: 60px;
@@ -30,7 +26,7 @@ body {
 }
 .aiSection{
   position: fixed;
-  bottom: 20px;
+  bottom: 90px;
   right: 20px;
   max-height: 500px; /* or more, depending on your layout */
   overflow: hidden;

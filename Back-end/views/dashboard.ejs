@@ -1,37 +1,40 @@
-<%- include("partials/header.ejs") %>
+ <%- include("partials/header.ejs") %>
 
-<main>
-  <section class="summary">
-    <h2>Financial Summary</h2>
-    <div class="summary-cards">
-      <div class="card">
-        <h3>Total Income</h3>
-        <p>$<%= totalIncome.toFixed(2) %></p>
-      </div>
-      <div class="card">
-        <h3>Total Expenses</h3>
-        <p>$<%= totalExpenses.toFixed(2) %></p>
-      </div>
-      <div class="card">
-        <h3>Remaining Balance</h3>
-        <p>$<%= (totalIncome - totalExpenses).toFixed(2) %></p>
-      </div>
-    </div>
-  </section>
+    <main>
+      <section class="summary">
+        <h2>Financial Summary</h2>
+        <div class="summary-cards">
+          <div class="card">
+            <h3>Total Income</h3>
+            <p>$<%= totalIncome.toFixed(2) %></p>
+          </div>
+          <div class="card">
+            <h3>Total Expenses</h3>
+            <p>$<%= totalExpenses.toFixed(2) %></p>
+          </div>
+          <div class="card">
+            <h3>Remaining Balance</h3>
+            <p>$<%= (totalIncome - totalExpenses).toFixed(2) %></p>
+          </div>
+        </div>
+      </section>
 
-  <section class="recent-activity">
-    <h2>Recent Transactions</h2>
-    <div class="transactions">
-      <% transactions.forEach(transaction => { %>
-      <div class="transaction">
-        <span class="description"><%= transaction.description %></span>
-        <span class="amount <%= transaction.type %>"
-          >$<%= transaction.amount.toFixed(2) %></span
-        >
-        <span class="date"><%= transaction.date.toLocaleDateString() %></span>
-      </div>
-      <% }) %>
-    </div>
-  </section>
-  <%- include("partials/footer.ejs") %>
-</main>
+      <section class="recent-activity">
+        <h2>Recent Transactions</h2>
+        <div class="transactions">
+          <% transactions.forEach(transaction => { %>
+          <div class="transaction">
+            <span class="description"><%= transaction.description %></span>
+            <span class="amount <%= transaction.type %>"
+              >$<%= transaction.amount.toFixed(2) %></span
+            >
+            <span class="date"
+              ><%= transaction.date.toLocaleDateString() %></span
+            >
+          </div>
+          <% }) %>
+        </div>
+      </section>
+    <%- include("partials/footer.ejs") %>
+
+

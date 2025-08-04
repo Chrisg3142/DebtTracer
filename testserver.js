@@ -5,6 +5,7 @@ import { dirname, join,} from "path";
 import path from "path";
 import { fileURLToPath } from "url";
 import session from "express-session";
+import connectDB from "./Back-end/config/db.js";
 import ejs from "ejs";
 import methodOverride from "method-override";
 import askAI from "./azureChat.js";
@@ -21,16 +22,13 @@ import expensesRoutes from "./Back-end/routes/expensesRoutes.js";
 import profileRoutes from "./Back-end/routes/profileRoutes.js";
 import dotenv from "dotenv";
 dotenv.config();
+// Database Connection
+await connectDB();
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = 3000;
 
-// Database Connection
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("Connection error:", err));
 app.use(express.json()); 
 app.set("view engine", "ejs");
 app.engine("ejs", ejs.renderFile);
@@ -114,6 +112,13 @@ try {
     res.status(500).json({ error: "Wake request failed." });
 }
 });
+
+app.get("/chat/history", (req, res) => {
+    const history = req.session.chatHistory || [];
+    // Only send the actual messages, not the system prompt
+    const filtered = history.filter(msg => msg.role !== "system");
+    res.json({ history: filtered });
+  });
 
 
 //starting message for when the user first opens the ai 

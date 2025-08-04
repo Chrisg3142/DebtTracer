@@ -1,0 +1,143 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  margin: 10px solid red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* login css */
+/* Login css */ /* Global container */
+.auth-container {
+  background-color: #201e3f;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Inria Sans", sans-serif;
+}
+
+/* Main login/register box */
+.login-container {
+  background-color: white;
+  width: 580px;
+  padding: 40px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+/* Form styling */
+.form-group input::placeholder {
+  color: #ccc;
+  opacity: 1; /* Firefox reduces opacity by default */
+  font-style: italic;
+}
+.login_logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login_logo,
+.logo_title {
+  font-size: 10px;
+  color: white;
+  margin: 10px 0;
+}
+/* Logo */
+.login_logo,
+img {
+  width: 300px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Title styling */
+.logo_title {
+  font-size: 48px;
+  color: #1d2854;
+  margin: 10px 0;
+}
+
+.form-group {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 35px;
+}
+
+.form-group label {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 5px;
+  display: block;
+  color: #1d2854;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Button styling */
+.login_button {
+  display: inline-block;
+  padding: 12px 24px;
+  width: 100%;
+  background-color: #201e3f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login_button:hover {
+  background-color: #3367d6;
+}
+
+.login_button:active {
+  background-color: #2a56c0;
+}
+
+/* Link below button */
+.switch-link {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.switch-link a {
+  color: #1d2854;
+  text-decoration: underline;
+}
+
+.recurrence-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.next-occurrence {
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .recurrence-info {
+    font-size: 0.85rem;
+  }
+}

@@ -2,12 +2,13 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100vh;
+  height: 100vh;
   font-family: Arial, sans-serif;
 }
 
 
-/* login css */
-/* Login css *//* Global container */
+
+/* Login css */ /* Global container */
 .auth-container {
   background-color: #201e3f;
   height: 100vh;
@@ -37,18 +38,20 @@ html, body {
   opacity: 1; /* Firefox reduces opacity by default */
   font-style: italic;
 }
-.login_logo{
+.login_logo {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.login_logo, .logo_title {
+.login_logo,
+.logo_title {
   font-size: 10px;
   color: white;
   margin: 10px 0;
 }
 /* Logo */
-.login_logo , img {
+.login_logo,
+img {
   width: 300px;
   height: auto;
   margin-bottom: 10px;
@@ -87,27 +90,26 @@ html, body {
 }
 
 /* Button styling */
-  .login_button {
+.login_button {
+  display: inline-block;
+  padding: 12px 24px;
+  width: 100%;
+  background-color: #201e3f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-    display: inline-block;
-    padding: 12px 24px;
-    width: 100%;
-    background-color: #201e3f;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .login_button:hover {
-    background-color: #3367d6;
-  }
-  
-  .login_button:active {
-    background-color: #2a56c0;
-  }
+.login_button:hover {
+  background-color: #3367d6;
+}
+
+.login_button:active {
+  background-color: #2a56c0;
+}
 
 /* Link below button */
 .switch-link {
@@ -120,20 +122,34 @@ html, body {
   text-decoration: underline;
 }
 
+.recurrence-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.next-occurrence {
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .recurrence-info {
+    font-size: 0.85rem;
+  }
+}
 
 /* header css */
 .container-fluidity {
   display: flex;
-  
+
   width: 100%;
   height: 90%;
-
 }
 .header {
   display: flex;
   width: 20%;
   height: 100%;
-   background:#1d2854; 
+  background: #1d2854;
 }
 .header .Title_logo {
   display: flex;
@@ -153,7 +169,7 @@ html, body {
   margin: 0;
 }
 .main-nav {
-  width: 100%; 
+  width: 100%;
 }
 .navbar {
   width: 100%;
@@ -185,9 +201,9 @@ html, body {
   justify-content: center;
   align-items: center;
   text-decoration: none;
- background: linear-gradient(90deg, #1d2854 35%, #4a6bff 100%);
+  background: linear-gradient(90deg, #1d2854 35%, #4a6bff 100%);
   color: white;
-  box-shadow: 0px 0px 2px 2px black; 
+  box-shadow: 0px 0px 2px 2px black;
   transition: all 0.2s ease;
 }
 
@@ -222,11 +238,11 @@ footer {
   width: 80%;
 }
 .social-links {
-height: 100%;
-width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
-.social-links  li{
+.social-links li {
   display: inline-block;
   margin: 0 20px;
   flex-direction: row;

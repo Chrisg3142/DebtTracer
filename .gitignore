@@ -1,3 +1,6 @@
+/node_modules
+.env
+
 # Logs
 logs
 *.log
@@ -38,7 +41,6 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -138,8 +140,7 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-# package-lock
-package-lock.json
+
 
 # ds store
 .DS_Store

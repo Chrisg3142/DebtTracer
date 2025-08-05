@@ -1,6 +1,24 @@
+<div class="circle-container" id="open-chat-container">
+    <button class="rotate-up" id="open-chat">&gt;</button>  
+  </div>
+  <div class="aiSection collapsed" id="ai-section">
+      <div class="chat-bar">
+        <button class="close-chat" id="close-chat">×</button>
+      </div>
+      <div id="chat-box">
+      </div>
+      <form id="chat-form">
+        <input type="text" id="user-input" placeholder="Ask a finance question..." autocomplete="off" required />
+        <button class="submit-prompt" type="submit">Send</button>
+      </form>
+  </div>
+  <script src="/index.js"></script>
+</main>
 <footer>
 	  <div class="footer-content">
-	<p>&copy; 2023 Debt Tracers. All rights reserved.</p>
+<% const Today = new Date() %>
+<% const year = Today.getFullYear()  %>
+	<p>&copy; <%= year %> Debt Tracers. All rights reserved.</p>
 	<ul class="social-links">
 		<!-- we could create a fake page for them or just make the button functional to an empty page or sign up page-->
 	  <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>

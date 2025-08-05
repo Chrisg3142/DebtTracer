@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const connectDB = async () => {
+  
   try {
     // Debug: Check if environment variablne is loading
     console.log("Connection string:", process.env.MONGODB_URI);

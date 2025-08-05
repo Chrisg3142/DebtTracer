@@ -19,6 +19,7 @@ import dashboardRoutes from "./Back-end/routes/dashboardRoutes.js";
 import earningsRoutes from "./Back-end/routes/earningsRoutes.js";
 import expensesRoutes from "./Back-end/routes/expensesRoutes.js";
 import profileRoutes from "./Back-end/routes/profileRoutes.js";
+import resultsRoutes from "./Back-end/routes/resultsRoutes.js";
 import dotenv from "dotenv";
 dotenv.config();
 // Database Connection
@@ -63,6 +64,7 @@ app.use("/dashboard", dashboardRoutes);
 app.use("/earnings", earningsRoutes);
 app.use("/expenses", expensesRoutes);
 app.use("/profile", profileRoutes);
+app.use("/results", resultsRoutes);
 
 app.get("/", (req, res) => {
   res.redirect(req.session.userId ? "/dashboard" : "/auth/login");

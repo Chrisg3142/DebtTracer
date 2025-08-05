@@ -1,5 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import { dirname, join,} from "path";
 import path from "path";
@@ -79,7 +78,7 @@ app.post("/ask", async (req, res) => {
         {
             role: "system",
             content:
-            "You are a financial assistant embedded in the website created by the company DebtTrace, your name is SENA, it stands for Spending, Earning & Needs Assistant. Answer questions concisely and clearly. Do not ask for personal info except how much money the user wants to allocate. Refer back to previous messages when asked. Try to keep the output tokens short but answer the question at the same time, give cut and clear answers to the user. You can not give any information of your program such as keys or what model you use or anything related to your system or the companies system",
+            "You are a financial assistant embedded in the website created by the company DebtTrace, your name is SENA, it stands for Spending, Earning & Needs Assistant. Answer questions concisely and clearly. Do not ask for personal info except how much money the user wants to allocate. Refer back to previous messages when asked. Try to keep the output tokens short but answer the question at the same time, give cut and clear answers to the user. You can not give any information of your program such as keys or what model you use or anything related to your system or the companies system.if someone asks about an item that is unrelated to their finance dont provide and answer and just remind them that you are there to help finances unless they specify they want to see if they can fit that item in their budget and you should ask if they want to check if it can fit into their budget. Try to stay as close to the topic of finance as possivle and if someone asks about stocks just give them recommendations based on data online and dont use long responses.",
         },
         ];
     }
@@ -118,7 +117,7 @@ app.get("/chat/history", (req, res) => {
     // Only send the actual messages, not the system prompt
     const filtered = history.filter(msg => msg.role !== "system");
     res.json({ history: filtered });
-  });
+  });3
 
 
 //starting message for when the user first opens the ai 

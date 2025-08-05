@@ -7,7 +7,7 @@ import ejs from "ejs";
 import methodOverride from "method-override";
 import "dotenv/config";
 import connectDB from "./config/db.js";
-import resultsRoutes from "./routes/resultsRoutes.js";
+
 
 //import models
 import User from "./models/User.js";
@@ -18,6 +18,7 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 import earningsRoutes from "./routes/earningsRoutes.js";
 import expensesRoutes from "./routes/expensesRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
+import resultsRoutes from "./routes/resultsRoutes.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();

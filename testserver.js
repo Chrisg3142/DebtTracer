@@ -20,6 +20,7 @@ import dashboardRoutes from "./Back-end/routes/dashboardRoutes.js";
 import earningsRoutes from "./Back-end/routes/earningsRoutes.js";
 import expensesRoutes from "./Back-end/routes/expensesRoutes.js";
 import profileRoutes from "./Back-end/routes/profileRoutes.js";
+import resultsRoutes from "./Back-end/routes/resultsRoutes.js";
 import dotenv from "dotenv";
 dotenv.config();
 // Database Connection
@@ -39,14 +40,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 // Session middleware
+// Session middleware
 app.use(
   session({
-    secret: "your-secret-key", // Should be in environment variables
+    secret: process.env.SESSION_SECRET, // Should be in environment variables
     resave: false,
     saveUninitialized: false,
     cookie: {
       secure: false, // Set to true in production with HTTPS
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      maxAge: 30 * 60 * 1000, // half hour
     },
   })
 );
@@ -64,9 +66,15 @@ app.use("/dashboard", dashboardRoutes);
 app.use("/earnings", earningsRoutes);
 app.use("/expenses", expensesRoutes);
 app.use("/profile", profileRoutes);
+app.use("/results", resultsRoutes);
+
 
 app.get("/", (req, res) => {
-  res.redirect(req.session.userId ? "/dashboard" : "/auth/login");
+  if (req.session.userId) {
+    res.redirect("/dashboard"); // Redirect to dashboard if logged in
+  } else {
+    res.render("index"); // Render index.ejs if not logged in
+  }
 });
 
 //this is a set up for the ai 
@@ -133,6 +141,6 @@ app.use((err, req, res, next) => {
     res.status(500).send("Something broke!");
 });
   
-app.listen(port, (req, res)=>{
-    console.log(`listening on port ${port}`);
-})
+app.listen(port, () => {
+  console.log(`Server running on port: ${port}`);
+});

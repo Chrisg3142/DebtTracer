@@ -43,14 +43,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 // Session middleware
+// Session middleware
 app.use(
   session({
-    secret: "your-secret-key", // Should be in environment variables
+    secret: process.env.SESSION_SECRET, // Should be in environment variables
     resave: false,
     saveUninitialized: false,
     cookie: {
       secure: false, // Set to true in production with HTTPS
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      maxAge: 30 * 60 * 1000, // half hour
     },
   })
 );
@@ -71,7 +72,11 @@ app.use("/profile", profileRoutes);
 app.use("/results", resultsRoutes);
 
 app.get("/", (req, res) => {
-  res.redirect(req.session.userId ? "/dashboard" : "/auth/login");
+  if (req.session.userId){
+    res.redirect("/dashboard");
+  } else {
+    res.render("index");
+  }
 });
 
 const MONTHS = [
@@ -216,7 +221,7 @@ app.use((err, req, res, next) => {
     console.error("Unhandled error:", err.stack);
     res.status(500).send("Something broke!");
 });
-
+  
 app.listen(port, (req, res)=>{
     console.log(`listening on port ${port}`);
-});
+})

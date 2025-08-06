@@ -139,7 +139,6 @@ img {
 /* header css */
 .container-fluidity {
   display: flex;
-
   width: 100%;
   height: 90%;
 }
@@ -225,7 +224,8 @@ footer {
   color: white;
   text-align: center;
   padding: 20px;
-  position: absolute;
+  position:rel;
+  margin-top: 10%;
   bottom: 0;
   height: 10%;
   width: 100%;
@@ -251,4 +251,8 @@ footer {
 }
 footer p {
   margin: 0;
+}
+
+.content-container{
+  margin-bottom: 10%;
 }

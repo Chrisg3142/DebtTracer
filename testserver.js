@@ -9,9 +9,13 @@ import ejs from "ejs";
 import methodOverride from "method-override";
 import askAI from "./azureChat.js";
 import axios from "axios";
+import mongoose from "mongoose";
 
 //import models
 import User from "./Back-end/models/User.js";
+import Income from "./Back-end/models/Income.js";
+import Expense from "./Back-end/models/Expense.js";
+import Debt from "./Back-end/models/Debt.js";
 
 //import routes
 import authRoutes from "./Back-end/routes/authRoutes.js";
@@ -29,7 +33,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = 3000;
 
-app.use(express.json()); 
+app.use(express.json());
 app.set("view engine", "ejs");
 app.engine("ejs", ejs.renderFile);
 app.set("views", join(__dirname, "Back-end/views")); // Go up one level from Back-end
@@ -70,11 +74,50 @@ app.get("/", (req, res) => {
   res.redirect(req.session.userId ? "/dashboard" : "/auth/login");
 });
 
-//this is a set up for the ai 
+const MONTHS = [
+  "january",
+  "february",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december",
+];
+
+function parseMonthYear(text) {
+  const regex = new RegExp(`(${MONTHS.join("|")})(?:\\s+(\\d{4}))?`, "i");
+  const match = text.match(regex);
+  if (!match) return null;
+  const month = MONTHS.indexOf(match[1].toLowerCase());
+  const year = match[2] ? parseInt(match[2], 10) : new Date().getFullYear();
+  return { month, year };
+}
+
+async function computeMonthlyTotal(model, userId, month, year) {
+  const start = new Date(year, month, 1);
+  const end = new Date(year, month + 1, 1);
+  const result = await model.aggregate([
+    {
+      $match: {
+        userId: new mongoose.Types.ObjectId(userId),
+        date: { $gte: start, $lt: end },
+      },
+    },
+    { $group: { _id: null, total: { $sum: "$amount" } } },
+  ]);
+  return result[0]?.total || 0;
+}
+
+//this is a set up for the ai
 //this is for the messages between the user and the ai system set up within the website
 app.post("/ask", async (req, res) => {
     const userMessage = req.body.message;
-    //this is for the ai to go back to old messages and access them for future conversation 
+    //this is for the ai to go back to old messages and access them for future conversation
     if (!req.session.chatHistory) {
         req.session.chatHistory = [
         {
@@ -84,11 +127,51 @@ app.post("/ask", async (req, res) => {
         },
         ];
     }
-    //adding the messages to a array that the ai can access and talk about later on 
-    req.session.chatHistory.push({ role: "user", content: userMessage });
 
     try {
-        const botReply = await askAI(req.session.chatHistory);
+        const chatHistory = [...req.session.chatHistory];
+
+        if (req.session.userId) {
+            const [incomes, expenses, debts] = await Promise.all([
+                Income.find({ userId: req.session.userId }).select("source amount frequency -_id"),
+                Expense.find({ userId: req.session.userId }).select("category name amount -_id"),
+                Debt.find({ userId: req.session.userId }).select("type remainingAmount interestRate minimumPayment dueDate -_id"),
+            ]);
+
+            const summary = {
+                incomes,
+                expenses,
+                debts,
+            };
+
+            chatHistory.push({
+                role: "system",
+                content: `User financial data: ${JSON.stringify(summary)}`,
+            });
+
+            const totalMatch = userMessage.match(/total\\s+(income|expense|expenses)/i);
+            const monthYear = parseMonthYear(userMessage);
+            if (totalMatch && monthYear) {
+                let total = 0;
+                const { month, year } = monthYear;
+                const type = totalMatch[1].toLowerCase();
+                if (type.startsWith("income")) {
+                    total = await computeMonthlyTotal(Income, req.session.userId, month, year);
+                } else if (type.startsWith("expense")) {
+                    total = await computeMonthlyTotal(Expense, req.session.userId, month, year);
+                }
+                chatHistory.push({
+                    role: "system",
+                    content: `Total ${type} for ${new Date(year, month).toLocaleString('default',{ month: 'long', year: 'numeric' })}: ${total}`,
+                });
+            }
+        }
+
+        chatHistory.push({ role: "user", content: userMessage });
+
+        const botReply = await askAI(chatHistory);
+
+        req.session.chatHistory.push({ role: "user", content: userMessage });
         req.session.chatHistory.push({ role: "assistant", content: botReply });
 
         res.json({ response: botReply });
@@ -116,13 +199,13 @@ try {
 
 app.get("/chat/history", (req, res) => {
     const history = req.session.chatHistory || [];
-    // Only send the actual messages, not the system prompt
+    //sends the actual messages, not the system prompt
     const filtered = history.filter(msg => msg.role !== "system");
     res.json({ history: filtered });
-  });3
+  });
 
 
-//starting message for when the user first opens the ai 
+//starting message for when the user first opens the ai
 app.get("/welcome", (req, res) => {
 res.json({
     response: "👋 Hi! I'm Sena. I'm here to help you understand and manage your debt. Ask me anything!"
@@ -133,7 +216,7 @@ app.use((err, req, res, next) => {
     console.error("Unhandled error:", err.stack);
     res.status(500).send("Something broke!");
 });
-  
+
 app.listen(port, (req, res)=>{
     console.log(`listening on port ${port}`);
-})
+});

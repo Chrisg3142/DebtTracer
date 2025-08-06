@@ -55,11 +55,13 @@ router.post("/", isAuthenticated, async (req, res) => {
     if (isNaN(parsedAmount) || parsedAmount <= 0) {
       throw new Error("Amount must be a positive number");
     }
+    const [year, month, day] = date.split("-");
+    const localDate = new Date(year, month - 1, day);
 
     await Income.create({
       source,
-      amount: parsedAmount,
-      date,
+      amount: parseFloat(amount),
+      date: localDate,
       frequency,
       userId: req.session.userId,
     });

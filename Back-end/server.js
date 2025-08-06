@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import ejs from "ejs";
 import methodOverride from "method-override";
 import "dotenv/config";
@@ -35,12 +36,18 @@ app.use(express.static(join(__dirname, "../public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
+// Session store
+const store = MongoStore.create({
+  mongoUrl: process.env.SESSION_DB_URI || process.env.MONGO_URI,
+});
+
 // Session middleware
 app.use(
   session({
     secret: process.env.SESSION_SECRET, // Should be in environment variables
     resave: false,
     saveUninitialized: false,
+    store,
     cookie: {
       secure: false, // Set to true in production with HTTPS
       maxAge: 30 * 60 * 1000, // half hour

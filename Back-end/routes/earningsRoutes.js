@@ -23,7 +23,7 @@ router.get("/", isAuthenticated, async (req, res) => {
       delete req.session.alert;
     }
 
-    res.render("earningss", {
+    res.render("earnings", {
       earnings,
       title: "Earnings",
       formData: {},
@@ -75,7 +75,7 @@ router.post("/", isAuthenticated, async (req, res) => {
     const earnings = await Income.find({ userId: req.session.userId }).sort({
       date: -1,
     });
-    res.render("earningss", {
+    res.render("earnings", {
       earnings,
       alert: {
         type: "danger",

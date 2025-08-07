@@ -13,6 +13,7 @@ body {
     align-items: center;
     padding: 20px 40px;
     background-color: #201e3f;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18); /* subtle shadow for depth */
   }
   
   .logo-container {
@@ -51,17 +52,20 @@ body {
   }
   
   .signup {
-    background-color: #fafa14;
+    background-color: #ffe600;
     color: #12163d;
   }
 
   .signup:hover {
-    background-color: #ffe600;
-    color: #12163d;
+    background-color: #fafa14;
+    color: #262c2c;
     cursor: pointer;
   }
 
   .tagline-section {
+  background: linear-gradient(90deg, #201e3f 60%, #2d2a5a 100%);
+  border-radius: 5px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
   padding: 60px 40px;
 }
 
@@ -70,36 +74,50 @@ body {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 40px;
+}
+
+.icon-container, .tagline-text {
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: fadeSlideIn 2.5s ease forwards;
 }
 
 .icon-container {
-  flex: 1;
-  max-width: 300px;
+  flex: 2;
+  max-width: 350px;
+  animation-delay: 0.2s;
 }
 
 .money-icon {
-  width: 100%;
-  max-width: 300px;
+  width: 400px;
   height: auto;
 }
 
 .tagline-text {
-  flex: 2;
-  max-width: 500px;
+  flex: 3;
+  max-width: 700px;
   color: white;
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .tagline-text h1 {
-  font-size: 28px;
-  margin-bottom: 15px;
+  font-size: 42px;
+  margin-bottom: 20px;
   color: white;
 }
 
 .tagline-text p {
-  font-size: 16px;
-  color: #00bfff;
+  font-size: 26px;
+  color: #80dfff;
   line-height: 1.6;
+  font-weight: 500;
 }
 
   

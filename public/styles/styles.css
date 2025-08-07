@@ -253,6 +253,9 @@ footer p {
   margin: 0;
 }
 
+main {
+  width: 100%;
+}
 .content-container{
   margin-bottom: 10%;
 }

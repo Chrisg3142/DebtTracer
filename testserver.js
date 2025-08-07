@@ -209,6 +209,48 @@ app.get("/chat/history", (req, res) => {
     res.json({ history: filtered });
   });
 
+//sends data to make a dynamic pie chart in the front end
+app.get("/chart-data", async (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ error: "Not logged in" });
+  }
+
+  try {
+    const userId = new mongoose.Types.ObjectId(req.session.userId);
+
+    // Group incomes by source
+    const incomeData = await Income.aggregate([
+      { $match: { userId } },
+      { $group: { _id: "$source", total: { $sum: "$amount" } } }
+    ]);
+
+    // Group expenses by category
+    const expenseData = await Expense.aggregate([
+      { $match: { userId } },
+      { $group: { _id: "$category", total: { $sum: "$amount" } } }
+    ]);
+
+    // Total income and expenses
+    const totalIncome = incomeData.reduce((sum, item) => sum + item.total, 0);
+    const totalExpenses = expenseData.reduce((sum, item) => sum + item.total, 0);
+
+    res.json({
+      income: incomeData,
+      expenses: expenseData,
+      summary: {
+        totalIncome,
+        totalExpenses
+      }
+    });
+
+  } catch (err) {
+    console.error("Error getting chart data:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+
+
 
 //starting message for when the user first opens the ai
 app.get("/welcome", (req, res) => {

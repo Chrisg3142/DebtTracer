@@ -3,11 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/welcome.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
     <title>Document</title>
   </head>
   <body>
-    <a href="/auth/login">Login</a>
-    <a href="/auth/register">Register</a>
-  </body>
+    <header class="navbar">
+      <div class="logo-container">
+        <img src="/images/DT_Noname.png" alt="Debt Tracer Logo" class="logo" />
+        <h1 class="app-name">Debt Tracer</h1>
+      </div>
+      <div class="auth-buttons">
+        <a href="/auth/login" class="btn login">Login</a>
+        <a href="/auth/register" class="btn signup">Sign Up</a>
+      </div>
+    </header>
+    <main class="main-content">
+      <section class="tagline-section">
+        <div class="tagline-wrapper">
+          <div class="icon-container">
+            <img src="/images/money_icon.png" alt="Money Icon" class="money-icon">
+          </div>
+          <div class="tagline-text">
+            <h1><em>From Debt Stress to Debt Success</em></h1>
+            <p>
+              Track your earnings, balance your expenses, and optimize your spending
+              for what truly matters — all in one place.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>  
 </html>

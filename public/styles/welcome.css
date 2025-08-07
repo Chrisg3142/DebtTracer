@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #201e3f;
+    color: white;
+  }
+  
+  /* Header/Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #211f46;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 50px;
+    margin-right: 15px;
+  }
+  
+  .app-name {
+    font-size: 24px;
+    color: white;
+  }
+  
+  .auth-buttons a {
+    margin-left: 15px;
+    text-decoration: none;
+    padding: 8px 24px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .login {
+    background-color: #ccc;
+    color: #12163d;
+  }
+  
+  .signup {
+    background-color: #ffff00;
+    color: #12163d;
+  }
+
+  .tagline-section {
+  padding: 60px 40px;
+}
+
+.tagline-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.icon-container {
+  flex: 1;
+  max-width: 300px;
+}
+
+.money-icon {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+.tagline-text {
+  flex: 2;
+  max-width: 500px;
+  color: white;
+}
+
+.tagline-text h1 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.tagline-text p {
+  font-size: 16px;
+  color: #00bfff;
+  line-height: 1.6;
+}
+
+  

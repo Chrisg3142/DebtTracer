@@ -285,6 +285,14 @@
         }
       });
     });
+ 
+    const autoAlert = document.querySelector(".alert-dismissible");
+    if (autoAlert) {
+      setTimeout(() => {
+        const alertInstance = bootstrap.Alert.getOrCreateInstance(autoAlert);
+        alertInstance.close();
+      }, 3000); // or 5000 ms if you want it to stay longer
+    }
   });
 
   function toggleEditMode(id, enable) {

@@ -2,13 +2,13 @@
 
 <main class="container mt-4">
   <section class="earnings-section">
-    <h1 class="mb-4">Income Management</h1>
+    <h1 class="mb-4" id="top-title-h1">Income Management</h1>
 
     <% if (typeof alert !== 'undefined' && alert) { %>
-      <div class="alert alert-<%= alert.type %> alert-dismissible fade show">
+      <div class="alert alert-<%= alert.type %> alert-dismissible fade show mb-4">
         <i class="fas fa-<%= alert.type === 'success' ? 'check' : 'exclamation' %>-circle me-2"></i>
         <%= alert.message %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <% } %>
 
@@ -191,6 +191,18 @@
     }
   }
 
+  // Auto-hide any alert message after 3 seconds
+  document.addEventListener("DOMContentLoaded", function () {
+    const alertEl = document.querySelector(".alert-dismissible");
+    if (alertEl) {
+      setTimeout(() => {
+        const bsAlert = bootstrap.Alert.getOrCreateInstance(alertEl);
+        bsAlert.close();
+      }, 3000);
+    }
+  });
+
+
   // Source selection handling for edit form
   function handleEditSourceChange(select, id) {
     const customInput = document.getElementById(`source-custom-edit-${id}`);
@@ -371,6 +383,7 @@
         if (row) {
           row.classList.add('fade-out');
           
+          
           setTimeout(() => {
             row.remove();
             updateTotalDisplay();
@@ -383,31 +396,38 @@
       console.error('Error:', error);
       showAlert('danger', error.message);
     }
-  }
+}
 
-  function updateTotalDisplay() {
+function updateTotalDisplay() {
+  setTimeout(() =>{
     window.location.reload();
-  }
+  }, 2000);
+}
 
-  function showAlert(type, message) {
-    const existingAlerts = document.querySelectorAll('.alert-dismissible');
-    existingAlerts.forEach(alert => alert.remove());
+function showAlert(type, message) {
+  const alertDiv = document.createElement('div');
+  alertDiv.className = `alert alert-${type} alert-dismissible fade show mt-3`;
+  alertDiv.setAttribute('role', 'alert');
+  alertDiv.innerHTML = `
+    <i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle me-2"></i>
+    ${message}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  `;
 
-    const alertDiv = document.createElement('div');
-    alertDiv.className = `alert alert-${type} alert-dismissible fade show mt-3`;
-    alertDiv.setAttribute('role', 'alert');
-    alertDiv.innerHTML = `
-      <i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle me-2"></i>
-      ${message}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    `;
-    
-    const container = document.querySelector('.earnings-section') || document.querySelector('main');
+  const h1 = document.getElementById('top-title-h1');
+
+  if (h1) {
+    h1.insertAdjacentElement('afterend', alertDiv);
+  } else {
     container.prepend(alertDiv);
-    
-    setTimeout(() => {
-      const bsAlert = new bootstrap.Alert(alertDiv);
-      bsAlert.close();
-    }, 5000);
   }
+
+  // Auto-hide after 3 seconds
+  setTimeout(() => {
+    const alertInstance = bootstrap.Alert.getOrCreateInstance(alertDiv);
+    alertInstance.close();
+  }, 3000);
+}
+
+
 </script>

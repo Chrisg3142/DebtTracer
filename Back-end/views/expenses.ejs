@@ -1,5 +1,7 @@
 <%- include('partials/header') %>
-
+<% function formatCurrency(amount) { 
+  return amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); 
+} %>
 <main class="content-container">
   <section class="expenses-section">
     <h1 class="section-title">Expense Tracker</h1>
@@ -136,7 +138,7 @@
           <h2 class="card-title">Expense History</h2>
           <div>
             <span class="badge bg-danger fs-6 me-2">
-              Total: $<%= expenses.reduce((sum, e) => sum + e.amount, 0).toFixed(2) %>
+              Total: $<%= formatCurrency(expenses.reduce((sum, e) => sum + e.amount, 0)) %>
             </span>
             <span class="badge bg-info fs-6">
               Recurring: <%= expenses.filter(e => e.isRecurring).length %>
@@ -178,7 +180,7 @@
                       </span>
                     </td>
                     <td><%= expense.name %></td>
-                    <td class="fw-bold">$<%= expense.amount.toFixed(2) %></td>
+                    <td class="fw-bold">$<%= formatCurrency(expense.amount) %></td>
                     <td>
                       <% if (expense.isRecurring) { %>
                         <div class="recurrence-info">

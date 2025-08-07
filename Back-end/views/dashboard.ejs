@@ -1,5 +1,7 @@
  <%- include("partials/header.ejs") %>
-
+ <% function formatCurrency(amount) { 
+  return amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); 
+} %>
     <main>
       <section class="summary">
         <h2>Financial Summary</h2>
@@ -26,7 +28,7 @@
           <div class="transaction">
             <span class="description"><%= transaction.description %></span>
             <span class="amount <%= transaction.type %>"
-              >$<%= transaction.amount.toFixed(2) %></span
+              >$<%= formatCurrency(transaction.amount) %></span 
             >
             <span class="date"
               ><%= transaction.date.toLocaleDateString() %></span

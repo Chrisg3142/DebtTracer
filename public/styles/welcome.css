@@ -102,4 +102,47 @@ body {
   line-height: 1.6;
 }
 
+.why-section {
+    padding: 60px 40px;
+  }
+  
+  .why-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .why-image {
+    flex: left;
+    max-width: 700px;
+  }
+  
+  .collage-img {
+    width: 150%;
+    border-radius: 10px;
+  }
+  
+  .why-text {
+    flex: 2;
+    max-width: 500px;
+    color: white;
+  }
+  
+  .why-text h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .highlight {
+    color: #00bfff;
+  }
+  
+  .why-description {
+    background-color: #2c5b9c;
+    padding: 20px;
+    border-radius: 15px;
+    line-height: 1.6;
+  }
   

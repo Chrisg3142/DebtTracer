@@ -122,11 +122,12 @@ body {
 
 .why-section {
     padding: 60px 40px;
+    background: radial-gradient(circle at center, #1f1f4f 0%, #0f0f2d 100%);
   }
   
   .why-wrapper {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
@@ -135,6 +136,7 @@ body {
   .why-image {
     flex: left;
     max-width: 700px;
+    margin-left: -130px; 
   }
   
   .collage-img {
@@ -144,13 +146,18 @@ body {
   
   .why-text {
     flex: 2;
-    max-width: 500px;
+    max-width: 650px;
     color: white;
+    margin-bottom: 40px;
+    margin-top: 200px;
   }
   
   .why-text h2 {
     font-size: 28px;
     margin-bottom: 20px;
+    margin-left: 0;
+    padding-left: 0;
+    text-align: center;
   }
   
   .highlight {
@@ -159,8 +166,11 @@ body {
   
   .why-description {
     background-color: #2c5b9c;
-    padding: 20px;
+    padding: 20px 32px;
     border-radius: 15px;
     line-height: 1.6;
+    margin-left: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
   

@@ -14,7 +14,7 @@ router.get("/", isAuthenticated, async (req, res) => {
       date: -1,
     });
     // Assuming you want to render both expenses and income in the same view
-    res.render("results", { expenses, Income });
+    res.render("results", { expenses, income });
   } catch (err) {
 
     res.status(500).render("error", { error: err.message });

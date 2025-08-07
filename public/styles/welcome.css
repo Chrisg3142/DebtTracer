@@ -47,4 +47,46 @@ body {
     background-color: #ffff00;
     color: #12163d;
   }
+
+  .tagline-section {
+  padding: 60px 40px;
+}
+
+.tagline-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.icon-container {
+  flex: 1;
+  max-width: 300px;
+}
+
+.money-icon {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+.tagline-text {
+  flex: 2;
+  max-width: 500px;
+  color: white;
+}
+
+.tagline-text h1 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.tagline-text p {
+  font-size: 16px;
+  color: #00bfff;
+  line-height: 1.6;
+}
+
   

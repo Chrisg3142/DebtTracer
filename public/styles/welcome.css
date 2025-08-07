@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: #201e3f;
     color: white;
   }
@@ -12,7 +12,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    background-color: #211f46;
+    background-color: #201e3f;
   }
   
   .logo-container {
@@ -21,12 +21,12 @@ body {
   }
   
   .logo {
-    height: 50px;
+    height: 75px;
     margin-right: 15px;
   }
   
   .app-name {
-    font-size: 24px;
+    font-size: 32px;
     color: white;
   }
   
@@ -34,18 +34,31 @@ body {
     margin-left: 15px;
     text-decoration: none;
     padding: 8px 24px;
+    font-size: 16px;
     border-radius: 5px;
     font-weight: bold;
   }
   
   .login {
-    background-color: #ccc;
-    color: #12163d;
+    background-color: #aeadad;
+    color: #212226;
+  }
+
+  .login:hover { 
+    background-color: #4d4d4d;
+    color: #f5f6f6;
+    cursor: pointer;
   }
   
   .signup {
-    background-color: #ffff00;
+    background-color: #fafa14;
     color: #12163d;
+  }
+
+  .signup:hover {
+    background-color: #ffe600;
+    color: #12163d;
+    cursor: pointer;
   }
 
   .tagline-section {

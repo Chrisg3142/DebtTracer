@@ -6,6 +6,130 @@ window.addEventListener("DOMContentLoaded", async () => {
     const openChatContainer = document.getElementById("open-chat-container");
     const closeChat = document.getElementById("close-chat");
     const aiSection = document.getElementById("ai-section");
+    //charts for pages
+    const earningsChart = document.getElementById("myChartEarnings");
+    const expensesChart = document.getElementById("myChartExpenses");
+    const combinedChart = document.getElementById("myChartCombined");
+
+    fetch("/chart-data")
+    .then(res => res.json())
+    .then(data => {
+      // Prepare income pie chart
+      Chart.register(ChartDataLabels);
+      const incomeLabels = data.income.map(i => i._id);
+      const incomeValues = data.income.map(i => i.total);
+  
+      const incomeCtx = earningsChart.getContext("2d");
+      new Chart(incomeCtx, {
+        type: "pie",
+        data: {
+          labels: incomeLabels,
+          datasets: [{
+            label: "Income Sources",
+            data: incomeValues,
+            backgroundColor: [
+              "#36a2eb", "#ff6384", "#ffcd56", "#4bc0c0", "#9966ff"
+            ]
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            datalabels: {
+              formatter: (value, context) => {
+                const data = context.chart.data.datasets[0].data;
+                const total = data.reduce((a, b) => a + b, 0);
+                const percentage = ((value / total) * 100).toFixed(1);
+                return `${percentage}%`;
+              },
+              color: "#fff",
+              font: {
+                weight: "bold",
+                size: 14
+              }
+            }
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+  
+      // Prepare expenses pie chart
+      const expenseLabels = data.expenses.map(e => e._id);
+      const expenseValues = data.expenses.map(e => e.total);
+  
+      const expenseCtx = expensesChart.getContext("2d");
+      new Chart(expenseCtx, {
+        type: "pie",
+        data: {
+          labels: expenseLabels,
+          datasets: [{
+            label: "Expense Categories",
+            data: expenseValues,
+            backgroundColor: [
+              "#ff9f40", "#9966ff", "#4bc0c0", "#ff6384", "#36a2eb"
+            ]
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            datalabels: {
+              formatter: (value, context) => {
+                const data = context.chart.data.datasets[0].data;
+                const total = data.reduce((a, b) => a + b, 0);
+                const percentage = ((value / total) * 100).toFixed(1);
+                return `${percentage}%`;
+              },
+              color: "#fff",
+              font: {
+                weight: "bold",
+                size: 14
+              }
+            }
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+  
+      // Combined Bar Chart: Income vs Expenses
+      const combinedCtx = combinedChart.getContext("2d");
+      new Chart(combinedCtx, {
+        type: "pie",
+        data: {
+          labels: ["Income", "Expenses"],
+          datasets: [{
+            label: "Income vs Expenses",
+            data: [data.summary.totalIncome, data.summary.totalExpenses],
+            backgroundColor: ["#36a2eb", "#ff6384"],
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            datalabels: {
+              formatter: (value, context) => {
+                const data = context.chart.data.datasets[0].data;
+                const total = data.reduce((a, b) => a + b, 0);
+                const percentage = ((value / total) * 100).toFixed(1);
+                return `${percentage}%`;
+              },
+              color: "#fff",
+              font: {
+                weight: "bold",
+                size: 14
+              }
+            }
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+    })
+    .catch(err => {
+      console.error("Failed to load chart data", err);
+    });
   
     let chatHistory = [];
   

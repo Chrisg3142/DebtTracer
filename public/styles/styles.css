@@ -5,19 +5,7 @@ html,body {
   width: 100%;
   font-family: Arial, sans-serif;
 }
-.layout{
-  margin:0;
-  padding:0;
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: clamp(250px, 18vw, 315px) 1fr;
-  grid-template-rows: 1fr auto;           /* content | footer */
-  transition: grid-template-columns .3s ease;
 
-}
-body.nav-collapsed .layout{
-  grid-template-columns: 0 1fr;
-}
 /* Login css */ /* Global container */
 .auth-container {
   background-color: #201e3f;

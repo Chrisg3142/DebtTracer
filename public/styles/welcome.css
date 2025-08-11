@@ -63,10 +63,10 @@ body {
   }
 
   .tagline-section {
-  background: linear-gradient(90deg, #201e3f 60%, #2d2a5a 100%);
+  background: linear-gradient(90deg,  #1f1f4f 20%, #2d2a5a 100%);
   border-radius: 5px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-  padding: 30px 40px;
+  padding: 30px 40px 10px 40px; /* 10px bottom padding */
 }
 
 .tagline-wrapper {
@@ -122,8 +122,8 @@ body {
 
 .why-section {
     padding: 0px 20px 0px;
-    background: radial-gradient(circle at center, #1f1f4f 0%, #0f0f2d 100%);
-    margin-top: 60px; /* adds space above the section, not inside */
+    background: radial-gradient(circle at center, #1f1f4f 0%, #201e3f 100%);
+    margin-top: 2px; /* adds space above the section, not inside */
   }
   
   .why-wrapper {
@@ -181,7 +181,7 @@ body {
   }
 
   .testimonials-section {
-    background: linear-gradient(90deg, #201e3f 60%, #2d2a5a 100%);
+    background: linear-gradient(90deg,  #1f1f4f 60%, #2d2a5a 100%);
     padding-top: 20px;
     text-align: center;
     border-radius: 5px;

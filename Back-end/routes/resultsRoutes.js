@@ -13,9 +13,6 @@ const router = express.Router();
  */
 router.get("/", isAuthenticated, async (req, res) => {
   try {
-<<<<<<< HEAD
-    const userId = req.session.userId;
-=======
     const expenses = await Expense.find({ userId: req.session.userId }).sort({
       date: -1,
     });
@@ -24,41 +21,6 @@ router.get("/", isAuthenticated, async (req, res) => {
     });
     // Assuming you want to render both expenses and income in the same view
     res.render("results", { expenses, income });
-  } catch (err) {
->>>>>>> 960c30322136a121b19502539971602788879ea6
-
-    // Pull both collections in parallel
-    const [expenses, earnings] = await Promise.all([
-      Expense.find({ userId }).sort({ date: -1 }).lean(),
-      Income.find({ userId }).sort({ date: -1 }).lean(),
-    ]);
-
-    // Ensure expected fields are present with sane defaults (defensive)
-    const safeExpenses = expenses.map(e => ({
-      _id: e._id,
-      category: e.category || "Uncategorized",
-      name: e.name || "",
-      amount: Number(e.amount) || 0,
-      date: e.date ? new Date(e.date) : new Date(),
-      isRecurring: !!e.isRecurring,
-      frequency: (e.frequency || (e.isRecurring ? "monthly" : "one-time")).toLowerCase(),
-      nextOccurrence: e.nextOccurrence ? new Date(e.nextOccurrence) : null,
-    }));
-
-    const safeEarnings = earnings.map(income => ({
-      _id: income._id,
-      source: income.source || "Income",
-      amount: Number(income.amount) || 0,
-      date: income.date ? new Date(income.date) : new Date(),
-      frequency: (income.frequency || "monthly").toLowerCase(),
-    }));
-
-    res.render("results", {
-      title: "Results",
-      user: req.user || null,
-      expenses: safeExpenses,
-      earnings: safeEarnings,
-    });
   } catch (err) {
     console.error("Failed to load results:", err);
     res.status(500).render("error", { error: err.message });

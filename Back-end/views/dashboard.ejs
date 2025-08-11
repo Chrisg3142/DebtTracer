@@ -29,7 +29,7 @@
           <div class="transaction">
             <span class="description"><%= transaction.description %></span>
             <span class="amount <%= transaction.type %>"
-              >$<%= transaction.amount.toFixed(2) %></span
+              >$<%= formatCurrency(transaction.amount) %></span 
             >
             <span class="date"
               ><%= transaction.date.toLocaleDateString() %></span

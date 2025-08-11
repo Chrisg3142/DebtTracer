@@ -13,19 +13,6 @@ const router = express.Router();
  */
 router.get("/", isAuthenticated, async (req, res) => {
   try {
-<<<<<<< HEAD
-    const userId = req.session.userId;
-=======
-    const expenses = await Expense.find({ userId: req.session.userId }).sort({
-      date: -1,
-    });
-    const income = await Income.find({ userId: req.session.userId }).sort({
-      date: -1,
-    });
-    // Assuming you want to render both expenses and income in the same view
-    res.render("results", { expenses, income });
-  } catch (err) {
->>>>>>> 960c30322136a121b19502539971602788879ea6
 
     // Pull both collections in parallel
     const [expenses, earnings] = await Promise.all([

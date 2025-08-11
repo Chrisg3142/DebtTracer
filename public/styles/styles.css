@@ -2,11 +2,7 @@ html,body {
   margin: 0;
   padding: 0;
   height: 100%;
-<<<<<<< HEAD
   width: 100%;
-=======
-  display: flex;
->>>>>>> 960c30322136a121b19502539971602788879ea6
   font-family: Arial, sans-serif;
 }
 .layout{
@@ -158,113 +154,7 @@ img {
 }
 /* header css */
 .container-fluidity {
-<<<<<<< HEAD
   display: contents;
-=======
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  /* overflow: auto; */
-}
-#header-hidden {
-  display: none;
-}
-.Title_logo{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 12px;
-  color: #fff;
-}
-
-
-.header .Title_logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  color: white;
-}
-
-.header .Title_logo img {
-  width: 10rem; /* Adjust as needed */
-  height: auto;
-  gap: ;
-}
-.header .Title_logo h2 {
-  font-size: 35px;
-  margin: 0;
-}
-.main-nav {
-  width: 100%;
-}
-.navbar {
-  width: 100%;
-  height: 100%;
-
-}
-.nav-links {
-  width: 100%;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column; /* Stack vertically */
-  gap: 16px; /* Space between items */
-}
-
-.nav-links li {
-  width: 100%;
-  padding-right: 10px;
-  padding-left: 10px;
-}
-
-.nav-links a {
-  border-radius: 5px;
-  display: block;
-  font-size: 20px;
-  width: 100%;
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  background: linear-gradient(90deg, #1d2854 35%, #4a6bff 100%);
-  color: white;
-  box-shadow: 0px 0px 2px 2px black;
-  transition: all 0.2s ease;
-}
-
-/* Active/hover states */
-.nav-links a.active,
-.nav-links a:hover {
-  background: #e9ecef;
-  color: #0d6efd;
-}
-
-/* Active state indicator */
-.nav-links a.active {
-  border-left: 4px solid #0d6efd;
-  font-weight: 500;
-}
-
-/* Footer css starts here */
-
-footer {
-  background-color: #1d2854;
-  color: white;
-  text-align: center;
-grid-column: 2;
-  grid-row: 2;
-  padding: 20px;
-  position: flex;
-  bottom: 0;
->>>>>>> 960c30322136a121b19502539971602788879ea6
   height: auto;
   width: 100%;
 }

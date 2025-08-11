@@ -180,10 +180,7 @@ body {
     width: 100%;
     box-sizing: border-box;
   }
-  padding: 0px 20px 0px;
-  background: radial-gradient(circle at center, #1f1f4f 0%, #0f0f2d 100%);
-  margin-top: 60px; /* adds space above the section, not inside */
-}
+
 
 .why-wrapper {
   display: flex;

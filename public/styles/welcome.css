@@ -187,6 +187,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.4);
     margin-top: 0px;
+    padding-bottom: 20px;
   }
   
   .testimonials-title {
@@ -256,8 +257,32 @@ body {
     height: auto;
   }
   
+  footer {
+  background-color: #201e3f;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  position: flex;
+  bottom: 0;
+  height: auto;
+}
+  
+.footer-container {
+  display: flex;
+  padding: 20px;
+  width: 80%;
+}
+.social-links {
+  height: 100%;
+  margin: 0;
+}
+.social-links li {
+  display: inline-block;
+  flex-direction: row;
+  height: auto;
+  width: auto;
 
-
-
+  /* gap: 20px; */
+} 
 
   

@@ -121,8 +121,9 @@ body {
 }
 
 .why-section {
-    padding: 20px 40px 5px;
+    padding: 0px 20px 0px;
     background: radial-gradient(circle at center, #1f1f4f 0%, #0f0f2d 100%);
+    margin-top: 60px; /* adds space above the section, not inside */
   }
   
   .why-wrapper {
@@ -130,26 +131,31 @@ body {
     align-items: flex-start;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 0px;
   }
   
   .why-image {
     flex: left;
-    max-width: 700px;
-    margin-left: -130px; 
+    max-width: 600px;
+    margin-left: 0; 
+    margin-right: 0;
   }
   
   .collage-img {
-    width: 150%;
-    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    max-height: 550px;
+    border-radius: 5px;
+    display: block;
   }
   
   .why-text {
     flex: 2;
-    max-width: 650px;
+    max-width: 550px;
     color: white;
     margin-bottom: 40px;
-    margin-top: 200px;
+    margin-top: 40px;
+    margin-left: 0;
   }
   
   .why-text h2 {

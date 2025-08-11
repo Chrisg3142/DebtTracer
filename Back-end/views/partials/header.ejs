@@ -18,24 +18,42 @@
     />
   </head>
   <body>
-    <div class="container-fluidity">
-    <header class="header">
-      <nav class="navbar">
-        <div class="Title_logo">
-          <img src="/images/logo.png" alt="Logo" class="logo" />
-          <h2>Debt Tracer</h2>
-        </div>
-        <!-- maybe if we obtain a logo
+
+      <header class="header" id="header-hidden">
+        <nav class="navbar">
+          <div class="Title_logo">
+            <img src="/images/logo.png" alt="Logo" class="logo" />
+            <h2>Debt Tracer</h2>
+          </div>
+          <!-- maybe if we obtain a logo
 		 <img src="" alt=""> -->
-        <div class="main-nav">
-          <ul class="nav-links">
-            <li><a href="/dashboard">Home</a></li>
-            <li><a href="/earnings">Earnings</a></li>
-            <li><a href="/expenses">Expenses</a></li>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/results">Results</a></li>
-            <li><a href="/auth/logout">Logout</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+          <div class="main-nav">
+            <ul class="nav-links">
+              <li><a href="/dashboard">Home</a></li>
+              <li><a href="/earnings">Earnings</a></li>
+              <li><a href="/expenses">Expenses</a></li>
+              <li><a href="/profile">Profile</a></li>
+              <li><a href="/results">Results</a></li>
+              <li><a href="/auth/logout">Logout</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+  <div class="Title_logo" id="logo-toggle">
+    <img src="/images/image.png" alt="Logo" class="logo" />
+  </div>
+  <div class="container-fluidity">
+
+
+  <script>
+    document.getElementById("logo-toggle").addEventListener("click", function () {
+      const hiddenHeader = document.getElementById("header-hidden");
+  
+      if (hiddenHeader.style.display === "none" || hiddenHeader.style.display === "") {
+        hiddenHeader.style.display = "flex";
+      } else {
+        hiddenHeader.style.display = "none";
+      }
+    });
+  </script>

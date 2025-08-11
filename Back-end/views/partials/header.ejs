@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/aiChat.css">
     <link rel="stylesheet" href="styles/profilePic.css">
+    <link rel="stylesheet" href="styles/pieCharts.css">
     <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -16,10 +17,19 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <!-- chart.js library -->
+<<<<<<< HEAD
+     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+=======
+>>>>>>> 960c30322136a121b19502539971602788879ea6
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
   </head>
   <body>
+
+<<<<<<< HEAD
     <div class="container-fluidity">
-    <header class="header">
+    <header class="header" id="sidebar">
       <nav class="navbar">
         <div class="Title_logo">
           <img src="/images/logo.png" alt="Logo" class="logo" />
@@ -27,7 +37,7 @@
         </div>
         <!-- maybe if we obtain a logo
 		 <img src="" alt=""> -->
-        <div class="main-nav">
+        <!-- <div class="main-nav"> -->
           <ul class="nav-links">
             <li><a href="/dashboard">Home</a></li>
             <li><a href="/earnings">Earnings</a></li>
@@ -36,6 +46,82 @@
             <li><a href="/results">Results</a></li>
             <li><a href="/auth/logout">Logout</a></li>
           </ul>
-        </div>
+        <!-- </div> -->
       </nav>
     </header>
+    <!-- just wanted to fix it possition not fixed -->
+    <button class="menu-toggle" aria-controls="sidebar" aria-expanded="true" title="Toggle menu">
+  <i class="fa fa-bars"></i>
+</button>
+<script>
+(function () {
+  const btn  = document.querySelector('.menu-toggle');
+  const body = document.body;
+
+  // Ensure we start hidden even if the class wasn't on the body
+  body.classList.add('nav-collapsed');
+
+  function syncAria(){
+    const expanded = !body.classList.contains('nav-collapsed');
+    btn.setAttribute('aria-expanded', String(expanded));
+  }
+
+  function toggleNav(){
+    body.classList.toggle('nav-collapsed');
+    syncAria();
+  }
+
+  btn.addEventListener('click', toggleNav);
+
+  // Keyboard support (Enter/Space)
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleNav();
+    }
+  });
+
+  // No need to handle resize in JS—the CSS clamp handles responsive width
+  syncAria();
+})();
+</script>
+=======
+      <header class="header" id="header-hidden">
+        <nav class="navbar">
+          <div class="Title_logo">
+            <img src="/images/logo.png" alt="Logo" class="logo" />
+            <h2>Debt Tracer</h2>
+          </div>
+          <!-- maybe if we obtain a logo
+		 <img src="" alt=""> -->
+          <div class="main-nav">
+            <ul class="nav-links">
+              <li><a href="/dashboard">Home</a></li>
+              <li><a href="/earnings">Earnings</a></li>
+              <li><a href="/expenses">Expenses</a></li>
+              <li><a href="/profile">Profile</a></li>
+              <li><a href="/results">Results</a></li>
+              <li><a href="/auth/logout">Logout</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+  <div class="Title_logo" id="logo-toggle">
+    <img src="/images/image.png" alt="Logo" class="logo" />
+  </div>
+  <div class="container-fluidity">
+
+
+  <script>
+    document.getElementById("logo-toggle").addEventListener("click", function () {
+      const hiddenHeader = document.getElementById("header-hidden");
+  
+      if (hiddenHeader.style.display === "none" || hiddenHeader.style.display === "") {
+        hiddenHeader.style.display = "flex";
+      } else {
+        hiddenHeader.style.display = "none";
+      }
+    });
+  </script>
+>>>>>>> 960c30322136a121b19502539971602788879ea6

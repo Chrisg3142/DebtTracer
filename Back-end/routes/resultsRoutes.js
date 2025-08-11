@@ -13,6 +13,7 @@ const router = express.Router();
  */
 router.get("/", isAuthenticated, async (req, res) => {
   try {
+    const userId = req.session.userId;
 
     // Pull both collections in parallel
     const [expenses, earnings] = await Promise.all([

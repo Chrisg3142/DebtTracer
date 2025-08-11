@@ -162,21 +162,15 @@ img {
   display: contents;
 =======
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
->>>>>>> 960c30322136a121b19502539971602788879ea6
+  /* overflow: auto; */
 }
-.header{
-  grid-column: 1;
-  grid-row: 1 / -1;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  background: #1d2854;
-  color: #fff;
-  overflow: hidden;                        /* clip inner paint */
-  contain: paint;
-  isolation: isolate;                      /* prevents “streaks” */
+#header-hidden {
+  display: none;
 }
 .Title_logo{
   display: flex;
@@ -268,12 +262,7 @@ footer {
 grid-column: 2;
   grid-row: 2;
   padding: 20px;
-<<<<<<< HEAD
-  position: static;
-  margin-top: 0;
-=======
-  position:relative;
-  margin-top: 10%;
+  position: flex;
   bottom: 0;
 >>>>>>> 960c30322136a121b19502539971602788879ea6
   height: auto;
@@ -298,70 +287,24 @@ footer p {
   margin: 0;
 }
 
-main {
-  width: 100%;
-}
 .content-container{
-<<<<<<< HEAD
-  grid-column: 2;
-  grid-row: 1;
-  padding-bottom: 1rem;
-=======
-  margin-bottom: 10%;
->>>>>>> 960c30322136a121b19502539971602788879ea6
-}
-.btn-group .btn-sm {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
+  width: 100%;
+  height: 100%;
+  margin: 50px 50px 50px 50px;
 }
 
-.btn-group .btn-sm i {
-  margin-right: 0.25rem;
+.table-responsive {
+  max-height: 320px;
+  overflow-y: auto; 
 }
-
-.btn-outline-primary:hover {
-  background-color: rgba(13, 110, 253, 0.1);
-}
-.btn-outline-danger:hover {
-  background-color: rgba(220, 53, 69, 0.1);
-}
-.btn-success:hover {
-  background-color: #198754;
-  opacity: 0.9;
-<<<<<<< HEAD
-}
-/* menu shirnk and expand mode */
-body.nav-collapsed .layout{
-  grid-template-columns: 1fr;
-}
-body.nav-collapsed .header{
-  transform: translate(-100%);
-}
-body.nav-collapsed .content-container {
- grid-column: 1;
-}
-body.nav-collapsed footer {
-  grid-column: 1;
-}
-.menu-toggle{
+.logo {
+  width: 25px;
   position: fixed;
-  top: 7px;
-  right: 16px;
-  z-index: 1000;
-  border: none;
-  background: #1d2854;
-  color: #fff;
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
-
-
-
-=======
+#header-hidden {
+  transition: all 0.3s ease;
+  flex-direction: row; /* Or row depending on your layout */
 }
->>>>>>> 960c30322136a121b19502539971602788879ea6

@@ -158,12 +158,16 @@ img {
 .container-fluidity {
   display: contents;
 }
-.header{
-  grid-column: 1;
-  grid-row: 1 / -1;
-  position: sticky;
+.header {
+  display: flex;
+  position: fixed;
+  left: 0;
   top: 0;
-  height: 100vh;
+  z-index: 1;
+  min-width: 18%;
+  width: 20%;
+  max-width: 20%;
+  height: 100%;
   background: #1d2854;
   color: #fff;
   overflow: hidden;                        /* clip inner paint */
@@ -186,13 +190,15 @@ img {
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-top: 0;
   color: white;
 }
 
 .header .Title_logo img {
   width: 10rem; /* Adjust as needed */
   height: auto;
-  gap: 10px;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 .header .Title_logo h2 {
   font-size: 35px;
@@ -201,23 +207,35 @@ img {
 .main-nav {
   width: 100%;
 }
+
 .navbar {
   width: 100%;
+  max-width: 100%;
   height: 100%;
-
+  overflow: hidden;
+  opacity: 1;
+  transform: translateX(0);
+  transition: max-width 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+  display: flex;
+  flex-direction: column;
 }
+
 .nav-links {
   width: 100%;
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: center;
   display: flex;
   flex-direction: column; /* Stack vertically */
   gap: 16px; /* Space between items */
 }
 
 .nav-links li {
-  width: 100%;
+  width: 95%;
   padding-right: 10px;
   padding-left: 10px;
 }
@@ -283,7 +301,6 @@ ul.social-links {
 footer p {
   margin: 0;
 }
-
 .content-container{
   grid-column: 2;
   grid-row: 1;
@@ -307,35 +324,77 @@ footer p {
 .btn-success:hover {
   background-color: #198754;
   opacity: 0.9;
-  width: 100%;
-  height: 100%;
-  margin: 50px 50px 50px 50px;
 }
-body.nav-collapsed .content-container {
- grid-column: 1;
-}
-body.nav-collapsed .header{
-  transform: translate(-100%);
-}
-body.nav-collapsed footer {
-  grid-column: 1;
-}
-.menu-toggle{
+
+.open-nav{
   position: fixed;
-  top: 7px;
-  right: 16px;
-  z-index: 1000;
-  border: none;
-  background: #1d2854;
-  color: #fff;
-  width: 44px;
-  height: 44px;
+  left: 15px;
+  top: 15px;
+  width: 50px;
+  height: 45px;
   border-radius: 10px;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  z-index: 1;
+  background-color: transparent;
 }
 
+.open-nav:hover{
+  background-color: rgb(99, 253, 202);
+  box-shadow: 1px 2px 1px 1px #4a6bff;
+}
+.close-nav{
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: aqua;
+  color: white;
+  margin-left: 75%;
+  margin-top: 0;
+  height: 50px;
+  margin-bottom: 5px;
+}
 
+.close-nav button{
+  position: fixed;
+  width: 50px;
+  height: 45px;
+  left: 15px;
+  top: 15px;
+  border-radius: 10px;
+}
+.collapsedx {
+  max-height: 0;
+  opacity: 0;
+  transform: translateX(20px);
+  pointer-events: none;
+}
+main{
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: aqua;
+  width: 80%;
+  padding: 50px 25px;
+}
+/* Animate the whole sidebar */
+.header{
+  position: fixed; /* you already have this */
+  top: 0; left: 0;
+  height: 100vh;
+  min-width: 200px;
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  will-change: transform, opacity;
+  z-index: 1000; /* keep above content */
+}
 
+/* Closed state */
+.collapsedx{
+  transform: translateX(-105%); /* fully offscreen */
+  opacity: 0;
+  pointer-events: none;  /* not clickable */
+  visibility: hidden;    /* not focusable */
+}
+
+/* Keep hamburger above the sliding panel */
+.open-nav{ z-index: 1100; }

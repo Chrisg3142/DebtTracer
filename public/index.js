@@ -11,6 +11,83 @@ window.addEventListener("DOMContentLoaded", async () => {
     const expensesChart = document.getElementById("myChartExpenses");
     const combinedChart = document.getElementById("myChartCombined");
 
+    //button for nav bar
+    const openNav = document.getElementById("open-nav");
+    const navBar = document.getElementById("nav-Bar")
+    const closeNav = document.getElementById("close-nav");
+    
+    // openNav.addEventListener("click", () => {
+    //   navBar.classList.add("show");
+    //   openNav.classList.add("hidden");
+    // });
+    
+    // closeNav.addEventListener("click", () => {
+    //   navBar.classList.remove("show");
+    //   openNav.classList.remove("hidden");
+    // });  
+    openNav.addEventListener("click", () => {
+      navBar.classList.remove("collapsedx");
+      openNav.classList.add("hidden");
+    });
+  
+    // Toggle close
+    closeNav.addEventListener("click", () => {
+      navBar.classList.add("collapsedx");
+      setTimeout(() => {
+        openNav.classList.remove("hidden");
+      }, 100);
+    });  
+
+    // Helper: run a callback after CSS transition finishes
+    function onTransitionEndOnce(el, cb) {
+      const handler = (e) => {
+        if (e.target === el) {
+          el.removeEventListener("transitionend", handler);
+          cb();
+        }
+      };
+      el.addEventListener("transitionend", handler);
+    }
+
+    // // Open animation
+    // openNav.addEventListener("click", () => {
+    //   navBar.classList.remove("collapsedx"); // slides in
+    //   navBar.setAttribute("aria-hidden", "false");
+    //   openNav.classList.add("hidden"); // hide hamburger
+    // });
+
+    // // // Close animation
+    // closeNav.addEventListener("click", () => {
+    //   navBar.classList.add("collapsedx"); // slides out
+    //   onTransitionEndOnce(navBar, () => {
+    //     navBar.setAttribute("aria-hidden", "true");
+    //     openNav.classList.remove("hidden"); // show hamburger after slide finishes
+    //   });
+    // });
+
+    function onTransitionEndOnce(el, cb){
+      const handler = (e)=>{ if(e.target === el){ el.removeEventListener('transitionend', handler); cb(); } };
+      el.addEventListener('transitionend', handler);
+    }
+    
+    openNav.addEventListener("click", () => {
+      // show + slide in
+      navBar.classList.remove("collapsedx");
+      navBar.setAttribute("aria-hidden","false");
+      openNav.classList.add("hidden"); // hide hamburger while open
+    });
+    
+    closeNav.addEventListener("click", () => {
+      // slide out
+      navBar.classList.add("collapsedx");
+      onTransitionEndOnce(navBar, () => {
+        // after slide completes
+        navBar.setAttribute("aria-hidden","true");
+        openNav.classList.remove("hidden");
+      });
+    });
+    
+
     fetch("/chart-data")
     .then(res => res.json())
     .then(data => {

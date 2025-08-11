@@ -6,6 +6,8 @@ html,body {
   font-family: Arial, sans-serif;
 }
 .layout{
+  margin:0;
+  padding:0;
   min-height: 100vh;
   display: grid;
   grid-template-columns: clamp(250px, 18vw, 315px) 1fr;
@@ -255,20 +257,19 @@ footer {
   background-color: #1d2854;
   color: white;
   text-align: center;
-grid-column: 2;
+  grid-column: 2;
   grid-row: 2;
   padding: 20px;
-  position:relative;
-  margin-top: 10%;
-  bottom: 0;
+  position: static;
+  margin-top: 0;
   height: auto;
   width: 100%;
 }
 
-.social-links {
-  height: 100%;
+ul.social-links {
   width: 100%;
   margin: 0;
+  padding:0;
 }
 
 .social-links li {
@@ -315,6 +316,9 @@ main {
 }
 body.nav-collapsed .content-container {
  grid-column: 1;
+}
+body.nav-collapsed .header{
+  transform: translate(-100%);
 }
 body.nav-collapsed footer {
   grid-column: 1;

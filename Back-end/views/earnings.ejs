@@ -1,5 +1,8 @@
-<div class="layout">
 <%- include('partials/header') %>
+<main class="content-container">
+  <% function formatCurrency(amount) { 
+  return amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); 
+} %>
   <section class="earnings-section">
     <h1 class="mb-4" id="top-title-h1">Income Management</h1>
 
@@ -171,9 +174,7 @@
       </div>
     </div>
   </section>
-
 <%- include('partials/footer') %>
-</div>
 <script>
   // Source selection handling for add form
   function handleSourceChange(select) {

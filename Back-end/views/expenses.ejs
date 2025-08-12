@@ -1,5 +1,8 @@
-<div class="layout">
 <%- include("partials/header.ejs") %>
+<main class="content-container">
+  <% function formatCurrency(amount) { 
+  return amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); 
+} %>
   <section class="expenses-section">
     <h1 class="mb-4" id="top-title-h1">Expense Management</h1>
 
@@ -226,7 +229,6 @@
   </section>
 
 <%- include('partials/footer') %>
-</div>
 
 <script>
   // Enable/disable frequency based on recurring toggle

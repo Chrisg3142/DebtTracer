@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= lang %>">
   <head>
     <meta charset="UTF-8" />
-    <title>Debt Tracer</title>
+    <title><%= t('title') %></title>
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/aiChat.css">
     <link rel="stylesheet" href="styles/profilePic.css">
@@ -20,48 +20,59 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- chart.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
   </head>
   <body>
-    <div class="container-fluidity">
     <header class="header collapsedx" id="nav-Bar">
       <nav class="navbar">
         <div class="close-nav">
           <button class="close-nav-button" id="close-nav">X</button>
         </div>
         <div class="Title_logo">
-          <img src="/images/logo.png" alt="Logo" class="logo" />
-          <h2>Debt Tracer</h2>
+          <img src="/images/default-avatar.png" alt="Logo" class="logo" />
+          <h2><%= t('title') %></h2>
         </div>
         <div class="main-nav">
           <ul class="nav-links">
-            <li><a href="/dashboard">Home</a></li>
-            <li><a href="/earnings">Earnings</a></li>
-            <li><a href="/expenses">Expenses</a></li>
-            
-            <li><a href="/results">Results</a></li>
-            <li><a href="/auth/logout">Logout</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <button class="open-nav" id="open-nav"><i class="fas fa-bars"></i></button>
+              <li><a href="/dashboard"><%= t('nav.home') %></a></li>
+              <li><a href="/earnings"><%= t('nav.earnings') %></a></li>
+              <li><a href="/expenses"><%= t('nav.expenses') %></a></li>
+              <li><a href="/results"><%= t('nav.results') %></a></li>
+              <li><a href="/auth/logout"><%= t('nav.logout') %></a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <button class="open-nav" id="open-nav"><i class="fas fa-bars"></i></button>
     <div class="profile-dark-bar" id="darkModebar">
+      <div class="lang">
+        <select id="language-select">
+          <option value="en" <%= lang === 'en' ? 'selected' : '' %>>English</option>
+          <option value="es" <%= lang === 'es' ? 'selected' : '' %>>Español</option>
+        </select>
+      </div>
       <div class="theme-switch">
         <i class="fas fa-sun"></i> 
-        <input type="checkbox" id="theme-toggle" /> <!-- Light mode icon -->
+        <input type="checkbox" id="theme-toggle"/> <!-- Light mode icon -->
         <label for="theme-toggle" class="theme-toggle-label"></label>
         <i class="fas fa-moon"></i>
       </div>
-
-      <a href="/profile"><img id="siteProfile"
-      src="<%= (user && user.profilePic) ? user.profilePic : '/images/logo.png' %>"
-      alt="Profile Picture" width="150" 
-      /></a>
+      <div class="profilePic">
+        <a href="/profile">
+        <img id="siteProfile"
+          src="<%= (user && user.profilePic) ? user.profilePic : '/images/logo.png' %>"
+          alt="Profile Picture" width="150" 
+        />
+      </a>
+      </div>
+      <script>
+        document.getElementById('language-select').addEventListener('change', function () {
+          const params = new URLSearchParams(window.location.search);
+          params.set('lang', this.value);
+          window.location.search = params.toString();
+        });
+      </script>
     </div>
-    <% function formatCurrency(amount) { 
-  return amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); 
-} %>
-<main class="content-container">

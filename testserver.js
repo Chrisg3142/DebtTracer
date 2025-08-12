@@ -10,6 +10,7 @@ import methodOverride from "method-override";
 import askAI from "./azureChat.js";
 import axios from "axios";
 import mongoose from "mongoose";
+import fs from "fs";
 
 //import models
 import User from "./Back-end/models/User.js";
@@ -31,6 +32,12 @@ await connectDB();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = 3000;
+
+const localesPath = join(__dirname, "Back-end", "locales");
+const translations = {
+  en: JSON.parse(fs.readFileSync(join(localesPath, "en.json"), "utf-8")),
+  es: JSON.parse(fs.readFileSync(join(localesPath, "es.json"), "utf-8")),
+};
 
 app.use(express.json());
 app.set("view engine", "ejs");
@@ -55,22 +62,27 @@ app.use(
   })
 );
 
-app.use(async (req, res, next) => {
-  try {
-    if (req.session?.userId) {
-      res.locals.user = await User.findById(req.session.userId)
-        .select('name email profilePic theme')  // only what views need
-        .lean(); // faster, plain object
-    } else {
-      res.locals.user = null;
-    }
-  } catch (err) {
-    console.error('user locals middleware error:', err);
-    res.locals.user = null; // fail-safe
+app.use((req, res, next) => {
+  let lang = req.session.lang;
+  if (req.query.lang && ["en", "es"].includes(req.query.lang)) {
+    lang = req.session.lang = req.query.lang;
   }
+  if (!lang) lang = req.session.lang = "en";
+  res.locals.lang = lang;
+  res.locals.t = (key) => {
+    return key
+      .split(".")
+      .reduce((obj, part) => (obj && obj[part] !== undefined ? obj[part] : key), translations[lang]);
+  };
   next();
 });
 
+app.use(async (req, res, next) => {
+  if (req.session.userId) {
+    res.locals.user = await User.findById(req.session.userId);
+  }
+  next();
+});
 
 // Route middleware
 app.use("/auth", authRoutes);
@@ -87,6 +99,7 @@ app.get("/", (req, res) => {
     res.render("index");
   }
 });
+
 
 const MONTHS = [
   "january",

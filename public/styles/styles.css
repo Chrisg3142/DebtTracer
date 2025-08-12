@@ -198,6 +198,7 @@ img {
   display: flex;
   flex-direction: column; /* Stack vertically */
   gap: 16px; /* Space between items */
+  margin-bottom: 80px;
 }
 
 .nav-links li {
@@ -241,8 +242,6 @@ footer {
   background-color: #1d2854;
   color: white;
   text-align: center;
-  grid-column: 2;
-  grid-row: 2;
   padding: 10px;
   position: relative;
   /* margin-top: 10%; */
@@ -274,8 +273,6 @@ footer p {
   margin: 0;
 }
 .content-container{
-  grid-column: 2;
-  grid-row: 1;
   padding-bottom: 1rem;
   min-height: 90%;
 }
@@ -394,6 +391,9 @@ main{
 /* Keep hamburger above the sliding panel */
 .open-nav{ z-index: 1100; }
 
+.lang{
+  margin-right: 20px;
+}
 /*
 setting the position for the side bar that has dark mode toggle
 and the users profile picture
@@ -408,8 +408,8 @@ and the users profile picture
   position: fixed;
   right: 15px;
   top: 15px;
-  min-width: 180px;
-  width: 20%;
+  min-width: 300px;
+  width: 320px;
   height: 75px;
   border: 2.5px solid black;
   background-color: rgb(248, 238, 225);
@@ -425,6 +425,8 @@ the one that appears throughout the entire site
   height: 50px;
   margin-left: 10px;
   margin-right: 0;
+  margin-top: auto;
+  margin-bottom: auto;
   border-radius: 50%;
 }
 
@@ -438,6 +440,18 @@ which includes the profile picture
   border: 2px solid rgb(255, 246, 234);
 }
 
+/*
+  this is to switch how the language selector looks
+*/
+#language-select{
+  border-radius: 6px;
+  height: 30px;
+  width: 85px;
+}
+
+#language-select:hover{
+  cursor: pointer;
+}
 /* Dark mode styles */
 .theme-switch{
   display: flex;
@@ -517,3 +531,17 @@ body.dark-mode {
 .mb-4 {
     text-align: center;
 }
+.grid { display: grid;
+   gap: 1rem; }
+.grid-2 { grid-template-columns: 1fr 1fr; }
+.cardresult { background:#fff; border-radius:16px; box-shadow: 0 6px 20px rgba(0,0,0,.08); padding: 1rem; }
+.row { display:flex; gap:.75rem; align-items:center; flex-wrap: wrap; }
+.muted { color:#777; }
+.table { width:100%; border-collapse: collapse; }
+.table th, .table td { padding:.5rem .6rem; border-bottom:1px solid #eee; }
+.small { font-size:.9rem; }
+.right { text-align:right; }
+.pill { padding:.2rem .5rem; border-radius:999px; background:#f3f4f6; }
+input[type="number"] { width: 120px; padding:.4rem .5rem; border:1px solid #e5e7eb; border-radius:8px; }
+input.inline { width: 100px; }
+canvas { max-height: 360px; }

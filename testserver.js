@@ -15,7 +15,6 @@ import mongoose from "mongoose";
 import User from "./Back-end/models/User.js";
 import Income from "./Back-end/models/Income.js";
 import Expense from "./Back-end/models/Expense.js";
-import Debt from "./Back-end/models/Debt.js";
 
 //import routes
 import authRoutes from "./Back-end/routes/authRoutes.js";

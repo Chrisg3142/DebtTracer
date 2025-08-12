@@ -144,6 +144,7 @@ font-weight: 500;
     max-width: 600px;
     margin-left: 0; 
     margin-right: 0;
+    max-height: 400px;
 }
 
 .collage-img {

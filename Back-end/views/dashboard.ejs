@@ -1,0 +1,41 @@
+<%- include("partials/header.ejs") %>
+ <% function formatCurrency(amount) { 
+  return amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); 
+} %>
+    <main>
+      <section class="summary">
+          <h2><%= t('dashboard.financialSummary') %></h2>
+        <div class="summary-cards">
+          <div class="card">
+              <h3><%= t('dashboard.totalIncome') %></h3>
+            <p>$<%= totalIncome.toFixed(2) %></p>
+          </div>
+          <div class="card">
+              <h3><%= t('dashboard.totalExpenses') %></h3>
+            <p>$<%= totalExpenses.toFixed(2) %></p>
+          </div>
+          <div class="card">
+              <h3><%= t('dashboard.remainingBalance') %></h3>
+            <p>$<%= (totalIncome - totalExpenses).toFixed(2) %></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="recent-activity">
+          <h2><%= t('dashboard.recentTransactions') %></h2>
+        <div class="transactions">
+          <% transactions.forEach(transaction => { %>
+          <div class="transaction">
+            <span class="description"><%= transaction.description %></span>
+            <span class="amount <%= transaction.type %>"
+              >$<%= formatCurrency(transaction.amount) %></span 
+            >
+            <span class="date"
+              ><%= transaction.date.toLocaleDateString() %></span
+            >
+          </div>
+          <% }) %>
+        </div>
+      </section>
+<%- include("partials/footer.ejs") %>
+

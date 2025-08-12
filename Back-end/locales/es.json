@@ -1,0 +1,110 @@
+{
+  "title": "Debt Tracer",
+  "nav": {
+    "home": "Inicio",
+    "earnings": "Ingresos",
+    "expenses": "Gastos",
+    "profile": "Perfil",
+    "results": "Resultados",
+    "logout": "Cerrar sesión"
+  },
+  "login": "Iniciar sesión",
+  "register": "Registrarse",
+  "dashboard": {
+    "financialSummary": "Resumen Financiero",
+    "totalIncome": "Ingresos Totales",
+    "totalExpenses": "Gastos Totales",
+    "remainingBalance": "Saldo Restante",
+    "recentTransactions": "Transacciones Recientes"
+  },
+  "earnings": {
+    "title": "Seguimiento de Ingresos",
+    "addNew": "Agregar Nuevo Ingreso",
+    "source": "Fuente de Ingreso",
+    "selectSource": "Selecciona una fuente",
+    "salary": "Salario",
+    "freelance": "Freelance",
+    "bonus": "Bono",
+    "investment": "Inversión",
+    "rental": "Ingreso por alquiler",
+    "other": "Otro (Especificar abajo)",
+    "customPlaceholder": "Ingresa una fuente personalizada",
+    "amount": "Monto",
+    "date": "Fecha",
+    "frequency": "Frecuencia",
+    "oneTime": "Una vez",
+    "weekly": "Semanal",
+    "biweekly": "Quincenal",
+    "monthly": "Mensual",
+    "addIncome": "Agregar Ingreso",
+    "history": "Historial de Ingresos",
+    "total": "Total",
+    "table": {
+      "date": "Fecha",
+      "source": "Fuente",
+      "amount": "Monto",
+      "frequency": "Frecuencia",
+      "actions": "Acciones"
+    },
+    "delete": "Eliminar",
+    "noRecords": "No se encontraron registros de ingresos. Agrega tu primer ingreso arriba."
+  },
+  "expenses": {
+    "title": "Seguimiento de Gastos",
+    "upcoming": "Tienes {{count}} gastos recurrentes próximos:",
+    "addNew": "Agregar Nuevo Gasto",
+    "category": "Categoría",
+    "selectCategory": "Selecciona una categoría",
+    "housing": "Vivienda",
+    "food": "Comida",
+    "transportation": "Transporte",
+    "utilities": "Servicios",
+    "entertainment": "Entretenimiento",
+    "name": "Nombre del Gasto",
+    "namePlaceholder": "p.ej. Comestibles, Renta",
+    "amount": "Monto",
+    "date": "Fecha",
+    "recurring": "Gasto Recurrente",
+    "frequency": "Frecuencia",
+    "oneTime": "Una vez",
+    "weekly": "Semanal",
+    "monthly": "Mensual",
+    "overdue": "ATRASADO",
+    "overdueSince": "Atrasado desde",
+    "due": "Vence",
+    "addExpense": "Agregar Gasto",
+    "history": "Historial de Gastos",
+    "total": "Total",
+    "table": {
+      "date": "Fecha",
+      "category": "Categoría",
+      "description": "Descripción",
+      "amount": "Monto",
+      "recurrence": "Recurrencia",
+      "actions": "Acciones"
+    },
+    "delete": "Eliminar",
+    "noRecords": "No se encontraron registros de gastos. Agrega tu primer gasto arriba."
+  },
+  "results": {
+    "title": "Resultados"
+  },
+  "profile": {
+    "upload": "Subir"
+  },
+  "auth": {
+    "welcome": "¡Bienvenido de nuevo!",
+    "username": "Usuario",
+    "password": "Contraseña",
+    "loginButton": "Iniciar sesión",
+    "noAccount": "¿No tienes una cuenta?",
+    "registerHere": "Regístrate aquí",
+    "fullName": "Nombre completo",
+    "email": "Correo electrónico",
+    "passwordHint": "Debe tener al menos 8 caracteres",
+    "emailHint": "Por favor ingresa un correo válido",
+    "registerButton": "Registrarse",
+    "haveAccount": "¿Ya tienes una cuenta?",
+    "loginHere": "Inicia sesión aquí"
+  }
+}

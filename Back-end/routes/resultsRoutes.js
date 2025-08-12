@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 const router = express.Router();
 
 // --- Helpers ---
-const WEEKS_PER_MONTH = 4;   // simple monthly approx
+const WEEKS_PER_MONTH = 4;   
 const WEEKS_PER_YEAR  = 52;
 const BIWEEKS_PER_MONTH = 2;
 const BIWEEKS_PER_YEAR  = 26;

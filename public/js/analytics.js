@@ -1,4 +1,3 @@
-
   (() => {
   let actualsChart, whatIfChart;
   let actualIncome = [], actualExpenses = [];
@@ -119,29 +118,36 @@
     drawWhatIf();
     updateSummaries();
   }
-
   function drawWhatIf() {
-    const ctx = document.getElementById("whatIfChart");
-    const labels = [
-      ...editIncome.map(i => `Income: ${i.label}`),
-      ...editExpenses.map(e => `Expense: ${e.label}`)
-    ];
-    const dataVals = [
-      ...editIncome.map(i => i.amountMonthly),
-      ...editExpenses.map(e => e.amountMonthly)
-    ];
+  const ctx = document.getElementById("whatIfChart");
+  const factor = 12 * years; // months in the selected horizon
 
-    if (whatIfChart) whatIfChart.destroy();
-    whatIfChart = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels,
-        datasets: [{ data: dataVals }]
-      },
-      options: { responsive: true, plugins: { legend: { position: "bottom" } } }
-    });
-  }
+  const labels = [
+    ...editIncome.map(i => `Income: ${i.label}`),
+    ...editExpenses.map(e => `Expense: ${e.label}`)
+  ];
 
+  const dataVals = [
+    ...editIncome.map(i => i.amountMonthly * factor),
+    ...editExpenses.map(e => e.amountMonthly * factor)
+  ];
+
+  if (whatIfChart) whatIfChart.destroy();
+  whatIfChart = new Chart(ctx, {
+    type: "pie",
+    data: { labels, datasets: [{ data: dataVals }] },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: "bottom" },
+        title: {
+          display: true,
+          text: `What-If • ${years} year${years > 1 ? "s" : ""} (totals)`
+        }
+      }
+    }
+  });
+}
   function updateSummaries() {
     const incA = sumMonthly(actualIncome);
     const expA = sumMonthly(actualExpenses);
@@ -175,14 +181,12 @@
     });
 
     const yearsEl = document.getElementById("years");
-    yearsEl.addEventListener("input", () => {
-      years = Math.max(1, parseInt(yearsEl.value || "1", 10));
-      updateSummaries();
-    });
+yearsEl.addEventListener("input", () => {
+  years = Math.max(1, parseInt(yearsEl.value || "1", 10));
+  drawWhatIf();          // <— add this line so the chart updates on year change
+  updateSummaries();
+});
 
-    document.getElementById("reload").addEventListener("click", () => {
-      loadData().catch(console.error);
-    });
   }
 
   // Boot
@@ -192,3 +196,4 @@
     alert("Failed to load analytics data.");
   });
 })();
+

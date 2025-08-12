@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
   font-family: Arial, sans-serif;
   transition: background-color 0.5s ease, color 0.5s ease;
 }
@@ -251,7 +252,6 @@ footer {
   position: relative;
   /* margin-top: 10%; */
   bottom: 0 ;
-  height: 10%;
   width: 100%;
   min-height: 10%;
   max-height: 10%;

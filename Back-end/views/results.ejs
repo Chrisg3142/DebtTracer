@@ -1,478 +1,293 @@
-<div class="layout">
-<%- include("partials/header.ejs") %>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title><%= title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/styles/styles.css">
   <style>
-    :root{
-      --gap: 1rem;
-      --card-bg: #fff;
-      --muted:#6b7280;
-      --ok:#16a34a;
-      --warn:#d97706;
-      --bad:#dc2626;
-      --border:#e5e7eb;
-      --bg:#f7f7fb;
-      --radius: 14px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      background:var(--bg); color:#111827;
-    }
-    .wrap{
-      max-width:1200px; margin:auto; padding:clamp(12px,2vw,24px);
-    }
-    header{
-      display:flex; align-items:center; gap:1rem; justify-content:space-between; margin-bottom:var(--gap);
-    }
-    h1{font-size:clamp(1.25rem,2.2vw,1.8rem); margin:0}
-    .scale-picker{
-      display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
-      background:var(--card-bg); padding:.5rem .75rem; border-radius:999px; border:1px solid var(--border);
-    }
-    .scale-picker label{display:flex; align-items:center; gap:.35rem; font-size:.95rem; cursor:pointer}
-    .scale-picker input[type="number"]{
-      width:5.25rem; padding:.3rem .5rem; border-radius:999px; border:1px solid var(--border);
-    }
-
-    .grid{
-      display:grid; gap:var(--gap);
-      grid-template-columns: 1fr;
-    }
-    @media (min-width:1024px){
-      .grid{ grid-template-columns: 1fr 1fr; }
-    }
-
-    .card{
-      background:var(--card-bg); border-radius:var(--radius); border:1px solid var(--border);
-      padding:1rem; min-height: 420px;
-    }
-    .card h2{font-size:1.1rem; margin:.25rem 0 1rem}
-    .legend{
-      font-size:.9rem; color:var(--muted); margin-top:.75rem;
-      display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:.35rem .75rem;
-    }
-    .legend .dot{
-      inline-size:10px; block-size:10px; border-radius:3px; display:inline-block; margin-right:.5rem; vertical-align:middle;
-    }
-
-    .summary{
-      display:grid; gap:.75rem; margin-top:1rem;
-      grid-template-columns: 1fr;
-    }
-    @media (min-width:640px){
-      .summary{ grid-template-columns: repeat(3, 1fr); }
-    }
-    .pill{
-      border:1px solid var(--border); border-radius:999px; padding:.6rem .9rem; background:#fff;
-      display:flex; align-items:center; justify-content:space-between; gap:.75rem; min-height:48px;
-    }
-    .pill small{color:var(--muted)}
-    .pill strong{font-variant-numeric: tabular-nums; letter-spacing:.2px}
-
-    .controls{
-      display:grid; gap:.65rem;
-    }
-    .row{
-      display:grid; gap:.5rem; align-items:center;
-      grid-template-columns: 1fr minmax(90px, 30%) 80px;
-      border-bottom:1px dashed var(--border); padding-bottom:.5rem;
-    }
-    .row:last-child{border-bottom:none}
-    .row label{font-size:.95rem}
-    .row input[type="range"]{width:100%}
-    .row input[type="number"]{
-      width:100%; padding:.35rem .5rem; border-radius:8px; border:1px solid var(--border);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .toolbar{
-      display:flex; align-items:center; gap:.5rem; justify-content:flex-end; margin-top:.75rem;
-    }
-    .btn{
-      appearance:none; border:1px solid var(--border); background:#fff; padding:.55rem .85rem;
-      border-radius:10px; cursor:pointer; font-weight:600;
-    }
-    .btn:focus{outline:2px solid #2563eb; outline-offset:2px}
-    .btn-primary{
-      border-color: transparent; background:#111827; color:white;
-    }
-    .note{font-size:.85rem; color:var(--muted); margin:.35rem 0 0}
+    .grid { display: grid; gap: 1rem; }
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .card { background:#fff; border-radius:16px; box-shadow: 0 6px 20px rgba(0,0,0,.08); padding: 1rem; }
+    .row { display:flex; gap:.75rem; align-items:center; flex-wrap: wrap; }
+    .muted { color:#777; }
+    .table { width:100%; border-collapse: collapse; }
+    .table th, .table td { padding:.5rem .6rem; border-bottom:1px solid #eee; }
+    .small { font-size:.9rem; }
+    .right { text-align:right; }
+    .pill { padding:.2rem .5rem; border-radius:999px; background:#f3f4f6; }
+    input[type="number"] { width: 120px; padding:.4rem .5rem; border:1px solid #e5e7eb; border-radius:8px; }
+    input.inline { width: 100px; }
+    canvas { max-height: 360px; }
   </style>
-<main class="content-container">
-<div class="wrap">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="layout">
 
-  <header>
-    <h1>Spending Overview</h1>
-
-    <!-- Scale Selector -->
-    <form class="scale-picker" id="scaleForm" aria-label="Scale selector">
-      <label>
-        <input type="radio" name="scale" value="monthly" aria-label="Monthly" checked>
-        Monthly
-      </label>
-      <label>
-        <input type="radio" name="scale" value="yearly" aria-label="Yearly">
-        Yearly
-      </label>
-      <label>
-        <input type="radio" name="scale" value="custom" aria-label="Custom years">
-        Custom
-      </label>
-      <label for="yearsInput" class="visually-hidden" style="position:absolute;left:-9999px;">Number of years for custom scale</label>
-      <input id="yearsInput" type="number" inputmode="numeric" min="1" max="50" value="5" aria-label="N years (for custom)" disabled>
-    </form>
-  </header>
-
-  <div class="grid">
-    <!-- Left: Pie -->
-    <section class="card" aria-labelledby="pieTitle">
-      <h2 id="pieTitle">Expenses by Category</h2>
-      <canvas id="pie" aria-label="Expense by category pie chart" role="img"></canvas>
-      <div class="legend" id="legend"></div>
-      <p class="note">Tooltip shows absolute amount for the current scale and % of total.</p>
-    </section>
-
-    <!-- Right: Adjuster -->
-    <section class="card" aria-labelledby="adjTitle">
-      <h2 id="adjTitle">Interactive Adjuster</h2>
-      <div id="controls" class="controls" role="group" aria-label="Adjust expense amounts per category">
-        <!-- rows injected -->
-      </div>
-
-      <div class="summary" role="region" aria-label="Summary">
-        <div class="pill" aria-live="polite">
-          <div><small>Total Earnings</small></div>
-          <strong id="sumEarnings">$0.00</strong>
+  <main class="grid grid-2" style="padding:1rem;">
+    <!-- Controls -->
+    <section class="card" style="grid-column: 1 / -1;">
+      <div class="row">
+        <div class="row">
+          <label class="pill">Basis month</label>
+          <input id="basis" type="month" />
         </div>
-        <div class="pill">
-          <div><small>Total Expenses</small></div>
-          <strong id="sumExpenses">$0.00</strong>
+        <div class="row">
+          <label class="pill">Horizon (years)</label>
+          <input id="years" type="number" min="1" step="1" value="1" />
         </div>
-        <div class="pill">
-          <div><small>Net (Leftover)</small></div>
-          <strong id="sumNet">$0.00</strong>
-        </div>
-      </div>
-
-      <div class="toolbar">
-        <button class="btn" id="downloadCsv" type="button" aria-label="Download current expense breakdown as CSV">Download CSV</button>
-        <button class="btn btn-primary" type="button" id="resetAdjustments" aria-label="Reset adjustments">Reset</button>
+        <button id="reload" class="pill" style="cursor:pointer;border:none;">Reload data</button>
+        <span class="muted small">One-time items count in the chosen basis month.</span>
       </div>
     </section>
-  </div>
 
-</div>
-</main>
-<script id="earnings-data" type="application/json">
-  <%- JSON.stringify(earnings || []) %>
-</script>
-<script id="expenses-data" type="application/json">
-  <%- JSON.stringify(expenses || []) %>
-</script>
+    <!-- Actuals -->
+    <section class="card">
+      <h2>Actuals (Monthly)</h2>
+      <div class="row muted small">
+        <span id="actuals-monthly-summary"></span>
+      </div>
+      <canvas id="actualsChart"></canvas>
+      <hr/>
+      <h3 class="small">Breakdown</h3>
+      <table class="table small" id="actualsTable">
+        <thead><tr><th>Income</th><th class="right">Monthly</th></tr></thead>
+        <tbody id="incomeBody"></tbody>
+      </table>
+      <table class="table small" id="actualsExpenseTable" style="margin-top:.75rem;">
+        <thead><tr><th>Expense</th><th class="right">Monthly</th></tr></thead>
+        <tbody id="expenseBody"></tbody>
+      </table>
+    </section>
+
+    <!-- What-If (editable) -->
+    <section class="card">
+      <h2>What-If (Monthly, live)</h2>
+      <div class="row muted small">
+        <span id="whatif-monthly-summary"></span>
+      </div>
+      <canvas id="whatIfChart"></canvas>
+      <hr/>
+      <div class="small muted">Edit the numbers below to simulate changes. Chart updates live.</div>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div>
+          <h3 class="small">Income (Monthly)</h3>
+          <table class="table small" id="editIncomeTable">
+            <thead><tr><th>Source</th><th class="right">Amount</th></tr></thead>
+            <tbody id="editIncomeBody"></tbody>
+          </table>
+        </div>
+        <div>
+          <h3 class="small">Expenses (Monthly)</h3>
+          <table class="table small" id="editExpenseTable">
+            <thead><tr><th>Category</th><th class="right">Amount</th></tr></thead>
+            <tbody id="editExpenseBody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row muted small" style="margin-top:.5rem;">
+        <span id="horizon-summary"></span>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/analytics.js"></script>
+</body>
+</html>
+
+
 <script>
-  // ====== Incoming server data (as JSON) ======
-  const earningsRaw = JSON.parse(document.getElementById('earnings-data').textContent);
-  const expensesRaw = JSON.parse(document.getElementById('expenses-data').textContent);
+  (() => {
+  let actualsChart, whatIfChart;
+  let actualIncome = [], actualExpenses = [];
+  let editIncome = [], editExpenses = [];
+  let years = 1;
+  let basis = new Date();
 
-  // ====== Helpers: currency & color ======
-  const fmt = (n) => (n ?? 0).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
-  function hsl(i, total){
-    const h = Math.round((360 / total) * i);
-    return `hsl(${h} 70% 50%)`;
+  function getBasisParam() {
+    const y = basis.getUTCFullYear();
+    const m = String(basis.getUTCMonth() + 1).padStart(2, "0");
+    return `${y}-${m}-01`;
+    // server only requires YYYY-MM-01 to know the month
   }
 
-  // ====== Frequency scaling (exact rules) ======
-  // For expenses: we also check isRecurring to apply "single purchase" behavior.
-  // For custom N years: recurring -> yearly * N; single -> amount * N.
-  const FREQ = {
-    daily:   { monthly: 30.4375, yearly: 365 },
-    weekly:  { monthly: 4.345,    yearly: 52  },
-    biweekly:{ monthly: (26/12),  yearly: 26  }, // present in your Earnings UI; added here sensibly
-    monthly: { monthly: 1,        yearly: 12  },
-    single:  { monthly: (1/12),   yearly: 1   },
-    'one-time': { monthly: (1/12), yearly: 1 } // synonym used in your forms
-  };
-
-  function isSinglePurchase(item){
-    // For expenses, we respect your isRecurring flag:
-    //   - if not recurring => treat as single purchase
-    //   - otherwise use its frequency
-    // For earnings, consider 'one-time' or 'single' frequency as single purchase
-    if (item.hasOwnProperty('isRecurring')) return !item.isRecurring; // expenses
-    const f = (item.frequency || '').toLowerCase();
-    return f === 'single' || f === 'one-time';
+  function format(n) {
+    return Number(n).toLocaleString(undefined,{minimumFractionDigits:2, maximumFractionDigits:2});
   }
 
-  function toMonthlyAmount(item){
-    const f = (item.frequency || (isSinglePurchase(item) ? 'single' : 'monthly')).toLowerCase();
-    const m = FREQ[f]?.monthly ?? 1;
-    return (item.amount || 0) * m;
-  }
-  function toYearlyAmount(item){
-    const f = (item.frequency || (isSinglePurchase(item) ? 'single' : 'monthly')).toLowerCase();
-    const y = FREQ[f]?.yearly ?? 12;
-    return (item.amount || 0) * y;
+  function sumMonthly(list) {
+    return list.reduce((s, x) => s + (x.monthly ?? x.amountMonthly ?? 0), 0);
   }
 
-  function scaleExpenseForCustom(item, N){
-    // Custom totals over N years:
-    // - Recurring: yearly * N
-    // - Single purchase: amount * N
-    if (!item) return 0;
-    if (isSinglePurchase(item)) return (item.amount || 0) * N;
-    return toYearlyAmount(item) * N;
-  }
-  function scaleEarningForCustom(item, N){
-    // Keep parity with expense logic:
-    if (isSinglePurchase(item)) return (item.amount || 0) * N;
-    return toYearlyAmount(item) * N;
-  }
+  async function loadData() {
+    const res = await fetch(`/results/data?basis=${encodeURIComponent(getBasisParam())}&years=${years}`);
+    if (!res.ok) throw new Error("Failed to fetch analytics data");
+    const data = await res.json();
 
-  // ====== Build category map from expenses ======
-  function aggregateExpensesByCategory(expenseList){
-    const map = new Map();
-    for (const e of expenseList){
-      const cat = e.category || 'Uncategorized';
-      if (!map.has(cat)) map.set(cat, []);
-      map.get(cat).push(e);
-    }
-    return map;
+    // Build "Actuals" data (monthly)
+    actualIncome = data.income.map(i => ({ label: i.label, monthly: i.monthly }));
+    actualExpenses = data.expenses.map(e => ({ label: e.label, monthly: e.monthly }));
+
+    // Initialize "What-If" as a copy of actuals (monthly)
+    editIncome = actualIncome.map(i => ({ label: i.label, amountMonthly: i.monthly }));
+    editExpenses = actualExpenses.map(e => ({ label: e.label, amountMonthly: e.monthly }));
+
+    drawActuals();
+    buildEditors();
+    drawWhatIf();
+    updateSummaries();
   }
 
-  // ====== Compute scaled totals ======
-  function computeTotals(scale, Nyears, categoryMap, adjustments){
-    // adjustments: optional per-category override (in current scale)
-    const categories = [...categoryMap.keys()];
-    const perCategory = {};
-    let totalExpenses = 0;
+  function drawActuals() {
+    const ctx = document.getElementById("actualsChart");
+    const labels = [
+      ...actualIncome.map(i => `Income: ${i.label}`),
+      ...actualExpenses.map(e => `Expense: ${e.label}`)
+    ];
+    const dataVals = [
+      ...actualIncome.map(i => i.monthly),
+      ...actualExpenses.map(e => e.monthly)
+    ];
 
-    for (let cat of categories){
-      const list = categoryMap.get(cat) || [];
-      let sum = 0;
+    if (actualsChart) actualsChart.destroy();
+    actualsChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels,
+        datasets: [{ data: dataVals }]
+      },
+      options: { responsive: true, plugins: { legend: { position: "bottom" } } }
+    });
 
-      if (scale === 'monthly'){
-        for (const it of list) sum += toMonthlyAmount(it);
-      } else if (scale === 'yearly'){
-        for (const it of list) sum += toYearlyAmount(it);
-      } else { // custom
-        for (const it of list) sum += scaleExpenseForCustom(it, Nyears);
-      }
+    // Fill tables
+    const incomeBody = document.getElementById("incomeBody");
+    incomeBody.innerHTML = actualIncome.map(i =>
+      `<tr><td>${i.label}</td><td class="right">$${format(i.monthly)}</td></tr>`
+    ).join("");
 
-      // Apply user adjustment (if provided for this category)
-      const adj = adjustments?.[cat];
-      if (typeof adj === 'number' && !Number.isNaN(adj)){
-        sum = Math.max(0, adj);
-      }
+    const expenseBody = document.getElementById("expenseBody");
+    expenseBody.innerHTML = actualExpenses.map(e =>
+      `<tr><td>${e.label}</td><td class="right">$${format(e.monthly)}</td></tr>`
+    ).join("");
 
-      perCategory[cat] = sum;
-      totalExpenses += sum;
-    }
-
-    // Earnings
-    let totalEarnings = 0;
-    if (scale === 'monthly'){
-      for (const it of earningsRaw) totalEarnings += toMonthlyAmount(it);
-    } else if (scale === 'yearly'){
-      for (const it of earningsRaw) totalEarnings += toYearlyAmount(it);
-    } else {
-      for (const it of earningsRaw) totalEarnings += scaleEarningForCustom(it, Nyears);
-    }
-
-    const net = totalEarnings - totalExpenses;
-    return { perCategory, totalExpenses, totalEarnings, net };
+    const inc = sumMonthly(actualIncome);
+    const exp = sumMonthly(actualExpenses);
+    document.getElementById("actuals-monthly-summary").textContent =
+      `Income: $${format(inc)} · Expenses: $${format(exp)} · Net: $${format(inc - exp)} /mo`;
   }
 
-  // ====== State ======
-  const categoryMap = aggregateExpensesByCategory(expensesRaw);
-  let scale = 'monthly';
-  let Nyears = 5;
-  let adjustments = {}; // category -> number (current scale)
-  const categories = [...categoryMap.keys()];
-  const colors = categories.map((_, i) => hsl(i, Math.max(categories.length, 1)));
+  function buildEditors() {
+    const editIncomeBody = document.getElementById("editIncomeBody");
+    editIncomeBody.innerHTML = editIncome.map((i, idx) =>
+      `<tr>
+         <td>${i.label}</td>
+         <td class="right">
+            <input class="inline" type="number" min="0" step="0.01"
+                   value="${i.amountMonthly}"
+                   data-type="income" data-index="${idx}" />
+         </td>
+       </tr>`
+    ).join("");
 
-  // ====== UI refs ======
-  const scaleForm   = document.getElementById('scaleForm');
-  const yearsInput  = document.getElementById('yearsInput');
-  const legendBox   = document.getElementById('legend');
-  const controlsBox = document.getElementById('controls');
-  const sumE        = document.getElementById('sumEarnings');
-  const sumX        = document.getElementById('sumExpenses');
-  const sumN        = document.getElementById('sumNet');
-  const btnCSV      = document.getElementById('downloadCsv');
-  const btnReset    = document.getElementById('resetAdjustments');
+    const editExpenseBody = document.getElementById("editExpenseBody");
+    editExpenseBody.innerHTML = editExpenses.map((e, idx) =>
+      `<tr>
+         <td>${e.label}</td>
+         <td class="right">
+            <input class="inline" type="number" min="0" step="0.01"
+                   value="${e.amountMonthly}"
+                   data-type="expense" data-index="${idx}" />
+         </td>
+       </tr>`
+    ).join("");
 
-  // ====== Chart: Pie ======
-  const pieCtx = document.getElementById('pie').getContext('2d');
-  const pieChart = new Chart(pieCtx, {
-    type: 'pie',
-    data: {
-      labels: categories,
-      datasets: [{ data: categories.map(()=>0), backgroundColor: colors, borderWidth:1 }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins:{
-        legend:{ display:false },
-        tooltip:{
-          callbacks:{
-            label(ctx){
-              const label = ctx.label || '—';
-              const val = ctx.raw || 0;
-              const total = ctx.dataset.data.reduce((a,b)=>a+(+b||0),0) || 1;
-              const pct = (val/total)*100;
-              return `${label}: $${fmt(val)}  (${pct.toFixed(1)}%)`;
-            }
-          }
-        }
-      }
-    }
-  });
+    // delegate change events
+    document.getElementById("editIncomeTable").addEventListener("input", onEditChange);
+    document.getElementById("editExpenseTable").addEventListener("input", onEditChange);
+  }
 
-  function renderLegend(){
-    legendBox.innerHTML = '';
-    categories.forEach((c, i) => {
-      const div = document.createElement('div');
-      div.innerHTML = `<span class="dot" style="background:${colors[i]}"></span>${c}`;
-      legendBox.appendChild(div);
+  function onEditChange(e) {
+    const t = e.target;
+    if (t.tagName !== "INPUT") return;
+    const type = t.getAttribute("data-type");
+    const index = Number(t.getAttribute("data-index"));
+    const val = Number(t.value || 0);
+    if (type === "income") editIncome[index].amountMonthly = val;
+    if (type === "expense") editExpenses[index].amountMonthly = val;
+    drawWhatIf();
+    updateSummaries();
+  }
+
+  function drawWhatIf() {
+    const ctx = document.getElementById("whatIfChart");
+    const labels = [
+      ...editIncome.map(i => `Income: ${i.label}`),
+      ...editExpenses.map(e => `Expense: ${e.label}`)
+    ];
+    const dataVals = [
+      ...editIncome.map(i => i.amountMonthly),
+      ...editExpenses.map(e => e.amountMonthly)
+    ];
+
+    if (whatIfChart) whatIfChart.destroy();
+    whatIfChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels,
+        datasets: [{ data: dataVals }]
+      },
+      options: { responsive: true, plugins: { legend: { position: "bottom" } } }
     });
   }
 
-  // ====== Controls (sliders + number inputs) ======
-  function makeRow(cat, valueNow){
-    const row = document.createElement('div');
-    row.className = 'row';
-    // Slider range heuristic: 0 to max( value*2, 200 ) for small categories; also allow keyboard fine-tune
-    const maxVal = Math.max(valueNow * 2, 200);
+  function updateSummaries() {
+    const incA = sumMonthly(actualIncome);
+    const expA = sumMonthly(actualExpenses);
+    const netA = incA - expA;
 
-    row.innerHTML = `
-      <label for="range-${CSS.escape(cat)}">${cat}</label>
-      <input id="range-${cat}" type="range" min="0" max="${Math.ceil(maxVal)}" step="1" value="${Math.round(valueNow)}"
-             aria-label="Adjust ${cat} amount"
-             aria-valuemin="0" aria-valuemax="${Math.ceil(maxVal)}" aria-valuenow="${Math.round(valueNow)}">
-      <input id="num-${cat}" type="number" min="0" step="1" value="${Math.round(valueNow)}"
-             aria-label="Enter ${cat} amount">
-    `;
+    const incW = editIncome.reduce((s, x) => s + x.amountMonthly, 0);
+    const expW = editExpenses.reduce((s, x) => s + x.amountMonthly, 0);
+    const netW = incW - expW;
 
-    const range = row.querySelector(`#range-${CSS.escape(cat)}`);
-    const num   = row.querySelector(`#num-${CSS.escape(cat)}`);
+    document.getElementById("whatif-monthly-summary").textContent =
+      `Income: $${format(incW)} · Expenses: $${format(expW)} · Net: $${format(netW)} /mo`;
 
-    const sync = (val) => {
-      const clean = Math.max(0, Number(val)||0);
-      range.value = String(clean);
-      range.setAttribute('aria-valuenow', String(clean));
-      num.value = String(clean);
-      adjustments[cat] = clean;
-      updateAll(); // reflect immediately
-    };
+    const horizonIncome  = incW * 12 * years;
+    const horizonExpense = expW * 12 * years;
 
-    range.addEventListener('input', e => sync(e.target.value));
-    num.addEventListener('input', e => sync(e.target.value));
+    document.getElementById("horizon-summary").textContent =
+      `Horizon: ${years} year(s) → Income: $${format(horizonIncome)} · Expenses: $${format(horizonExpense)} · Net: $${format(horizonIncome - horizonExpense)}`;
+  }
 
-    // Keyboard fine-tuning on slider (left/right + shift for larger steps)
-    range.addEventListener('keydown', (e) => {
-      let step = e.shiftKey ? 10 : 1;
-      if (e.key === 'ArrowRight') { e.preventDefault(); sync(Number(range.value) + step); }
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); sync(Number(range.value) - step); }
+  // UI wiring
+  function initControls() {
+    // default basis to current YYYY-MM
+    const basisEl = document.getElementById("basis");
+    const now = new Date();
+    const ym = `${now.getUTCFullYear()}-${String(now.getUTCMonth()+1).padStart(2,"0")}`;
+    basisEl.value = ym;
+    basisEl.addEventListener("change", () => {
+      const [y,m] = basisEl.value.split("-").map(Number);
+      basis = new Date(Date.UTC(y, m - 1, 1));
+      loadData().catch(console.error);
     });
 
-    return row;
+    const yearsEl = document.getElementById("years");
+    yearsEl.addEventListener("input", () => {
+      years = Math.max(1, parseInt(yearsEl.value || "1", 10));
+      updateSummaries();
+    });
+
+    document.getElementById("reload").addEventListener("click", () => {
+      loadData().catch(console.error);
+    });
   }
 
-  function renderControls(perCategory){
-    controlsBox.innerHTML = '';
-    for (const cat of categories){
-      const val = perCategory[cat] || 0;
-      controlsBox.appendChild(makeRow(cat, val));
-    }
-  }
-
-  // ====== Update (core) ======
-  function updateAll(){
-    const { perCategory, totalExpenses, totalEarnings, net } = computeTotals(scale, Nyears, categoryMap, adjustments);
-
-    // Chart
-    pieChart.data.labels = categories;
-    pieChart.data.datasets[0].data = categories.map(c => perCategory[c] || 0);
-    pieChart.update();
-
-    // Summary
-    sumE.textContent = `$${fmt(totalEarnings)}`;
-    sumX.textContent = `$${fmt(totalExpenses)}`;
-    sumN.textContent = `$${fmt(net)}`;
-  }
-
-  // ====== CSV ======
-  function downloadCSV(){
-    const { perCategory } = computeTotals(scale, Nyears, categoryMap, adjustments);
-    const rows = [['Category','Amount (' + (scale==='custom' ? (Nyears + 'y total') : scale) + ')']];
-    for (const cat of categories) rows.push([cat, (perCategory[cat] ?? 0).toFixed(2)]);
-    const csv = rows.map(r => r.map(x => `"${String(x).replaceAll('"','""')}"`).join(',')).join('\r\n');
-    const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    const stamp = new Date().toISOString().slice(0,10);
-    a.download = `expenses_${scale}${scale==='custom'?'_'+Nyears+'y':''}_${stamp}.csv`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  }
-
-  // ====== Reset ======
-  function resetAdjustments(){
-    adjustments = {};
-    // Rebuild controls based on base (unadjusted) values in current scale
-    const base = computeTotals(scale, Nyears, categoryMap, null).perCategory;
-    renderControls(base);
-    updateAll();
-  }
-
-  // ====== Scale picker events ======
-  scaleForm.addEventListener('change', (e) => {
-    const selected = new FormData(scaleForm).get('scale');
-    scale = selected;
-    yearsInput.disabled = (scale !== 'custom');
-    if (scale !== 'custom') {
-      // Clamp adjustments to new scale basis by re-seeding sliders from base (clears prior adjustments for clarity)
-      resetAdjustments();
-    } else {
-      // Keep adjustments but ensure years is valid
-      Nyears = Math.min(50, Math.max(1, Number(yearsInput.value)||5));
-      // Re-seed sliders based on current custom base only if no user adjustments yet
-      if (Object.keys(adjustments).length === 0) {
-        const base = computeTotals(scale, Nyears, categoryMap, null).perCategory;
-        renderControls(base);
-      }
-      updateAll();
-    }
+  // Boot
+  initControls();
+  loadData().catch(err => {
+    console.error(err);
+    alert("Failed to load analytics data.");
   });
-  yearsInput.addEventListener('input', () => {
-    Nyears = Math.min(50, Math.max(1, Number(yearsInput.value)||1));
-    // Rebuild controls only if not yet adjusted (so we preserve user edits)
-    if (Object.keys(adjustments).length === 0){
-      const base = computeTotals('custom', Nyears, categoryMap, null).perCategory;
-      renderControls(base);
-    }
-    updateAll();
-  });
-
-  // ====== Buttons ======
-  btnCSV.addEventListener('click', downloadCSV);
-  btnReset.addEventListener('click', resetAdjustments);
-
-  // ====== Init ======
-  (function init(){
-    renderLegend();
-
-    // Seed controls from **base** monthly values (default view)
-    const base = computeTotals(scale, Nyears, categoryMap, null).perCategory;
-    renderControls(base);
-
-    // First paint
-    updateAll();
-  })();
+})();
 </script>
-<%- include("partials/footer.ejs") %>
-</div>

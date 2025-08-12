@@ -190,7 +190,7 @@ img {
 .header .Title_logo img {
   width: 10rem; /* Adjust as needed */
   height: auto;
-  gap: ;
+  gap: 10px;
 }
 .header .Title_logo h2 {
   font-size: 35px;

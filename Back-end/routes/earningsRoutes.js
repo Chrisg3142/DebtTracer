@@ -27,7 +27,7 @@ router.get("/", isAuthenticated, async (req, res) => {
       earnings,
       title: "Earnings",
       formData: {},
-      user: req.user || null,
+      // user: req.user || null,
       alert, // Pass the alert to the template
     });
   } catch (err) {

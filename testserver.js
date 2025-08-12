@@ -57,11 +57,21 @@ app.use(
 );
 
 app.use(async (req, res, next) => {
-  if (req.session.userId) {
-    res.locals.user = await User.findById(req.session.userId);
+  try {
+    if (req.session?.userId) {
+      res.locals.user = await User.findById(req.session.userId)
+        .select('name email profilePic theme')  // only what views need
+        .lean(); // faster, plain object
+    } else {
+      res.locals.user = null;
+    }
+  } catch (err) {
+    console.error('user locals middleware error:', err);
+    res.locals.user = null; // fail-safe
   }
   next();
 });
+
 
 // Route middleware
 app.use("/auth", authRoutes);

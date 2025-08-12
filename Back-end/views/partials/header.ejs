@@ -48,3 +48,17 @@
       </nav>
     </header>
     <button class="open-nav" id="open-nav"><i class="fas fa-bars"></i></button>
+    <div class="profile-dark-bar" id="darkModebar">
+      <div class="theme-switch">
+        <i class="fas fa-sun"></i> 
+        <input type="checkbox" id="theme-toggle" /> <!-- Light mode icon -->
+        <label for="theme-toggle" class="theme-toggle-label"></label>
+        <i class="fas fa-moon"></i>
+      </div>
+
+      <img id="siteProfile"
+      src="<%= (user && user.profilePic) ? user.profilePic : '/images/default-avatar.png' %>"
+      alt="Profile Picture" width="150" 
+      />
+
+    </div>

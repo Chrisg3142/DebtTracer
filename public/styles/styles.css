@@ -536,10 +536,11 @@ body.dark-mode {
     text-align: center;
 }
 .grid { display: grid;
-   gap: 1rem; }
+   gap: 1rem; 
+  }
 .grid-2 { grid-template-columns: 1fr 1fr; }
 .cardresult { background:#fff; border-radius:16px; box-shadow: 0 6px 20px rgba(0,0,0,.08); padding: 1rem; }
-.row { display:flex; gap:.75rem; align-items:center; flex-wrap: wrap; }
+.row1 { display:flex; gap:.75rem; align-items:center; flex-wrap: wrap; }
 .muted { color:#777; }
 .table { width:100%; border-collapse: collapse; }
 .table th, .table td { padding:.5rem .6rem; border-bottom:1px solid #eee; }
@@ -549,3 +550,8 @@ body.dark-mode {
 input[type="number"] { width: 120px; padding:.4rem .5rem; border:1px solid #e5e7eb; border-radius:8px; }
 input.inline { width: 100px; }
 canvas { max-height: 360px; }
+
+#titleh1{
+  text-align: center;
+  margin-top: 25px;
+}

@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/styles/styles.css">
   <style>
     .grid { display: grid; gap: 1rem; }
-    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-2 { grid-template-columns: 1fr 1fr; }gthy  m
     .card { background:#fff; border-radius:16px; box-shadow: 0 6px 20px rgba(0,0,0,.08); padding: 1rem; }
     .row { display:flex; gap:.75rem; align-items:center; flex-wrap: wrap; }
     .muted { color:#777; }
@@ -62,7 +62,7 @@
 
     <!-- What-If (editable) -->
     <section class="card">
-      <h2>What-If (Monthly, live)</h2>
+      <h2>What-If </h2>
       <div class="row muted small">
         <span id="whatif-monthly-summary"></span>
       </div>
@@ -217,29 +217,36 @@
     drawWhatIf();
     updateSummaries();
   }
-
   function drawWhatIf() {
-    const ctx = document.getElementById("whatIfChart");
-    const labels = [
-      ...editIncome.map(i => `Income: ${i.label}`),
-      ...editExpenses.map(e => `Expense: ${e.label}`)
-    ];
-    const dataVals = [
-      ...editIncome.map(i => i.amountMonthly),
-      ...editExpenses.map(e => e.amountMonthly)
-    ];
+  const ctx = document.getElementById("whatIfChart");
+  const factor = 12 * years; // months in the selected horizon
 
-    if (whatIfChart) whatIfChart.destroy();
-    whatIfChart = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels,
-        datasets: [{ data: dataVals }]
-      },
-      options: { responsive: true, plugins: { legend: { position: "bottom" } } }
-    });
-  }
+  const labels = [
+    ...editIncome.map(i => `Income: ${i.label}`),
+    ...editExpenses.map(e => `Expense: ${e.label}`)
+  ];
 
+  const dataVals = [
+    ...editIncome.map(i => i.amountMonthly * factor),
+    ...editExpenses.map(e => e.amountMonthly * factor)
+  ];
+
+  if (whatIfChart) whatIfChart.destroy();
+  whatIfChart = new Chart(ctx, {
+    type: "pie",
+    data: { labels, datasets: [{ data: dataVals }] },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: "bottom" },
+        title: {
+          display: true,
+          text: `What-If • ${years} year${years > 1 ? "s" : ""} (totals)`
+        }
+      }
+    }
+  });
+}
   function updateSummaries() {
     const incA = sumMonthly(actualIncome);
     const expA = sumMonthly(actualExpenses);
@@ -273,14 +280,12 @@
     });
 
     const yearsEl = document.getElementById("years");
-    yearsEl.addEventListener("input", () => {
-      years = Math.max(1, parseInt(yearsEl.value || "1", 10));
-      updateSummaries();
-    });
+yearsEl.addEventListener("input", () => {
+  years = Math.max(1, parseInt(yearsEl.value || "1", 10));
+  drawWhatIf();          // <— add this line so the chart updates on year change
+  updateSummaries();
+});
 
-    document.getElementById("reload").addEventListener("click", () => {
-      loadData().catch(console.error);
-    });
   }
 
   // Boot

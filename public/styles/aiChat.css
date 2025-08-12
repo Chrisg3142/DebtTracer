@@ -1,13 +1,13 @@
 .circle-container {
   position: fixed;
   z-index: 1;
-  bottom: 12%;
-  right: 3%;
-  width: 5%;
-  height: 6%;
-  border-radius: 100%;
+  bottom: 90px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   background-color: gold;
-  color: white;
+  color: black;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,10 +88,12 @@
 }
 .message.bot {
   background-color: #f1f1f1;
+  color: black;
   align-self: flex-start;
 }
 .message.user {
   background-color: #8ea5ff;
+  color: black;
   align-self: flex-end;
 }
 
@@ -117,4 +119,14 @@ input[type="text"] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+/*
+adding dark mode for ai chat below here
+change this to change how the button looks 
+just change the background color
+*/
+.circleDark{
+  background-color: maroon;
+  color: white;
 }

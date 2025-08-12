@@ -15,7 +15,6 @@ import mongoose from "mongoose";
 import User from "./Back-end/models/User.js";
 import Income from "./Back-end/models/Income.js";
 import Expense from "./Back-end/models/Expense.js";
-import Debt from "./Back-end/models/Debt.js";
 
 //import routes
 import authRoutes from "./Back-end/routes/authRoutes.js";
@@ -57,11 +56,21 @@ app.use(
 );
 
 app.use(async (req, res, next) => {
-  if (req.session.userId) {
-    res.locals.user = await User.findById(req.session.userId);
+  try {
+    if (req.session?.userId) {
+      res.locals.user = await User.findById(req.session.userId)
+        .select('name email profilePic theme')  // only what views need
+        .lean(); // faster, plain object
+    } else {
+      res.locals.user = null;
+    }
+  } catch (err) {
+    console.error('user locals middleware error:', err);
+    res.locals.user = null; // fail-safe
   }
   next();
 });
+
 
 // Route middleware
 app.use("/auth", authRoutes);

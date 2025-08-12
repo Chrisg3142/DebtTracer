@@ -1,6 +1,5 @@
 <div class="layout">
 <%- include("partials/header.ejs") %>
-<main class="content-container">
     <form action="/profile/pic" method="POST" enctype="multipart/form-data">
         <input type="file" name="profilePic" accept="image/*" required />
         <button type="submit">Upload</button>
@@ -9,7 +8,7 @@
       <% if (user.profilePic) { %>
         <img id="setProfilePic" src="<%= user.profilePic %>" alt="Profile Picture" width="150" />
       <% } else { %>
-        <img id="setProfilePic" src="/images/default-avatar.png" alt="Default Avatar" width="150" />
+        <img id="setProfilePic" src="/images/logo.png" alt="Default Avatar" width="150" />
       <% } %>
       
 </main>

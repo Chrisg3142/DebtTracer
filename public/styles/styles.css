@@ -139,11 +139,6 @@ img {
 }
 
 /* header css */
-/* .container-fluidity {
-  display: flex;
-  width: 100%;
-  height: 100%;
-} */
 .header {
   display: flex;
   position: fixed;
@@ -312,7 +307,7 @@ footer p {
 }
 
 .open-nav:hover{
-  background-color: rgb(99, 253, 202);
+  background-color: rgb(52, 70, 185);
   box-shadow: 1px 2px 1px 1px #4a6bff;
 }
 
@@ -467,7 +462,7 @@ which includes the profile picture
   margin-right: 5px;
 }
 body.dark-mode {
-  background-color: #121212;
+  background-color: rgb(60, 60, 60);
   color: #f5f5f5;
 }
 
@@ -551,7 +546,172 @@ input[type="number"] { width: 120px; padding:.4rem .5rem; border:1px solid #e5e7
 input.inline { width: 100px; }
 canvas { max-height: 360px; }
 
-#titleh1{
-  text-align: center;
-  margin-top: 25px;
+/* --- Desktop Figma-style layout (no mobile) --- */
+
+/* Left: compact stack of three cards */
+.summary .summary-cards{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  width:420px;                /* fixed left column like Figma */
 }
+
+/* Card look for the three summary items */
+.summary .card{
+  background:#c3c3c3;
+  border-radius:14px;
+  box-shadow:0 10px 24px rgba(0,0,0,.12);
+  padding:14px 16px;
+}
+.summary .card h3{
+  margin:0 0 6px;
+  font-size:16px;
+  font-weight:700;
+}
+.summary .card p{
+  margin:0;
+  font-weight:700;
+  font-size:18px;
+}
+
+/* Right: Recent Transactions as a single card panel */
+.recent-activity{
+  background:#c3c3c3;
+  border-radius:14px;
+  box-shadow:0 10px 24px rgba(0,0,0,.12);
+  padding:16px;
+}
+
+/* Put the two sections next to each other */
+main > .summary{
+  display:inline-block;
+  vertical-align:top;
+  width:420px;                /* match the stack width */
+  margin-right:24px;
+}
+main > .recent-activity{
+  display:inline-block;
+  vertical-align:top;
+  width:calc(100% - 420px - 24px);
+  min-height:320px;
+}
+
+/* Transactions rows inside the right panel */
+.transactions .transaction{
+  background:#f8fafc;
+  border-radius:10px;
+  padding:10px 12px;
+  margin:8px 0;
+  display: grid;
+  grid-template-columns:1fr auto auto; /* description | amount | date */
+  gap:12px;
+  align-items:center;
+}
+.transactions .description{font-weight:600;}
+.transactions .amount{font-weight:800;}
+.transactions .amount.income{color:#059669;}
+.transactions .amount.expense{color:#dc2626;}
+.transactions .date{color:#6b7280;font-size:13px;}
+
+/* --- Dark mode (uses your existing .dark-mode on <body>) --- */
+.dark-mode .summary .card,
+.dark-mode .recent-activity{
+  background:#777777;
+  color:#e5e7eb;
+  box-shadow:0 10px 24px rgba(0,0,0,.45);
+}
+.dark-mode .transactions .transaction{
+  background:#111827;
+  color:#e5e7eb;
+}
+.dark-mode .transactions .date{color:#9ca3af;}
+.dark-mode .transactions .amount.expense{color:#fb7185;}
+.dark-mode .transactions .amount.income{color:#34d399;}
+
+/* ------------------------------
+   DASHBOARD ONLY (Figma layout)
+   ------------------------------ */
+   #dashboard-main{
+    /* Put the two sections side-by-side */
+    display: grid;
+    grid-template-columns: 420px 1fr; /* left stack width + flexible right */
+    column-gap: 40px;
+    align-items: start;
+  }
+  
+  /* Kill the vertical stacking coming from the global main rule */
+  #dashboard-main .summary,
+  #dashboard-main .recent-activity{
+    margin: 0;                /* flush with the grid */
+  }
+  
+  /* Left: the three compact cards stack */
+  #dashboard-main .summary .summary-cards{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 420px;             /* matches the grid’s first column */
+  }
+  
+  /* Card look (keeps what you liked from Figma) */
+  #dashboard-main .summary .card{
+    background: #c3c3c3;
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0,0,0,.12);
+    padding: 14px 16px;
+  }
+  #dashboard-main .summary .card h3{
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  #dashboard-main .summary .card p{
+    margin: 0;
+    font-weight: 700;
+    font-size: 18px;
+  }
+  
+  /* Right: Recent Transactions container styled as a single panel */
+  #dashboard-main .recent-activity{
+    background: #c3c3c3;
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0,0,0,.12);
+    padding: 16px;
+    width: 325px;
+    min-height: 320px;
+  }
+  
+  /* Transaction rows */
+  #dashboard-main .transactions .transaction{
+    background: #0b1320;      /* dark navy row like your Figma */
+    color: #e5e7eb;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    margin: 8px 0;
+    display: grid;
+    grid-template-columns: 1fr auto min-content; /* description | amount | date */
+    gap: 12px;
+    align-items: center;
+  }
+  #dashboard-main .transactions .description{ font-weight: 600; }
+  #dashboard-main .transactions .amount{ font-weight: 800; color: #34d399; } /* income green */
+  #dashboard-main .transactions .amount.expense{ color: #fb7185; }           /* expense pink */
+  #dashboard-main .transactions .date{ color: #9ca3af; font-size: 13px; }
+  
+  /* Dark mode tweaks (use your existing body.dark-mode flag) */
+  body.dark-mode #dashboard-main .summary .card,
+  body.dark-mode #dashboard-main .recent-activity{
+    background: #777777;
+    color: #e5e7eb;
+    box-shadow: 0 10px 24px rgba(0,0,0,.45);
+  }
+  body.dark-mode #dashboard-main .transactions .transaction{
+    background: #111827;
+    color: #e5e7eb;
+  }
+  body.dark-mode #dashboard-main .transactions .date{ color: #9ca3af; }
+  
+
+  
+  

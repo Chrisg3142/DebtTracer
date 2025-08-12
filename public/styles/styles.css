@@ -712,6 +712,9 @@ main > .recent-activity{
   }
   body.dark-mode #dashboard-main .transactions .date{ color: #9ca3af; }
   
-
+#titleh1{
+  text-align: center;
+  margin-top: 25px;
+}
   
   

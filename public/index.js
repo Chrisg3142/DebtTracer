@@ -15,16 +15,38 @@ window.addEventListener("DOMContentLoaded", async () => {
     const openNav = document.getElementById("open-nav");
     const navBar = document.getElementById("nav-Bar")
     const closeNav = document.getElementById("close-nav");
-    
-    // openNav.addEventListener("click", () => {
-    //   navBar.classList.add("show");
-    //   openNav.classList.add("hidden");
-    // });
-    
-    // closeNav.addEventListener("click", () => {
-    //   navBar.classList.remove("show");
-    //   openNav.classList.remove("hidden");
-    // });  
+    //selector for the darkmode toggle and profile pic
+    const darkSwitch = document.getElementById("darkModebar");
+
+
+    //block code for dark mode and light mode
+    //if css darkmode doesnt work for some components
+    //make a dark mode class and add it in the second if statement 
+    //then to toggle it set classlist.toggle("ex.") om the even listnener
+    const themeToggle = document.getElementById("theme-toggle");
+    if (themeToggle) {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        openNav.classList.add("openNavDark");
+        closeNav.classList.add("closeNavDark");
+        openChatContainer.classList.add("circleDark");
+        openChat.classList.add("circleDark");
+        darkSwitch.classList.add("profileDM");
+        themeToggle.checked = true;
+      }
+      themeToggle.addEventListener("change", () => {
+        document.body.classList.toggle("dark-mode");
+        openNav.classList.toggle("openNavDark");
+        closeNav.classList.toggle("closeNavDark");
+        openChatContainer.classList.toggle("circleDark");
+        openChat.classList.toggle("circleDark");
+        darkSwitch.classList.toggle("profileDM");
+        const theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+        localStorage.setItem("theme", theme);
+      });
+    }
+
     openNav.addEventListener("click", () => {
       navBar.classList.remove("collapsedx");
       openNav.classList.add("hidden");

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= lang %>">
   <head>
+    <link rel="stylesheet" href="styles/welcome.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/welcome.css" />
-    <title>Document</title>
+      <title><%= t('title') %></title>
   </head>
   <body>
     <header class="navbar">
@@ -13,8 +13,8 @@
         <h1 class="app-name">Debt Tracer</h1>
       </div>
       <div class="auth-buttons">
-        <a href="/auth/login" class="btn login">Login</a>
-        <a href="/auth/register" class="btn signup">Sign Up</a>
+        <a href="/auth/login" class="btn login"><%= t('login') %></a>
+        <a href="/auth/register" class="btn signup"><%= t('register') %></a>
       </div>
     </header>
     <main class="main-content">

@@ -1,0 +1,110 @@
+{
+  "title": "Debt Tracer",
+  "nav": {
+    "home": "Home",
+    "earnings": "Earnings",
+    "expenses": "Expenses",
+    "profile": "Profile",
+    "results": "Results",
+    "logout": "Logout"
+  },
+  "login": "Login",
+  "register": "Register",
+  "dashboard": {
+    "financialSummary": "Financial Summary",
+    "totalIncome": "Total Income",
+    "totalExpenses": "Total Expenses",
+    "remainingBalance": "Remaining Balance",
+    "recentTransactions": "Recent Transactions"
+  },
+  "earnings": {
+    "title": "Income Tracker",
+    "addNew": "Add New Income",
+    "source": "Income Source",
+    "selectSource": "Select a source",
+    "salary": "Salary",
+    "freelance": "Freelance",
+    "bonus": "Bonus",
+    "investment": "Investment",
+    "rental": "Rental Income",
+    "other": "Other (Specify Below)",
+    "customPlaceholder": "Enter custom source",
+    "amount": "Amount",
+    "date": "Date",
+    "frequency": "Frequency",
+    "oneTime": "One-time",
+    "weekly": "Weekly",
+    "biweekly": "Bi-weekly",
+    "monthly": "Monthly",
+    "addIncome": "Add Income",
+    "history": "Income History",
+    "total": "Total",
+    "table": {
+      "date": "Date",
+      "source": "Source",
+      "amount": "Amount",
+      "frequency": "Frequency",
+      "actions": "Actions"
+    },
+    "delete": "Delete",
+    "noRecords": "No income records found. Add your first income above."
+  },
+  "expenses": {
+    "title": "Expense Tracker",
+    "upcoming": "You have {{count}} recurring expenses due soon:",
+    "addNew": "Add New Expense",
+    "category": "Category",
+    "selectCategory": "Select a category",
+    "housing": "Housing",
+    "food": "Food",
+    "transportation": "Transportation",
+    "utilities": "Utilities",
+    "entertainment": "Entertainment",
+    "name": "Expense Name",
+    "namePlaceholder": "e.g. Groceries, Rent",
+    "amount": "Amount",
+    "date": "Date",
+    "recurring": "Recurring Expense",
+    "frequency": "Frequency",
+    "oneTime": "One-time",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "overdue": "OVERDUE",
+    "overdueSince": "Overdue since",
+    "due": "Due",
+    "addExpense": "Add Expense",
+    "history": "Expense History",
+    "total": "Total",
+    "table": {
+      "date": "Date",
+      "category": "Category",
+      "description": "Description",
+      "amount": "Amount",
+      "recurrence": "Recurrence",
+      "actions": "Actions"
+    },
+    "delete": "Delete",
+    "noRecords": "No expense records found. Add your first expense above."
+  },
+  "results": {
+    "title": "Results"
+  },
+  "profile": {
+    "upload": "Upload"
+  },
+  "auth": {
+    "welcome": "Welcome back!",
+    "username": "Username",
+    "password": "Password",
+    "loginButton": "Login",
+    "noAccount": "Don't have an account?",
+    "registerHere": "Register here",
+    "fullName": "Full Name",
+    "email": "Email",
+    "passwordHint": "Must be at least 8 characters",
+    "emailHint": "Please enter a valid email address",
+    "registerButton": "Register",
+    "haveAccount": "Already have an account?",
+    "loginHere": "Login here"
+  }
+}

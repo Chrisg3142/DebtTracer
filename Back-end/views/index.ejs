@@ -1,12 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= lang %>">
   <head>
+    <link rel="stylesheet" href="styles/welcome.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+      <title><%= t('title') %></title>
   </head>
   <body>
-    <a href="/auth/login">Login</a>
-    <a href="/auth/register">Register</a>
+    <header class="navbar">
+      <div class="logo-container">
+        <img src="/images/DT_Noname.png" alt="Debt Tracer Logo" class="logo" />
+        <h1 class="app-name">Debt Tracer</h1>
+      </div>
+      <div class="auth-buttons">
+        <a href="/auth/login" class="btn login"><%= t('login') %></a>
+        <a href="/auth/register" class="btn signup"><%= t('register') %></a>
+      </div>
+    </header>
+    <main class="main-content">
+      <section class="tagline-section">
+        <div class="tagline-wrapper">
+          <div class="icon-container">
+            <img src="/images/money_icon.png" alt="Money Icon" class="money-icon">
+          </div>
+          <div class="tagline-text">
+            <h1><em>From Debt Stress to Debt Success</em></h1>
+            <p>
+              Track your earnings, balance your expenses, and optimize your spending
+              for what truly matters — all in one place.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="why-section">
+        <div class="why-wrapper">
+          <div class="why-image">
+            <img src="/images/MoneyGive.jpg" alt="Debt Tracer collage" class="money-img" />
+          </div>
+          <div class="why-text">
+            <h2>Why use <span class="highlight">Debt Tracer?</span></h2>
+            <p class="why-description">
+              Managing money shouldn't be complicated — it should be smart.  
+              Debt Tracer was created to simplify your finances, help you pay off debt faster,  
+              and give you the tools to build a better financial future — all in one place.
+              <br></br>
+              Whether you're juggling multiple debts, trying to save for a big purchase, or just want to get a better handle on your spending,  
+              Debt Tracer provides the insights and tools you need to take control of your money.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="testimonials-section">
+        <h2 class="testimonials-title">Member Testimonials:</h2>
+        <div class="testimonials-wrapper">
+          <div class="testimonial-card">
+            <p class="testimonial-text">“Debt Tracer absolutely saved my life! It's an amazing tool which has helped me manage my money better!”</p>
+            <p class="testimonial-author">~ Jawad, 20</p>
+            <img src="/images/DT_Noname.png" alt="Dollar Logo" class="testimonial-logo" />
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">“Debt Tracer changed my perspective on money and how to manage it well.”</p>
+            <p class="testimonial-author">~ Arisa, 18</p>
+            <img src="/images/DT_Noname.png" alt="Dollar Logo" class="testimonial-logo" />
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">“I love the simplicity and design of Debt Tracer. It truly helps me keep my financial goals aligned.”</p>
+            <p class="testimonial-author">~ Nadia, 27</p>
+            <img src="/images/DT_Noname.png" alt="Dollar Logo" class="testimonial-logo" />
+          </div>
+        </div>
+      </section>
+</main>
+
+<footer>
+	<div class="footer-content">
+		<% const Today = new Date() %>
+		<% const year = Today.getFullYear()  %>
+		<p>&copy; <%= year %> Debt Tracers. All rights reserved.</p>
+		<ul class="social-links">
+			<!-- we could create a fake page for them or just make the button functional to an empty page or sign up page-->
+		<li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
+		<li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
+		<li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+		<li><a href="https://www.linkedin.com" target="_blank">LinkedIn</a></li>
+		</ul>
+  </div>
+</footer>
+</body>
+</html>
   </body>
 </html>

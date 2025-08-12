@@ -47,6 +47,21 @@ window.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
+    //this code is to save what language someone selects 
+    //this makes it so it is retrieved from session storage and lets 
+    //the language load up when the user starts up the page
+    const lang = document.getElementById("language-select");
+    if (lang){
+      const savedLang = localStorage.getItem("language");
+      if (savedLang){
+        lang.value = savedLang;
+      }
+      lang.addEventListener("change", () =>{
+        const language = lang.value;
+        localStorage.setItem("language", language);
+      })
+    }
+
     openNav.addEventListener("click", () => {
       navBar.classList.remove("collapsedx");
       openNav.classList.add("hidden");

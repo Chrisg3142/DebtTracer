@@ -103,8 +103,8 @@
 
     <script src="/js/analytics.js"></script>
 <%- include('partials/footer') %>
-<!-- <script>
-  window.I18N =  JSON.stringify({
+<script>
+  window.I18N = <%- JSON.stringify({
     income: t('playground.actuals.incomeHeader'),
     expenses: t('playground.actuals.expenseHeader'),
     net: t('playground.netWord'),
@@ -115,5 +115,5 @@
     perMonthSuffix: t('playground.perMonthSuffix'),
     totals: t('playground.totalsWord'),
     errors: { analyticsLoad: t('playground.errors.analyticsLoad') }
-  }) ;
-</script> -->
+  }) %>;
+</script>

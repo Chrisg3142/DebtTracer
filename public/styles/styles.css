@@ -208,7 +208,7 @@ img {
 }
 
 .nav-links a {
-  border-radius: 5px;
+  border-radius: 7px;
   display: block;
   font-size: 20px;
   width: 95%;
@@ -217,9 +217,9 @@ img {
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  background: linear-gradient(90deg, #1d2854 35%, #4a6bff 100%);
+  background: linear-gradient(90deg, #212e62 15%, #4a6bff 100%);
   color: white;
-  box-shadow: 0px 0px 2px 2px black;
+  box-shadow: 0px 0px 2px 2px rgb(225, 225, 225);
   transition: all 0.2s ease;
 }
 
@@ -655,7 +655,7 @@ main > .recent-activity{
   
   /* Card look (keeps what you liked from Figma) */
   #dashboard-main .summary .card{
-    background: #d6d6d6;
+    background: #eaedfa;
     border-radius: 14px;
     box-shadow: 0 10px 24px rgba(0,0,0,.12);
     padding: 14px 16px;
@@ -673,18 +673,18 @@ main > .recent-activity{
   
   /* Right: Recent Transactions container styled as a single panel */
   #dashboard-main .recent-activity{
-    background: #dbdbdb;
+    background: #dfdede;
     border-radius: 14px;
     box-shadow: 0 10px 24px rgba(0,0,0,.12);
     padding: 16px;
-    width: 325px;
+    width: 400px;
     min-height: 320px;
   }
   
   /* Transaction rows */
   #dashboard-main .transactions .transaction{
     background: #0b1320;      /* dark navy row like your Figma */
-    color: #e5e7eb;
+    color: #6a90dc;
     border-radius: 10px;
     width: 100%;
     padding: 10px 12px;

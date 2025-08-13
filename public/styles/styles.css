@@ -724,7 +724,6 @@ main > .recent-activity{
   margin-top: 25px;
 }
   
-  
 .card {
   background-color: var(--card-bg, #1e293b); 
   border-radius: 10px;
@@ -733,12 +732,30 @@ main > .recent-activity{
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card:hover {
+#income-history-card:hover {
   transform: translateY(-8px) scale(1.03);
   box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
 
+#expense1:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
 
 .goHome p{
   margin:0;
+}
+#expense2:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+#expense3:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+body.dark-mode .content-containerP {
+  background-color: #2a2a40; /* darker bluish tone for dark mode */
+  border: 2px solid rgb(153, 153, 153);
 }

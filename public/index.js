@@ -55,6 +55,11 @@ window.addEventListener("DOMContentLoaded", async () => {
       const savedLang = localStorage.getItem("language");
       if (savedLang){
         lang.value = savedLang;
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("lang") !== savedLang){
+          params.set("lang", savedLang);
+          window.location.search = params.toString();
+        }
       }
       lang.addEventListener("change", () =>{
         const language = lang.value;
@@ -106,14 +111,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         navBar.setAttribute("aria-hidden","true");
         openNav.classList.remove("hidden");
       });
-    });
-
-    //this is to see the file name when someone 
-    //chooses a file to change their profile picture
-    document.getElementById('profilePic').addEventListener('change', function() {
-      if (this.files && this.files[0]) {
-        document.querySelector('.custom-file-label').textContent = this.files[0].name;
-      }
     });
 
     fetch("/chart-data")

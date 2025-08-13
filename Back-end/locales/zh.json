@@ -23,8 +23,28 @@
       "member3": "“我喜欢 Debt Tracer 的简洁与设计。用它记账特别顺手，还能帮我管好钱。”",
       "copyright": "版权所有。"
     },
-    "login": "登录",
-    "register": "注册",
+   "login": {
+  "title": "登录",
+  "welcome": "欢迎回来！",
+  "username": "用户名",
+  "password": "密码",
+  "loginButton": "登录",
+  "home": "首页",
+  "noAccount": "还没有账号？",
+  "registerHere": "在此注册"
+},
+"register": {
+  "title": "注册",
+  "fullName": "全名",
+  "email": "电子邮箱",
+  "password": "密码",
+  "passwordHint": "必须至少 8 个字符",
+  "emailHint": "请输入有效的电子邮箱地址",
+  "registerButton": "注册",
+  "home": "主页",
+  "haveAccount": "已经有账号？",
+  "loginHere": "在此登录"
+},
     "dashboard": {
       "financialSummary": "财务概览",
       "totalIncome": "总收入",

@@ -187,13 +187,11 @@ app.post("/ask", async (req, res) => {
             const [incomes, expenses] = await Promise.all([
                 Income.find({ userId: req.session.userId }).select("source amount frequency -_id"),
                 Expense.find({ userId: req.session.userId }).select("category name amount -_id"),
-                // Debt.find({ userId: req.session.userId }).select("type remainingAmount interestRate minimumPayment dueDate -_id"),
             ]);
 
             const summary = {
                 incomes,
                 expenses,
-                debts,
             };
 
             chatHistory.push({

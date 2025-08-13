@@ -23,8 +23,28 @@
       "member3": "「Debt Tracerはシンプルで使いやすくて最高！おかげで貯金計画もきちんと守れるんです。」",
       "copyright": "無断複製・転載を禁じます。"
     },
-    "login": "ログイン",
-    "register": "登録",
+    "login": {
+  "title": "ログイン",
+  "welcome": "お帰りなさい！",
+  "username": "ユーザー名",
+  "password": "パスワード",
+  "loginButton": "ログイン",
+  "home": "ホーム",
+  "noAccount": "アカウントをお持ちではありませんか？",
+  "registerHere": "こちらで登録"
+},
+"register": {
+  "title": "新規登録",
+  "fullName": "氏名",
+  "email": "メールアドレス",
+  "password": "パスワード",
+  "passwordHint": "8文字以上で入力してください",
+  "emailHint": "有効なメールアドレスを入力してください",
+  "registerButton": "登録",
+  "home": "ホームページ",
+  "haveAccount": "すでにアカウントをお持ちですか？",
+  "loginHere": "こちらでログイン"
+},
     "dashboard": {
       "financialSummary": "財務サマリー",
       "totalIncome": "総収入",
@@ -149,6 +169,9 @@
         "amountHeader": "金額"
       },
       "horizonSummaryLabel": "期間のサマリー"
+    },
+    "chat": {
+      "welcome": "👋 こんにちは、Senaです。あなたの負債の理解と管理をお手伝いします。何でも聞いてください！"
     },
     "auth": {
       "welcome": "お帰りなさい！",

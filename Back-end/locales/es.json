@@ -23,8 +23,28 @@
     "member3": "Me encanta lo simple y bien diseñado que es Debt Tracer. La verdad es que me ayuda mucho a organizar mis finanzas.",
     "copyright": "Todos los derechos reservados."
   },
-  "login": "Iniciar sesión",
-  "register": "Registrarse",
+ "login": {
+  "title": "Iniciar sesión",
+  "welcome": "¡Bienvenido de nuevo!",
+  "username": "Usuario",
+  "password": "Contraseña",
+  "loginButton": "Iniciar sesión",
+  "home": "Pagina principal",
+  "noAccount": "¿No tienes una cuenta?",
+  "registerHere": "Regístrate aquí"
+},
+"register": {
+  "title": "Registrarse",
+  "fullName": "Nombre completo",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "passwordHint": "Debe tener al menos 8 caracteres",
+  "emailHint": "Por favor ingresa un correo electrónico válido",
+  "registerButton": "Registrarse",
+  "home": "Inicio",
+  "haveAccount": "¿Ya tienes una cuenta?",
+  "loginHere": "Inicia sesión aquí"
+},
   "dashboard": {
     "financialSummary": "Resumen financiero",
     "totalIncome": "Ingresos totales",
@@ -149,6 +169,9 @@
       "amountHeader": "Monto"
     },
     "horizonSummaryLabel": "Resumen del horizonte"
+  },
+  "chat": {
+    "welcome": "👋 ¡Hola! Soy Sena. Estoy aquí para ayudarte a entender y administrar tu deuda. ¡Pregúntame lo que quieras!"
   },
   "auth": {
     "welcome": "¡Bienvenido de nuevo!",

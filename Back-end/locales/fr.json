@@ -23,8 +23,28 @@
       "member3": "“J'adore la simplicité et le design de Debt Tracer. Cela m'aide vraiment à maintenir mes objectifs financiers alignés.”",
       "copyright": "Tous droits réservés."
     },
-    "login": "Connexion",
-    "register": "Inscription",
+    "login": {
+  "title": "Connexion",
+  "welcome": "Bon retour !",
+  "username": "Nom d'utilisateur",
+  "password": "Mot de passe",
+  "loginButton": "Connexion",
+  "home": "Accueil",
+  "noAccount": "Vous n'avez pas de compte ?",
+  "registerHere": "Inscrivez-vous ici"
+},
+"register": {
+  "title": "Inscription",
+  "fullName": "Nom complet",
+  "email": "E-mail",
+  "password": "Mot de passe",
+  "passwordHint": "Doit contenir au moins 8 caractères",
+  "emailHint": "Veuillez entrer une adresse e-mail valide",
+  "registerButton": "S'inscrire",
+  "home": "Page d'accueil",
+  "haveAccount": "Vous avez déjà un compte ?",
+  "loginHere": "Connectez-vous ici"
+},
     "dashboard": {
       "financialSummary": "Résumé financier",
       "totalIncome": "Revenus totaux",
@@ -150,6 +170,9 @@
       },
       "horizonSummaryLabel": "Résumé de l’horizon"
     },
+    "chat": {
+      "welcome": "👋 Salut ! Je suis Sena. Je suis là pour vous aider à comprendre et gérer votre dette. Posez-moi toutes vos questions !"
+    },  
     "auth": {
       "welcome": "Bon retour !",
       "username": "Nom d’utilisateur",

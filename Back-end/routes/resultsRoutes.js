@@ -94,7 +94,7 @@ function summarizeDocs(docs, opts) {
 router.get("/", isAuthenticated, (req, res) => {
   res.render("results", {
     title: "Results",
-    user: req.user || null,
+    
   });
 });
 

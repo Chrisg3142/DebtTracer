@@ -544,7 +544,6 @@ body.dark-mode {
 .pill { padding:.2rem .5rem; border-radius:999px; background:#f3f4f6; }
 input[type="number"] { width: 120px; padding:.4rem .5rem; border:1px solid #e5e7eb; border-radius:8px; }
 input.inline { width: 100px; }
-canvas { max-height: 360px; }
 
 /* --- Desktop Figma-style layout (no mobile) --- */
 

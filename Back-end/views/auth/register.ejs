@@ -16,7 +16,7 @@
           </select>
         </div>
     <div class="login-container">
-      <h1>Register</h1>
+      <h1><%= t("register.title") %></h1>
 
       <% if (typeof error !== 'undefined' && error) { %>
       <div class="alert error"><%= error %></div>
@@ -24,7 +24,7 @@
       
       <form action="/auth/register" method="POST">
         <div class="form-group">
-          <label>Full Name</label>
+          <label><%= t("register.fullName") %></label>
           <input
             type="text"
             name="name"
@@ -35,7 +35,7 @@
         </div>
 
         <div class="form-group">
-          <label>Email</label>
+          <label><%= t("register.email") %></label>
           <input
             type="email"
             name="email"
@@ -43,25 +43,32 @@
             placeholder="example@domain.com"
             required
           />
-          <small class="form-hint">Please enter a valid email address</small>
+          <small class="form-hint"><%= t("register.emailHint") %></small>
         </div>
 
         <div class="form-group">
           <label>Password </label>
           <input type="password" name="password" minlength="8" required />
-          <small class="form-hint">Must be at least 8 characters</small>
+          <small class="form-hint"><%= t("register.passwordHint") %></small>
         </div>
         <div class="submit-button">
-          <button type="submit" class="login_button">Register</button>
+          <button type="submit" class="login_button"><%= t("register.registerButton") %></button>
         </div>
         
       </form>
       <div class="goHome">
-        <p><a href="/">Home</a></p>
-        <p>Already have an account? <a href="/auth/login">Login here</a></p>
+        <p><a href="/"><%= t("login.home") %></a></p>
+        <p><%= t("register.haveAccount") %> <a href="/auth/login"><%= t("register.loginHere") %></a></p>
         </div>
       
 
     </div>
+    <script>
+      document.getElementById('language-select').addEventListener('change', function () {
+        const params = new URLSearchParams(window.location.search);
+        params.set('lang', this.value);
+        window.location.search = params.toString();
+      });
+    </script>
   </body>
 </html>

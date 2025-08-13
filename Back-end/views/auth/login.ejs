@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title><%= t("login.title") %></title>
     <link rel="stylesheet" href="/styles/styles.css" />
   </head>
   <body class="auth-container">
@@ -22,11 +22,11 @@
       <h1 id="logo_title">Debt Tracer</h1>
     </div>
     <div class="login-container">
-      <h1>Welcome back!</h1>
+      <h1><%= t("login.welcome") %></h1>
 
       <form action="/auth/login" method="POST" class="login-form">
         <div class="form-group" id="username">
-          <label>Username:</label>
+          <label><%= t("login.username") %></label>
           <input
             type="email"
             name="email"
@@ -37,19 +37,19 @@
         </div>
 
         <div class="form-group" id="password-field">
-          <label>Password:</label>
+          <label><%= t("login.password") %></label>
           <input type="password" name="password" placeholder="Password" required />
           
         </div>
         <div class="submit-button">
-          <button type="submit" class="login_button">Login</button>
+          <button type="submit" class="login_button"><%= t("login.login") %></button>
         </div>
         
       </form>
       <div class="register-link">
-          <p><a href="/">Home</a></p>
+          <p><a href="/"><%= t("login.home") %></a></p>
           <p>
-            Don't have an account? <a href="/auth/register">Register here</a>
+            <%= t("login.noAccount") %> <a href="/auth/register"><%= t("login.registerHere") %></a>
           </p>
         </div>
     </div>

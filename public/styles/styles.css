@@ -530,20 +530,54 @@ body.dark-mode {
 .mb-4 {
     text-align: center;
 }
-.grid { display: grid;
-   gap: 1rem; 
-  }
-.grid-2 { grid-template-columns: 1fr 1fr; }
-.cardresult { background:#fff; border-radius:16px; box-shadow: 0 6px 20px rgba(0,0,0,.08); padding: 1rem; }
-.row1 { display:flex; gap:.75rem; align-items:center; flex-wrap: wrap; }
-.muted { color:#777; }
-.table { width:100%; border-collapse: collapse; }
-.table th, .table td { padding:.5rem .6rem; border-bottom:1px solid #eee; }
-.small { font-size:.9rem; }
-.right { text-align:right; }
-.pill { padding:.2rem .5rem; border-radius:999px; background:#f3f4f6; }
-input[type="number"] { width: 120px; padding:.4rem .5rem; border:1px solid #e5e7eb; border-radius:8px; }
-input.inline { width: 100px; }
+/* Ensure parent container contains everything */
+.grid {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%; /* Prevents going beyond parent's width */
+  overflow-x: auto; /* Scroll if content is wider */
+  box-sizing: border-box;
+}
+
+/* For your two-column layout */
+.grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Make sure table fits container */
+.table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Forces table to respect container width */
+  word-wrap: break-word;
+}
+
+/* Table cells prevent overflow */
+.table th, .table td {
+  padding: .5rem .6rem;
+  border-bottom: 1px solid #eee;
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Show "..." if text is too long */
+  white-space: nowrap; /* Keep in one line — remove if you want wrapping */
+}
+
+/* Make sure inputs never overflow their cell */
+input[type="number"],
+input.inline {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Optional: prevent flex rows from stretching too far */
+.row1 {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+  flex-wrap: wrap; /* Wrap instead of overflowing */
+  max-width: 100%;
+}
 
 /* --- Desktop Figma-style layout (no mobile) --- */
 

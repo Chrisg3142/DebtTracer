@@ -1,10 +1,27 @@
 <%- include("partials/header.ejs") %>
 <main class="content-container">
-  <% function formatCurrency(amount) { 
-  return amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); 
-} %>
+  <% 
+    function formatCurrency(amount) { 
+      return amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); 
+    }
+    // Localized labels for stored codes
+    const freqLabel = (code) => ({
+      'one-time': t('expenses.oneTime'),
+      'weekly':   t('expenses.weekly'),
+      'monthly':  t('expenses.monthly'),
+    }[code] || code);
+
+    const catLabel = (c) => ({
+      'Housing':        t('expenses.housing'),
+      'Food':           t('expenses.food'),
+      'Transportation': t('expenses.transportation'),
+      'Utilities':      t('expenses.utilities'),
+      'Entertainment':  t('expenses.entertainment'),
+    }[c] || c);
+  %>
+
   <section class="expenses-section">
-    <h1 class="mb-4" id="top-title-h1">Expense Management</h1>
+    <h1 class="mb-4" id="top-title-h1"><%= t('expenses.title') %></h1>
 
     <% if (typeof alert !== 'undefined' && alert) { %>
       <div class="alert alert-<%= alert.type %> alert-dismissible fade show mb-4">
@@ -16,38 +33,39 @@
 
     <div class="card mb-4">
       <div class="card-header">
-        <h2 class="card-title">Add New Expense</h2>
+        <h2 class="card-title"><%= t('expenses.addNew') %></h2>
       </div>
       <div class="card-body">
         <form action="/expenses" method="POST" class="expense-form">
           <div class="row g-3">
             <div class="col-md-4">
-              <label for="category" class="form-label">Category*</label>
+              <label for="category" class="form-label"><%= t('expenses.category') %>*</label>
               <select class="form-select" id="category" name="category" required>
-                <option value="" disabled selected>Select a category</option>
-                <option value="Housing" <%= formData && formData.category === 'Housing' ? 'selected' : '' %>>Housing</option>
-                <option value="Food" <%= formData && formData.category === 'Food' ? 'selected' : '' %>>Food</option>
-                <option value="Transportation" <%= formData && formData.category === 'Transportation' ? 'selected' : '' %>>Transportation</option>
-                <option value="Utilities" <%= formData && formData.category === 'Utilities' ? 'selected' : '' %>>Utilities</option>
-                <option value="Entertainment" <%= formData && formData.category === 'Entertainment' ? 'selected' : '' %>>Entertainment</option>
+                <option value="" disabled selected><%= t('expenses.selectCategory') %></option>
+                <!-- Canonical values; localized labels -->
+                <option value="Housing"        <%= formData && formData.category === 'Housing' ? 'selected' : '' %>><%= t('expenses.housing') %></option>
+                <option value="Food"           <%= formData && formData.category === 'Food' ? 'selected' : '' %>><%= t('expenses.food') %></option>
+                <option value="Transportation" <%= formData && formData.category === 'Transportation' ? 'selected' : '' %>><%= t('expenses.transportation') %></option>
+                <option value="Utilities"      <%= formData && formData.category === 'Utilities' ? 'selected' : '' %>><%= t('expenses.utilities') %></option>
+                <option value="Entertainment"  <%= formData && formData.category === 'Entertainment' ? 'selected' : '' %>><%= t('expenses.entertainment') %></option>
               </select>
             </div>
             
             <div class="col-md-4">
-              <label for="name" class="form-label">Expense Name*</label>
+              <label for="name" class="form-label"><%= t('expenses.name') %>*</label>
               <input 
                 type="text" 
                 class="form-control" 
                 id="name" 
                 name="name" 
-                placeholder="e.g. Groceries, Rent" 
+                placeholder="<%= t('expenses.namePlaceholder') %>" 
                 required
                 value="<%= typeof formData !== 'undefined' ? formData.name : '' %>"
               >
             </div>
 
             <div class="col-md-4">
-              <label for="amount" class="form-label">Amount*</label>
+              <label for="amount" class="form-label"><%= t('expenses.amount') %>*</label>
               <div class="input-group">
                 <span class="input-group-text">$</span>
                 <input 
@@ -65,7 +83,7 @@
             </div>
 
             <div class="col-md-4">
-              <label for="date" class="form-label">Date*</label>
+              <label for="date" class="form-label"><%= t('expenses.date') %>*</label>
               <input 
                 type="date" 
                 class="form-control" 
@@ -78,11 +96,11 @@
             </div>
 
             <div class="col-md-4">
-              <label for="frequency" class="form-label">Frequency*</label>
+              <label for="frequency" class="form-label"><%= t('expenses.frequency') %>*</label>
               <select class="form-select" id="frequency" name="frequency" <%= !formData || !formData.isRecurring ? 'disabled' : '' %>>
-                <option value="one-time" <%= formData && formData.frequency === 'one-time' ? 'selected' : '' %>>One-time</option>
-                <option value="weekly" <%= formData && formData.frequency === 'weekly' ? 'selected' : '' %>>Weekly</option>
-                <option value="monthly" <%= formData && formData.frequency === 'monthly' ? 'selected' : '' %>>Monthly</option>
+                <option value="one-time" <%= formData && formData.frequency === 'one-time' ? 'selected' : '' %>><%= t('expenses.oneTime') %></option>
+                <option value="weekly"   <%= formData && formData.frequency === 'weekly'   ? 'selected' : '' %>><%= t('expenses.weekly') %></option>
+                <option value="monthly"  <%= formData && formData.frequency === 'monthly'  ? 'selected' : '' %>><%= t('expenses.monthly') %></option>
               </select>
             </div>
 
@@ -95,13 +113,13 @@
                   name="isRecurring"
                   <%= formData && formData.isRecurring === 'on' ? 'checked' : '' %>
                 >
-                <label class="form-check-label" for="isRecurring">Recurring Expense</label>
+                <label class="form-check-label" for="isRecurring"><%= t('expenses.recurring') %></label>
               </div>
             </div>
 
             <div class="col-12">
               <button type="submit" class="btn btn-primary">
-                <i class="fas fa-plus-circle me-2"></i>Add Expense
+                <i class="fas fa-plus-circle me-2"></i><%= t('expenses.addExpense') %>
               </button>
             </div>
           </div>
@@ -111,9 +129,9 @@
 
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <h2 class="card-title mb-0">Expense History</h2>
+        <h2 class="card-title mb-0"><%= t('expenses.history') %></h2>
         <span class="badge bg-danger fs-6">
-          Total: $<%= expenses.reduce((sum, e) => sum + e.amount, 0).toFixed(2) %>
+          <%= t('expenses.total') %>: $<%= expenses.reduce((sum, e) => sum + e.amount, 0).toFixed(2) %>
         </span>
       </div>
       
@@ -123,20 +141,23 @@
             <table class="table table-hover mb-0">
               <thead class="table-light">
                 <tr>
-                  <th>Date</th>
-                  <th>Category</th>
-                  <th>Name</th>
-                  <th>Amount</th>
-                  <th>Frequency</th>
-                  <th>Actions</th>
+                  <th><%= t('expenses.table.date') %></th>
+                  <th><%= t('expenses.table.category') %></th>
+                  <th><%= t('expenses.table.description') %></th>
+                  <th><%= t('expenses.table.amount') %></th>
+                  <th><%= t('expenses.table.recurrence') %></th>
+                  <th><%= t('expenses.table.actions') %></th>
                 </tr>
               </thead>
               <tbody>
                 <% expenses.forEach(expense => { %>
                   <tr id="expense-row-<%= expense._id %>" class="<%= expense.isRecurring && expense.nextOccurrence && new Date(expense.nextOccurrence) < new Date() ? 'table-danger' : '' %>">
                     <td>
-                      <% const utcDate = new Date(expense.date);const localDate = new Date(utcDate.getUTCFullYear(),utcDate.getUTCMonth(),utcDate.getUTCDate());%>
-                      <%= localDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %>
+                      <% 
+                        const utcDate = new Date(expense.date);
+                        const localDate = new Date(utcDate.getUTCFullYear(), utcDate.getUTCMonth(), utcDate.getUTCDate());
+                      %>
+                      <%= localDate.toLocaleDateString(lang || 'en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %>
                     </td>
                     <td>
                       <span id="category-display-<%= expense._id %>" class="badge bg-<%= 
@@ -145,14 +166,15 @@
                         expense.category === 'Transportation' ? 'info' :
                         expense.category === 'Utilities' ? 'warning' : 'secondary'
                       %>">
-                        <%= expense.category %>
+                        <%= catLabel(expense.category) %>
                       </span>
                       <select class="form-select d-none" id="category-edit-<%= expense._id %>">
-                        <option value="Housing" <%= expense.category === 'Housing' ? 'selected' : '' %>>Housing</option>
-                        <option value="Food" <%= expense.category === 'Food' ? 'selected' : '' %>>Food</option>
-                        <option value="Transportation" <%= expense.category === 'Transportation' ? 'selected' : '' %>>Transportation</option>
-                        <option value="Utilities" <%= expense.category === 'Utilities' ? 'selected' : '' %>>Utilities</option>
-                        <option value="Entertainment" <%= expense.category === 'Entertainment' ? 'selected' : '' %>>Entertainment</option>
+                        <!-- Canonical values; localized labels -->
+                        <option value="Housing"        <%= expense.category === 'Housing' ? 'selected' : '' %>><%= t('expenses.housing') %></option>
+                        <option value="Food"           <%= expense.category === 'Food' ? 'selected' : '' %>><%= t('expenses.food') %></option>
+                        <option value="Transportation" <%= expense.category === 'Transportation' ? 'selected' : '' %>><%= t('expenses.transportation') %></option>
+                        <option value="Utilities"      <%= expense.category === 'Utilities' ? 'selected' : '' %>><%= t('expenses.utilities') %></option>
+                        <option value="Entertainment"  <%= expense.category === 'Entertainment' ? 'selected' : '' %>><%= t('expenses.entertainment') %></option>
                       </select>
                     </td>
                     <td>
@@ -173,22 +195,22 @@
                           expense.frequency === 'monthly' ? 'warning' : 'secondary'
                         %>">
                           <i class="fas fa-repeat me-1"></i>
-                          <%= expense.frequency.charAt(0).toUpperCase() + expense.frequency.slice(1) %>
+                          <%= freqLabel(expense.frequency) %>
                         </span>
                       <% } else { %>
                         <span id="frequency-display-<%= expense._id %>" class="badge bg-secondary">
-                          <i class="fas fa-times me-1"></i> One-time
+                          <i class="fas fa-times me-1"></i> <%= t('expenses.oneTime') %>
                         </span>
                       <% } %>
                       <div class="d-none" id="frequency-edit-container-<%= expense._id %>">
                         <div class="form-check form-switch mb-2">
                           <input class="form-check-input" type="checkbox" id="isRecurring-edit-<%= expense._id %>" <%= expense.isRecurring ? 'checked' : '' %>>
-                          <label class="form-check-label" for="isRecurring-edit-<%= expense._id %>">Recurring</label>
+                          <label class="form-check-label" for="isRecurring-edit-<%= expense._id %>"><%= t('expenses.recurring') %></label>
                         </div>
                         <select class="form-select" id="frequency-edit-<%= expense._id %>" <%= !expense.isRecurring ? 'disabled' : '' %>>
-                          <option value="one-time" <%= expense.frequency === 'one-time' ? 'selected' : '' %>>One-time</option>
-                          <option value="weekly" <%= expense.frequency === 'weekly' ? 'selected' : '' %>>Weekly</option>
-                          <option value="monthly" <%= expense.frequency === 'monthly' ? 'selected' : '' %>>Monthly</option>
+                          <option value="one-time" <%= expense.frequency === 'one-time' ? 'selected' : '' %>><%= t('expenses.oneTime') %></option>
+                          <option value="weekly"   <%= expense.frequency === 'weekly' ? 'selected' : '' %>><%= t('expenses.weekly') %></option>
+                          <option value="monthly"  <%= expense.frequency === 'monthly' ? 'selected' : '' %>><%= t('expenses.monthly') %></option>
                         </select>
                       </div>
                     </td>
@@ -200,7 +222,7 @@
                         </button>
                         <button class="btn btn-outline-danger delete-expense" data-id="<%= expense._id %>">
                           <i class="fas fa-trash-alt"></i>
-                          <span class="d-none d-sm-inline">Delete</span>
+                          <span class="d-none d-sm-inline"><%= t('expenses.delete') %></span>
                         </button>
                       </div>
                       <div class="btn-group btn-group-sm d-none" id="save-buttons-<%= expense._id %>">
@@ -221,7 +243,7 @@
           </div>
         <% } else { %>
           <div class="alert alert-info m-3">
-            <i class="fas fa-info-circle me-2"></i>No expense records found. Add your first expense above.
+            <i class="fas fa-info-circle me-2"></i><%= t('expenses.noRecords') %>
           </div>
         <% } %>
       </div>
@@ -229,4 +251,3 @@
   </section>
 
 <%- include('partials/footer') %>
-

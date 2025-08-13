@@ -69,8 +69,10 @@
       <div class="profilePic">
         <a href="/profile">
           <img id="siteProfile"
-            src="<%= (user && user.profilePic) ? user.profilePic : '/images/logo.png' %>"
-            alt="Profile Picture" width="150" />
+            src="<%= (typeof user !== 'undefined' && user && user.profilePic) ? user.profilePic : '/images/logo.png' %>"
+            alt="Profile Picture" width="150" 
+          />
+
         </a>
       </div>
     </div>

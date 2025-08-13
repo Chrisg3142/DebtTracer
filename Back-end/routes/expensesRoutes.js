@@ -43,7 +43,7 @@ router.get("/", isAuthenticated, async (req, res) => {
       expenses,
       title: "Expenses",
       formData: {},
-      user: req.user || null,
+      // user: req.user || null,
       alert,
     });
   } catch (err) {

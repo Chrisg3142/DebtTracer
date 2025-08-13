@@ -65,6 +65,22 @@ app.use(
   })
 );
 
+app.use(async (req, res, next) => {
+  res.locals.user = null; // always define it so EJS can reference it safely
+  if (req.session.userId) {
+    try {
+      // only select what you need to avoid pulling sensitive fields
+      res.locals.user = await User.findById(req.session.userId)
+        .select("profilePic name email")
+        .lean();
+    } catch (e) {
+      // optional: console.warn("Failed to load user for locals:", e);
+      res.locals.user = null;
+    }
+  }
+  next();
+});
+
 const DEFAULT_LANG = "en";
 
 app.use((req, res, next) => {

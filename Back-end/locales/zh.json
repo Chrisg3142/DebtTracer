@@ -9,6 +9,20 @@
       "logout": "退出登录",
       "playground": "实验室"
     },
+    "index": {
+      "login": "登录",
+      "register": "注册",
+      "welcome": "从债务压力到债务成功",
+      "subtitle": "在同一平台跟踪收入、平衡支出，并将资金优化到真正重要的地方。",
+      "why": "为什么使用",
+      "use": "理财不该复杂，而应当更聪明。Debt Tracer 的目标是简化你的财务、帮助你更快还清债务，并为你提供构建更好财务未来的工具——一切尽在同一处。",
+      "use1": "无论你正在同时处理多笔债务、为大额开支存钱，还是只想更好地掌控日常花费，Debt Tracer 都能提供洞见与工具，助你掌控自己的资金。",
+      "member": "会员评价：",
+      "member1": "Debt Tracer 绝对拯救了我的生活！这款了不起的工具让我更好地管理了我的钱！",
+      "member2": "“Debt Tracer 改变了我对金钱以及如何有效管理它的看法。”",
+      "member3": "我喜欢 Debt Tracer 的简洁与设计。它真的",
+      "copyright": "版权所有。"
+    },
     "login": "登录",
     "register": "注册",
     "dashboard": {
@@ -28,7 +42,7 @@
       "bonus": "奖金",
       "investment": "投资",
       "rental": "租金收入",
-      "other": "其他（在下方填写）",
+      "other": "其他（请在下方填写）",
       "customPlaceholder": "输入自定义来源",
       "amount": "金额",
       "date": "日期",
@@ -107,7 +121,7 @@
         "basisMonth": "基准月份",
         "horizonYears": "时间范围（年）",
         "reloadData": "重新加载数据",
-        "oneTimeNote": "一次性条目计入所选基准月份。"
+        "oneTimeNote": "一次性项目将计入所选的基准月份。"
       },
       "actuals": {
         "title": "实际（按月）",
@@ -142,7 +156,7 @@
       "password": "密码",
       "loginButton": "登录",
       "noAccount": "没有账户？",
-      "registerHere": "在此注册",
+      "registerHere": "立即注册",
       "fullName": "姓名",
       "email": "电子邮件",
       "passwordHint": "至少 8 个字符",

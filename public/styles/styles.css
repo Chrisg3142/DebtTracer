@@ -443,7 +443,7 @@ which includes the profile picture
   this is to switch how the language selector looks
 */
 #language-select{
-  border-radius: 6px;
+  border-radius: 25px;
   height: 30px;
   width: 85px;
 }

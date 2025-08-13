@@ -127,6 +127,6 @@ change this to change how the button looks
 just change the background color
 */
 .circleDark{
-  background-color: maroon;
+  background-color: rgb(6, 25, 56);
   color: white;
 }

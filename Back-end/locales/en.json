@@ -150,6 +150,9 @@
     },
     "horizonSummaryLabel": "Horizon summary"
   },
+  "chat": {
+      "welcome": "👋 Hi! I'm Sena. I'm here to help you understand and manage your debt. Ask me anything!"
+  },
   "auth": {
     "welcome": "Welcome back!",
     "username": "Username",

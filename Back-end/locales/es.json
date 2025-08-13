@@ -150,6 +150,9 @@
     },
     "horizonSummaryLabel": "Resumen del horizonte"
   },
+  "chat": {
+    "welcome": "👋 ¡Hola! Soy Sena. Estoy aquí para ayudarte a entender y administrar tu deuda. ¡Pregúntame lo que quieras!"
+  },
   "auth": {
     "welcome": "¡Bienvenido de nuevo!",
     "username": "Usuario",

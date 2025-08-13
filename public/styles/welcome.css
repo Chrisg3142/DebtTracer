@@ -33,8 +33,23 @@ color: white;
 
 .auth-buttons{
     min-width: 250px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
-.auth-buttons a {
+.auth-buttons .lang select{
+        border-radius: 25px;
+        height: 30px;
+        width: 85px;
+}
+      
+.auth-buttons .lang select:hover{
+    cursor: pointer;
+}
+
+
+.auth-buttons .logReg a {
 margin-left: 15px;
 text-decoration: none;
 padding: 8px 24px;

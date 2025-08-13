@@ -22,8 +22,11 @@
             <option value="ja" <%= lang === 'ja' ? 'selected' : '' %>>日本語</option>
           </select>
         </div>
-        <a href="/auth/login" class="btn login"><%= t('index.login') %></a>
-        <a href="/auth/register" class="btn signup"><%= t('index.register') %></a>
+        <div class="logReg">
+          <a href="/auth/login" class="btn login"><%= t('index.login') %></a>
+          <a href="/auth/register" class="btn signup"><%= t('index.register') %></a>
+        </div>
+        
       </div>
     </header>
     <main class="main-content">

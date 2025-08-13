@@ -8,6 +8,20 @@
     "results": "Results",
     "logout": "Logout"
   },
+  "index" : {
+    "login": "Login",
+    "register": "Register",
+    "welcome": "From Debt Stress to Debt Success",
+    "subtitle": "Track your earnings, balance your expenses, and optimize your spending for what truly matters — all in one place.",
+    "why": "Why Use",
+    "use": "Managing money shouldn't be complicated, it should be smart.   Debt Tracer was created to simplify your finances, help you pay off debt faster,   and give you the tools to build a better financial future — all in one place.",
+    "use1": "Whether you're juggling multiple debts, trying to save for a big purchase, or just want to get a better handle on your spending,   Debt Tracer provides the insights and tools you need to take control of your money.",
+    "member": "Member Testimonials:",
+    "member1": "Debt Tracer absolutely saved my life! It's an amazing tool which has helped me manage my money better!",
+    "member2": "“Debt Tracer changed my perspective on money and how to manage it well.”",
+    "member3": "I love the simplicity and design of Debt Tracer. It truly",
+    "copyright": "All rights reserved."
+  },
   "login": "Login",
   "register": "Register",
   "dashboard": {

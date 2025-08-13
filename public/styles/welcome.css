@@ -41,6 +41,7 @@ padding: 8px 24px;
 font-size: 16px;
 border-radius: 5px;
 font-weight: bold;
+box-shadow: 4px 4px 10px rgba(15, 17, 23, 0.7);
 }
 
 .login {
@@ -67,8 +68,8 @@ cursor: pointer;
 
 .tagline-section {
 background: linear-gradient(90deg,  #1f1f4f 20%, #2d2a5a 100%);
-border-radius: 5px;
-box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+border-radius: 2px;
+box-shadow: inset 0 4px 24px rgba(33, 69, 130, 0.4);
 padding: 30px 40px 10px 40px; /* 10px bottom padding */
 }
 
@@ -143,6 +144,7 @@ font-weight: 500;
     max-width: 600px;
     margin-left: 0; 
     margin-right: 0;
+    max-height: 400px;
 }
 
 .collage-img {

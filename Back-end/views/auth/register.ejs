@@ -12,7 +12,7 @@
       <% if (typeof error !== 'undefined' && error) { %>
       <div class="alert error"><%= error %></div>
       <% } %>
-
+      
       <form action="/auth/register" method="POST">
         <div class="form-group">
           <label>Full Name</label>
@@ -45,9 +45,13 @@
         <div class="submit-button">
           <button type="submit" class="login_button">Register</button>
         </div>
+        <p>Already have an account? <a href="/auth/login">Login here</a></p>
       </form>
 
-      <p>Already have an account? <a href="/auth/login">Login here</a></p>
+      
+      <div class="goHome">
+        <p>Home<a href="/">Home</a></p>
+      </div>
     </div>
   </body>
 </html>

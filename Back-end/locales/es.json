@@ -1,4 +1,18 @@
 {
+"index": {
+  "login": "Iniciar sesión",
+  "register": "Registrarse",
+  "welcome": "De Estrés por Deudas a Éxito Financiero",
+  "subtitle": "Controla tus ingresos, equilibra tus gastos y optimiza tu consumo para lo que realmente importa — todo en un solo lugar.",
+  "why": "Por qué usar",
+  "use": "Administrar el dinero no debería ser complicado, debería ser inteligente. Debt Tracer fue creado para simplificar tus finanzas, ayudarte a pagar deudas más rápido y darte las herramientas para construir un mejor futuro financiero — todo en un solo lugar.",
+  "use1": "Ya sea que estés manejando múltiples deudas, intentando ahorrar para una gran compra o simplemente quieras tener un mejor control de tus gastos, Debt Tracer te ofrece las ideas y herramientas que necesitas para tomar el control de tu dinero.",
+  "member": "Testimonios de miembros:",
+  "member1": "¡Debt Tracer absolutamente me salvó la vida! ¡Es una herramienta increíble que me ha ayudado a administrar mejor mi dinero!",
+  "member2": "“Debt Tracer cambió mi perspectiva sobre el dinero y cómo gestionarlo bien.”",
+  "member3": "Me encanta la simplicidad y el diseño de Debt Tracer. Realmente",
+  "copyright": "Todos los derechos reservados."
+},
   "title": "Debt Tracer",
   "nav": {
     "home": "Inicio",

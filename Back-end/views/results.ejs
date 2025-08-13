@@ -1,68 +1,115 @@
 <%- include("partials/header.ejs") %>
-<h1 id="titleh1">Financial Playground</h1>
-  <main class="grid grid-2" style="padding:1rem;">
-    <!-- Controls -->
-    <section class="card" style="grid-column: 1 / -1;">
+
+<h1 id="titleh1"><%= t('playground.title') %></h1>
+
+<main class="grid grid-2" style="padding:1rem;">
+  <!-- Controls -->
+  <section class="card" style="grid-column: 1 / -1;">
+    <div class="row1">
       <div class="row1">
-        <div class="row1">
-          <label class="pill">Basis month</label>
-          <input id="basis" type="month" />
-        </div>
-        <div class="row1">
-          <label class="pill">Horizon (years)</label>
-          <input id="years" type="number" min="1" step="1" value="1" />
-        </div>
-        <button id="reload" class="pill" style="cursor:pointer;border:none;">Reload data</button>
-        <span class="muted small">One-time items count in the chosen basis month.</span>
+        <label class="pill"><%= t('playground.controls.basisMonth') %></label>
+        <input id="basis" type="month" />
       </div>
-    </section>
+      <div class="row1">
+        <label class="pill"><%= t('playground.controls.horizonYears') %></label>
+        <input id="years" type="number" min="1" step="1" value="1" />
+      </div>
+      <button id="reload" class="pill" style="cursor:pointer;border:none;">
+        <%= t('playground.controls.reloadData') %>
+      </button>
+      <span class="muted small"><%= t('playground.controls.oneTimeNote') %></span>
+    </div>
+  </section>
 
-    <!-- Actuals -->
-    <section class="card">
-      <h2>Actuals (Monthly)</h2>
-      <div class="row1 muted small">
-        <span id="actuals-monthly-summary"></span>
-      </div>
-      <canvas id="actualsChart"></canvas>
-      <hr/>
-      <h3 class="small">Breakdown</h3>
-      <table class="table small" id="actualsTable">
-        <thead><tr><th>Income</th><th class="right">Monthly</th></tr></thead>
-        <tbody id="incomeBody"></tbody>
-      </table>
-      <table class="table small" id="actualsExpenseTable" style="margin-top:.75rem;">
-        <thead><tr><th>Expense</th><th class="right">Monthly</th></tr></thead>
-        <tbody id="expenseBody"></tbody>
-      </table>
-    </section>
+  <!-- Actuals -->
+  <section class="card">
+    <h2><%= t('playground.actuals.title') %></h2>
+    <div class="row1 muted small">
+      <span id="actuals-monthly-summary"></span>
+    </div>
+    <canvas id="actualsChart"></canvas>
+    <hr/>
+    <h3 class="small"><%= t('playground.actuals.breakdown') %></h3>
 
-    <!-- What-If (editable) -->
-    <section class="card">
-      <h2>What-If </h2>
-      <div class="row1 muted small">
-        <span id="whatif-monthly-summary"></span>
+    <table class="table small" id="actualsTable">
+      <thead>
+        <tr>
+          <th><%= t('playground.actuals.incomeHeader') %></th>
+          <th class="right"><%= t('playground.actuals.monthlyHeader') %></th>
+        </tr>
+      </thead>
+      <tbody id="incomeBody"></tbody>
+    </table>
+
+    <table class="table small" id="actualsExpenseTable" style="margin-top:.75rem;">
+      <thead>
+        <tr>
+          <th><%= t('playground.actuals.expenseHeader') %></th>
+          <th class="right"><%= t('playground.actuals.monthlyHeader') %></th>
+        </tr>
+      </thead>
+      <tbody id="expenseBody"></tbody>
+    </table>
+  </section>
+
+  <!-- What-If (editable) -->
+  <section class="card">
+    <h2><%= t('playground.whatIf.title') %></h2>
+    <div class="row1 muted small">
+      <span id="whatif-monthly-summary"></span>
+    </div>
+    <canvas id="whatIfChart"></canvas>
+    <hr/>
+    <div class="small muted"><%= t('playground.whatIf.editNote') %></div>
+
+    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+      <div>
+        <h3 class="small"><%= t('playground.whatIf.incomeTitle') %></h3>
+        <table class="table small" id="editIncomeTable">
+          <thead>
+            <tr>
+              <th><%= t('playground.whatIf.sourceHeader') %></th>
+              <th class="right"><%= t('playground.whatIf.amountHeader') %></th>
+            </tr>
+          </thead>
+          <tbody id="editIncomeBody"></tbody>
+        </table>
       </div>
-      <canvas id="whatIfChart"></canvas>
-      <hr/>
-      <div class="small muted">Edit the numbers below to simulate changes. Chart updates live.</div>
-      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
-        <div>
-          <h3 class="small">Income (Monthly)</h3>
-          <table class="table small" id="editIncomeTable">
-            <thead><tr><th>Source</th><th class="right">Amount</th></tr></thead>
-            <tbody id="editIncomeBody"></tbody>
-          </table>
-        </div>
-        <div>
-          <h3 class="small">Expenses (Monthly)</h3>
-          <table class="table small" id="editExpenseTable">
-            <thead><tr><th>Category</th><th class="right">Amount</th></tr></thead>
-            <tbody id="editExpenseBody"></tbody>
-          </table>
-        </div>
+
+      <div>
+        <h3 class="small"><%= t('playground.whatIf.expensesTitle') %></h3>
+        <table class="table small" id="editExpenseTable">
+          <thead>
+            <tr>
+              <th><%= t('playground.whatIf.categoryHeader') %></th>
+              <th class="right"><%= t('playground.whatIf.amountHeader') %></th>
+            </tr>
+          </thead>
+          <tbody id="editExpenseBody"></tbody>
+        </table>
       </div>
-      <div class="row1 muted small" style="margin-top:.5rem;">
-        <span id="horizon-summary"></span>
-      </div>
-    </section>
-<%- include('partials/footer') %>
+    </div>
+
+    <div class="row1 muted small" style="margin-top:.5rem;">
+      <span class="muted small"><%= t('playground.horizonSummaryLabel') %>:</span>
+      <span id="horizon-summary"></span>
+    </div>
+  </section>
+
+<!-- Expose translations for client JS -->
+<script>
+  window.I18N = <%- JSON.stringify({
+    income: t('playground.actuals.incomeHeader'),
+    expenses: t('playground.actuals.expenseHeader'),
+    net: t('playground.netWord'),
+    whatIf: t('playground.whatIf.title'),
+    horizon: t('playground.horizonWord'),
+    yearOne: t('playground.yearOne'),
+    yearMany: t('playground.yearMany'),
+    perMonthSuffix: t('playground.perMonthSuffix'),
+    totals: t('playground.totalsWord'),
+    errors: { analyticsLoad: t('playground.errors.analyticsLoad') }
+  }) %>;
+</script>
+
+<%- include("partials/footer") %>

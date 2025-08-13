@@ -6,7 +6,8 @@
     "expenses": "Gastos",
     "profile": "Perfil",
     "results": "Resultados",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "playground": "Laboratorio"
   },
   "login": "Iniciar sesión",
   "register": "Registrarse",
@@ -99,6 +100,41 @@
     "currentPassword": "Contraseña actual",
     "newPassword": "Nueva contraseña",
     "confirmPassword": "Confirmar nueva contraseña"
+  },
+  "playground": {
+    "title": "Laboratorio Financiero",
+    "controls": {
+      "basisMonth": "Mes base",
+      "horizonYears": "Horizonte (años)",
+      "reloadData": "Recargar datos",
+      "oneTimeNote": "Los elementos de una sola vez se contabilizan en el mes base elegido."
+    },
+    "actuals": {
+      "title": "Actuales (Mensual)",
+      "breakdown": "Desglose",
+      "incomeHeader": "Ingresos",
+      "expenseHeader": "Gasto",
+      "monthlyHeader": "Mensual"
+    },
+    "netWord": "Neto",
+    "horizonWord": "Horizonte",
+    "yearOne": "año",
+    "yearMany": "años",
+    "perMonthSuffix": "/mes",
+    "totalsWord": "totales",
+    "errors": {
+      "analyticsLoad": "No se pudieron cargar los datos de análisis."
+    },
+    "whatIf": {
+      "title": "Simulación",
+      "editNote": "Edita los números de abajo para simular cambios. El gráfico se actualiza en tiempo real.",
+      "incomeTitle": "Ingresos (Mensual)",
+      "expensesTitle": "Gastos (Mensual)",
+      "sourceHeader": "Fuente",
+      "categoryHeader": "Categoría",
+      "amountHeader": "Monto"
+    },
+    "horizonSummaryLabel": "Resumen del horizonte"
   },
   "auth": {
     "welcome": "¡Bienvenido de nuevo!",

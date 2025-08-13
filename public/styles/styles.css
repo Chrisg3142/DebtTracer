@@ -6,11 +6,16 @@ body {
   width: 100%;
   font-family: Arial, sans-serif;
   transition: background-color 0.5s ease, color 0.5s ease;
+  background-color: #ffffff;
+  background-image: radial-gradient(#d6d6d6 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 /* Login css */ /* Global container */
 .auth-container {
   background-color: #201e3f;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 0.5px, transparent 3px);
+  background-size: 28px 28px;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -464,6 +469,8 @@ which includes the profile picture
 body.dark-mode {
   background-color: rgb(60, 60, 60);
   color: #f5f5f5;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 .dark-mode .header {

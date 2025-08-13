@@ -100,9 +100,6 @@
 
 <!-- Expose translations for client JS -->
 
-
-    <script src="/js/analytics.js"></script>
-<%- include('partials/footer') %>
 <script>
   window.I18N = <%- JSON.stringify({
     income: t('playground.actuals.incomeHeader'),
@@ -117,3 +114,5 @@
     errors: { analyticsLoad: t('playground.errors.analyticsLoad') }
   }) %>;
 </script>
+    <script src="/js/analytics.js"></script>
+<%- include('partials/footer') %>

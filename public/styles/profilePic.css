@@ -1,5 +1,109 @@
-#setProfilePic{
+/* 
+this is for the commented out profile picture that 
+shows in the ejs file but is currently commented out 
+because of the new darkmode bar that shows at the top 
+right of every page 
+*/
+
+/* #setProfilePic{
     border-radius: 50%;
     height: 100px;
     width: 100px;
+} */
+
+.content-container{
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+    border: 2px solid black;
+    border-radius: 20px;
+    margin: 10px auto;
+    width: 800px;
+    height: 100%;
+    padding: 10px;
+}
+.profilePictureSec{
+    margin-top: 10px;
+}
+/* 
+hides the default file input 
+button that says choose file
+*/
+#profilePic {
+    display: none;
+}
+
+/*
+the css for the custom label 
+that replaces the choose file button 
+*/
+.custom-file-label {
+display: inline-block;
+padding: 10px 15px;
+background-color: #007bff;
+color: white;
+border-radius: 6px;
+cursor: pointer;
+font-size: 14px;
+margin-right: 10px;
+}
+
+.custom-file-label:hover {
+background-color: #0056b3;
+}
+
+.profilePictureSec form button{
+    border: 1px solid black;
+}
+  
+/* .updateInfo{
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 10px auto;
+    width: 800px;
+    height: 100%;
+    padding: 10px;
+} */
+
+.stack{
+    display: flex;
+    flex-direction: column; 
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+}
+
+.stack input{
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    width: 450px;
+    height: 40px;
+}
+
+.stack button{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    width: 350px;
+    height: 40px;
+}
+
+.labels{
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 14pt;
+    font-weight: 600;
+}
+
+.changePassword form input{
+    margin-bottom: 10px;
 }

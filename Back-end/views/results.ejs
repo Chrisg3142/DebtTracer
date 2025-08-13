@@ -1,13 +1,83 @@
 <%- include("partials/header.ejs") %>
-<main>
+  <main>
     <h1><%= t('results.title') %></h1>
-    <div class="firstRow">
-        <canvas id="myChartEarnings"></canvas>
-        <canvas id="myChartExpenses"></canvas>
-    </div>
-    <div class="secondRow">
-        <canvas id="myChartCombined"></canvas>
-    </div>
+        <section class="card">
+          <div class="row">
+            <div class="row">
+              <label class="pill">Basis month</label>
+              <input id="basis" type="month" />
+            </div>
+            <div class="row">
+              <label class="pill">Horizon (years)</label>
+              <input id="years" type="number" min="1" step="1" value="1" />
+            </div>
+            <button id="reload" class="pill">Reload data</button>
+            <span class="muted small">One-time items count in the chosen basis month.</span>
+          </div>
+        </section>
+    
+        <!-- Actuals -->
+        <section class="card">
+          <h2>Actuals (Monthly)</h2>
+          <div class="row muted small">
+            <span id="actuals-monthly-summary"></span>
+          </div>
+          <canvas id="actualsChart"></canvas>
+          <hr/>
+          <h3 class="small">Breakdown</h3>
+          <table class="table small" id="actualsTable">
+            <thead><tr><th>Income</th><th class="right">Monthly</th></tr></thead>
+            <tbody id="incomeBody"></tbody>
+          </table>
+          <table class="table small" id="actualsExpenseTable">
+            <thead><tr><th>Expense</th><th class="right">Monthly</th></tr></thead>
+            <tbody id="expenseBody"></tbody>
+          </table>
+        </section>
+    
+        <!-- What-If (editable) -->
+        <section class="card">
+          <h2>What-If (Monthly, live)</h2>
+          <div class="row muted small">
+            <span id="whatif-monthly-summary"></span>
+          </div>
+          <canvas id="whatIfChart"></canvas>
+          <hr/>
+          <div class="small muted">Edit the numbers below to simulate changes. Chart updates live.</div>
+          <div class="tables">
+            <div class="leftTable">
+              <h3 class="small">Income (Monthly)</h3>
+              <table class="tableLeft small" id="editIncomeTable">
+                <thead>
+                    <tr class="dataWI">
+                        <th>Source</th>
+                        <th class="right">Amount</th>
+                    </tr>
+                </thead>
+                <tbody class="editWIbody" id="editIncomeBody">
+
+                </tbody>
+              </table>
+            </div>
+            <div class="rightTable">
+              <h3 class="small">Expenses (Monthly)</h3>
+              <table class="tableRight small" id="editExpenseTable">
+                <thead>
+                    <tr class="dataWI">
+                        <th>Category</th>
+                        <th class="right">Amount</th>
+                    </tr>
+                </thead>
+                <tbody class="editExpenseBody" id="editExpenseBody">
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="row muted small">
+            <span id="horizon-summary"></span>
+          </div>
+        </section>
    
-</main>
 <%- include("partials/footer.ejs") %>

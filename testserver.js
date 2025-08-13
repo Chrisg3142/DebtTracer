@@ -272,9 +272,6 @@ app.get("/chart-data", async (req, res) => {
   }
 });
 
-
-
-
 //starting message for when the user first opens the ai
 app.get("/welcome", (req, res) => {
 res.json({

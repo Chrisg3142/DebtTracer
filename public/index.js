@@ -86,22 +86,6 @@ window.addEventListener("DOMContentLoaded", async () => {
       el.addEventListener("transitionend", handler);
     }
 
-    // // Open animation
-    // openNav.addEventListener("click", () => {
-    //   navBar.classList.remove("collapsedx"); // slides in
-    //   navBar.setAttribute("aria-hidden", "false");
-    //   openNav.classList.add("hidden"); // hide hamburger
-    // });
-
-    // // // Close animation
-    // closeNav.addEventListener("click", () => {
-    //   navBar.classList.add("collapsedx"); // slides out
-    //   onTransitionEndOnce(navBar, () => {
-    //     navBar.setAttribute("aria-hidden", "true");
-    //     openNav.classList.remove("hidden"); // show hamburger after slide finishes
-    //   });
-    // });
-
     function onTransitionEndOnce(el, cb){
       const handler = (e)=>{ if(e.target === el){ el.removeEventListener('transitionend', handler); cb(); } };
       el.addEventListener('transitionend', handler);
@@ -123,7 +107,14 @@ window.addEventListener("DOMContentLoaded", async () => {
         openNav.classList.remove("hidden");
       });
     });
-    
+
+    //this is to see the file name when someone 
+    //chooses a file to change their profile picture
+    document.getElementById('profilePic').addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+        document.querySelector('.custom-file-label').textContent = this.files[0].name;
+      }
+    });
 
     fetch("/chart-data")
     .then(res => res.json())

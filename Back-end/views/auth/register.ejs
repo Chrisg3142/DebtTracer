@@ -63,12 +63,12 @@
       
 
     </div>
-    <script>
-      document.getElementById('language-select').addEventListener('change', function () {
-        const params = new URLSearchParams(window.location.search);
-        params.set('lang', this.value);
-        window.location.search = params.toString();
-      });
-    </script>
+        <script>
+  document.getElementById('language-select').addEventListener('change', function () {
+    const params = new URLSearchParams(window.location.search);
+    params.set('lang', this.value);
+    window.location.search = params.toString();
+  });
+</script>
   </body>
 </html>

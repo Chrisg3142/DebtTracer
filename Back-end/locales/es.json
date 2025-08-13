@@ -61,7 +61,7 @@
     "utilities": "Servicios",
     "entertainment": "Entretenimiento",
     "name": "Nombre del Gasto",
-    "namePlaceholder": "p.ej. Comestibles, Renta",
+    "namePlaceholder": "p. ej., Comestibles, Renta",
     "amount": "Monto",
     "date": "Fecha",
     "recurring": "Gasto Recurrente",
@@ -90,7 +90,15 @@
     "title": "Resultados"
   },
   "profile": {
-    "upload": "Subir"
+    "upload": "Subir",
+    "selectFile": "Seleccionar foto de perfil",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "saveChanges": "Guardar cambios",
+    "updatePassword": "Actualizar contraseña",
+    "currentPassword": "Contraseña actual",
+    "newPassword": "Nueva contraseña",
+    "confirmPassword": "Confirmar nueva contraseña"
   },
   "auth": {
     "welcome": "¡Bienvenido de nuevo!",

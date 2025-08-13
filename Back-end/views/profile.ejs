@@ -1,14 +1,52 @@
 
 <%- include("partials/header.ejs") %>
-<main class="content-container">
-        <form action="/profile/pic" method="POST" enctype="multipart/form-data">
-          <input type="file" name="profilePic" accept="image/*" required />
-          <button type="submit"><%= t('profile.upload') %></button>
-        </form>
+<main>
+  <div class="content-container">
+
+    <!-- Profile Picture -->
+    <section class="profilePictureSec">
+      <form action="/profile/pic" method="POST" enctype="multipart/form-data">
+        <label for="profilePic" class="custom-file-label">
+          <%= t('profile.selectFile') || 'Select Profile Picture' %>
+        </label>
+        <input type="file" id="profilePic" name="profilePic" accept="image/png,image/jpeg" required />
+        <button type="submit"><%= t('profile.upload') || 'Upload' %></button>
+      </form>
       
-      <% if (user.profilePic) { %>
-        <img id="setProfilePic" src="<%= user.profilePic %>" alt="Profile Picture" width="150" />
-      <% } else { %>
-        <img id="setProfilePic" src="/images/logo.png" alt="Default Avatar" width="150" />
-      <% } %>
- <%- include("partials/footer.ejs") %>
+      <!--       
+      <%# if (user && user.profilePic) { %>
+        <img id="setProfilePic" src="<%#= user.profilePic %>" alt="Profile Picture" width="150" height="150" />
+      <%# } else { %>
+        <img id="setProfilePic" src="/images/default-avatar.png" alt="Default Avatar" width="150" height="150" />
+      <%# } %>
+      -->
+    </section>
+
+    <!-- Update Name/Email -->
+    <div class="updateInfo">
+      <section class="changeInfo">
+        <form action="/profile/update?_method=PATCH" method="POST" class="stack">
+          <div class="labels">
+            <label for="name"><%= t('profile.name') || 'Name' %></label>
+          </div>
+          <input type="text" name="name" value="<%= user?.name || '' %>" placeholder="<%= t('profile.name') || 'Name' %>">
+          <div class="labels">
+            <label for="email"><%= t('profile.email') || 'Email' %></label>
+          </div>
+          <input type="email" name="email" value="<%= user?.email || '' %>" placeholder="<%= t('profile.email') || 'Email' %>">
+          <button type="submit"><%= t('profile.saveChanges') || 'Save Changes' %></button>
+        </form>
+      </section>
+  
+      <!-- Update Password -->
+      <section class="changePassword">
+        <form action="/profile/password?_method=PATCH" method="POST" class="stack">
+          <input type="password" name="currentPassword" required autocomplete="current-password" placeholder="<%= t('profile.currentPassword') || 'Current password' %>">
+          <input type="password" name="newPassword" required minlength="8" autocomplete="new-password" placeholder="<%= t('profile.newPassword') || 'New password' %>">
+          <input type="password" name="confirmPassword" required minlength="8" autocomplete="new-password" placeholder="<%= t('profile.confirmPassword') || 'Confirm new password' %>">
+          <button type="submit"><%= t('profile.updatePassword') || 'Update Password' %></button>
+        </form>
+      </section>
+    </div>
+  </div>
+<%- include("partials/footer.ejs") %>

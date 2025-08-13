@@ -90,7 +90,15 @@
     "title": "Results"
   },
   "profile": {
-    "upload": "Upload"
+    "upload": "Upload",
+    "selectFile": "Select Profile Picture",
+    "name": "Name",
+    "email": "Email",
+    "saveChanges": "Save Changes",
+    "updatePassword": "Update Password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password"
   },
   "auth": {
     "welcome": "Welcome back!",

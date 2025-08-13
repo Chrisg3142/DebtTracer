@@ -6,13 +6,22 @@
     <link rel="stylesheet" href="/styles/styles.css" />
   </head>
   <body class="auth-container">
+                <div class="langl">
+          <select id="language-select">
+            <option value="en" <%= lang === 'en' ? 'selected' : '' %>>English</option>
+            <option value="es" <%= lang === 'es' ? 'selected' : '' %>>Español</option>
+            <option value="fr" <%= lang === 'fr' ? 'selected' : '' %>>Français</option>
+            <option value="zh" <%= lang === 'zh' ? 'selected' : '' %>>中文</option>
+            <option value="ja" <%= lang === 'ja' ? 'selected' : '' %>>日本語</option>
+          </select>
+        </div>
     <div class="login-container">
       <h1>Register</h1>
 
       <% if (typeof error !== 'undefined' && error) { %>
       <div class="alert error"><%= error %></div>
       <% } %>
-
+      
       <form action="/auth/register" method="POST">
         <div class="form-group">
           <label>Full Name</label>
@@ -45,9 +54,14 @@
         <div class="submit-button">
           <button type="submit" class="login_button">Register</button>
         </div>
+        
       </form>
+      <div class="goHome">
+        <p><a href="/">Home</a></p>
+        <p>Already have an account? <a href="/auth/login">Login here</a></p>
+        </div>
+      
 
-      <p>Already have an account? <a href="/auth/login">Login here</a></p>
     </div>
   </body>
 </html>

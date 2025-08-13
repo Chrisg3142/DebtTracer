@@ -1,0 +1,169 @@
+{
+    "title": "Debt Tracer",
+    "nav": {
+      "home": "Accueil",
+      "earnings": "Revenus",
+      "expenses": "Dépenses",
+      "profile": "Profil",
+      "results": "Résultats",
+      "logout": "Déconnexion",
+      "playground": "Laboratoire"
+    },
+    "index": {
+      "login": "Connexion",
+      "register": "Inscription",
+      "welcome": "Du stress de la dette au succès financier",
+      "subtitle": "Suivez vos revenus, équilibrez vos dépenses et optimisez ce qui compte vraiment — le tout au même endroit.",
+      "why": "Pourquoi utiliser",
+      "use": "Gérer son argent ne devrait pas être compliqué, mais intelligent. Debt Tracer a été créé pour simplifier vos finances, vous aider à rembourser vos dettes plus vite et vous donner les outils pour construire un meilleur avenir financier — tout au même endroit.",
+      "use1": "Que vous gériez plusieurs dettes, économisiez pour un gros achat ou souhaitiez simplement mieux maîtriser vos dépenses, Debt Tracer fournit les insights et les outils pour reprendre le contrôle de votre argent.",
+      "member": "Témoignages des membres :",
+      "member1": "“Debt Tracer a littéralement sauvé ma vie ! C'est un outil incroyable qui m'a aidé à mieux gérer mon argent !”",
+      "member2": "“Debt Tracer a changé ma vision de l'argent et ma façon de bien le gérer.”",
+      "member3": "“J'adore la simplicité et le design de Debt Tracer. Cela m'aide vraiment à maintenir mes objectifs financiers alignés.”",
+      "copyright": "Tous droits réservés."
+    },
+    "login": "Connexion",
+    "register": "Inscription",
+    "dashboard": {
+      "financialSummary": "Résumé financier",
+      "totalIncome": "Revenus totaux",
+      "totalExpenses": "Dépenses totales",
+      "remainingBalance": "Solde restant",
+      "recentTransactions": "Transactions récentes"
+    },
+    "earnings": {
+      "title": "Suivi des revenus",
+      "addNew": "Ajouter un revenu",
+      "source": "Source de revenu",
+      "selectSource": "Sélectionner une source",
+      "salary": "Salaire",
+      "freelance": "Freelance",
+      "bonus": "Prime",
+      "investment": "Investissement",
+      "rental": "Revenus locatifs",
+      "other": "Autre (à préciser ci-dessous)",
+      "customPlaceholder": "Saisir une source personnalisée",
+      "amount": "Montant",
+      "date": "Date",
+      "frequency": "Fréquence",
+      "oneTime": "Ponctuel",
+      "weekly": "Hebdomadaire",
+      "biweekly": "Toutes les deux semaines",
+      "monthly": "Mensuel",
+      "addIncome": "Ajouter un revenu",
+      "history": "Historique des revenus",
+      "total": "Total",
+      "table": {
+        "date": "Date",
+        "source": "Source",
+        "amount": "Montant",
+        "frequency": "Fréquence",
+        "actions": "Actions"
+      },
+      "delete": "Supprimer",
+      "noRecords": "Aucun revenu trouvé. Ajoutez votre premier revenu ci-dessus."
+    },
+    "expenses": {
+      "title": "Suivi des dépenses",
+      "upcoming": "Vous avez {{count}} dépenses récurrentes à venir :",
+      "addNew": "Ajouter une dépense",
+      "category": "Catégorie",
+      "selectCategory": "Sélectionner une catégorie",
+      "housing": "Logement",
+      "food": "Alimentation",
+      "transportation": "Transport",
+      "utilities": "Services publics",
+      "entertainment": "Divertissement",
+      "name": "Nom de la dépense",
+      "namePlaceholder": "ex. Courses, Loyer",
+      "amount": "Montant",
+      "date": "Date",
+      "recurring": "Dépense récurrente",
+      "frequency": "Fréquence",
+      "oneTime": "Ponctuelle",
+      "weekly": "Hebdomadaire",
+      "monthly": "Mensuelle",
+      "overdue": "EN RETARD",
+      "overdueSince": "En retard depuis",
+      "due": "Échéance",
+      "addExpense": "Ajouter une dépense",
+      "history": "Historique des dépenses",
+      "total": "Total",
+      "table": {
+        "date": "Date",
+        "category": "Catégorie",
+        "description": "Description",
+        "amount": "Montant",
+        "recurrence": "Récurrence",
+        "actions": "Actions"
+      },
+      "delete": "Supprimer",
+      "noRecords": "Aucune dépense trouvée. Ajoutez votre première dépense ci-dessus."
+    },
+    "results": {
+      "title": "Résultats"
+    },
+    "profile": {
+      "upload": "Téléverser",
+      "selectFile": "Sélectionner une photo de profil",
+      "name": "Nom",
+      "email": "E-mail",
+      "saveChanges": "Enregistrer les modifications",
+      "updatePassword": "Mettre à jour le mot de passe",
+      "currentPassword": "Mot de passe actuel",
+      "newPassword": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le nouveau mot de passe"
+    },
+    "playground": {
+      "title": "Laboratoire financier",
+      "controls": {
+        "basisMonth": "Mois de référence",
+        "horizonYears": "Horizon (années)",
+        "reloadData": "Recharger les données",
+        "oneTimeNote": "Les éléments ponctuels sont comptabilisés dans le mois de référence choisi."
+      },
+      "actuals": {
+        "title": "Réels (mensuel)",
+        "breakdown": "Détail",
+        "incomeHeader": "Revenus",
+        "expenseHeader": "Dépense",
+        "monthlyHeader": "Mensuel"
+      },
+      "netWord": "Net",
+      "horizonWord": "Horizon",
+      "yearOne": "an",
+      "yearMany": "ans",
+      "perMonthSuffix": "/mois",
+      "totalsWord": "totaux",
+      "errors": {
+        "analyticsLoad": "Échec du chargement des données d’analyse."
+      },
+      "whatIf": {
+        "title": "Simulation",
+        "editNote": "Modifiez les montants ci-dessous pour simuler des changements. Le graphique se met à jour en direct.",
+        "incomeTitle": "Revenus (mensuel)",
+        "expensesTitle": "Dépenses (mensuel)",
+        "sourceHeader": "Source",
+        "categoryHeader": "Catégorie",
+        "amountHeader": "Montant"
+      },
+      "horizonSummaryLabel": "Résumé de l’horizon"
+    },
+    "auth": {
+      "welcome": "Bon retour !",
+      "username": "Nom d’utilisateur",
+      "password": "Mot de passe",
+      "loginButton": "Se connecter",
+      "noAccount": "Vous n’avez pas de compte ?",
+      "registerHere": "Inscrivez-vous ici",
+      "fullName": "Nom complet",
+      "email": "E-mail",
+      "passwordHint": "Au moins 8 caractères",
+      "emailHint": "Veuillez saisir une adresse e-mail valide",
+      "registerButton": "S’inscrire",
+      "haveAccount": "Vous avez déjà un compte ?",
+      "loginHere": "Connectez-vous ici"
+    }
+  }
+  

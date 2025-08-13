@@ -1,0 +1,169 @@
+{
+    "title": "Debt Tracer",
+    "nav": {
+      "home": "首页",
+      "earnings": "收入",
+      "expenses": "支出",
+      "profile": "个人资料",
+      "results": "结果",
+      "logout": "退出登录",
+      "playground": "实验室"
+    },
+    "index": {
+      "login": "登录",
+      "register": "注册",
+      "welcome": "从债务压力到债务成功",
+      "subtitle": "在同一平台跟踪收入、平衡支出，并将资金优化到真正重要的地方。",
+      "why": "为什么使用",
+      "use": "理财不该复杂，而应当更聪明。Debt Tracer 的目标是简化你的财务、帮助你更快还清债务，并为你提供构建更好财务未来的工具——一切尽在同一处。",
+      "use1": "无论你正在同时处理多笔债务、为大额开支存钱，还是只想更好地掌控日常花费，Debt Tracer 都能提供洞见与工具，助你掌控自己的资金。",
+      "member": "会员评价：",
+      "member1": "“Debt Tracer 绝对拯救了我的生活！这款了不起的工具让我更好地管理了我的钱！”",
+      "member2": "“Debt Tracer 改变了我对金钱以及如何有效管理它的看法。”",
+      "member3": "“我喜欢 Debt Tracer 的简洁与设计。用它记账特别顺手，还能帮我管好钱。”",
+      "copyright": "版权所有。"
+    },
+    "login": "登录",
+    "register": "注册",
+    "dashboard": {
+      "financialSummary": "财务概览",
+      "totalIncome": "总收入",
+      "totalExpenses": "总支出",
+      "remainingBalance": "结余",
+      "recentTransactions": "最近交易"
+    },
+    "earnings": {
+      "title": "收入跟踪",
+      "addNew": "新增收入",
+      "source": "收入来源",
+      "selectSource": "选择来源",
+      "salary": "薪水",
+      "freelance": "自由职业",
+      "bonus": "奖金",
+      "investment": "投资",
+      "rental": "租金收入",
+      "other": "其他（请在下方填写）",
+      "customPlaceholder": "输入自定义来源",
+      "amount": "金额",
+      "date": "日期",
+      "frequency": "频率",
+      "oneTime": "一次性",
+      "weekly": "每周",
+      "biweekly": "每两周",
+      "monthly": "每月",
+      "addIncome": "添加收入",
+      "history": "收入记录",
+      "total": "合计",
+      "table": {
+        "date": "日期",
+        "source": "来源",
+        "amount": "金额",
+        "frequency": "频率",
+        "actions": "操作"
+      },
+      "delete": "删除",
+      "noRecords": "暂无收入记录。请先在上方添加。"
+    },
+    "expenses": {
+      "title": "支出跟踪",
+      "upcoming": "你有 {{count}} 笔即将到期的循环支出：",
+      "addNew": "新增支出",
+      "category": "类别",
+      "selectCategory": "选择类别",
+      "housing": "住房",
+      "food": "餐饮",
+      "transportation": "交通",
+      "utilities": "公用事业",
+      "entertainment": "娱乐",
+      "name": "支出名称",
+      "namePlaceholder": "例如：购物、房租",
+      "amount": "金额",
+      "date": "日期",
+      "recurring": "循环支出",
+      "frequency": "频率",
+      "oneTime": "一次性",
+      "weekly": "每周",
+      "monthly": "每月",
+      "overdue": "逾期",
+      "overdueSince": "自…起逾期",
+      "due": "到期",
+      "addExpense": "添加支出",
+      "history": "支出记录",
+      "total": "合计",
+      "table": {
+        "date": "日期",
+        "category": "类别",
+        "description": "描述",
+        "amount": "金额",
+        "recurrence": "循环",
+        "actions": "操作"
+      },
+      "delete": "删除",
+      "noRecords": "暂无支出记录。请先在上方添加。"
+    },
+    "results": {
+      "title": "结果"
+    },
+    "profile": {
+      "upload": "上传",
+      "selectFile": "选择头像",
+      "name": "姓名",
+      "email": "电子邮件",
+      "saveChanges": "保存更改",
+      "updatePassword": "更新密码",
+      "currentPassword": "当前密码",
+      "newPassword": "新密码",
+      "confirmPassword": "确认新密码"
+    },
+    "playground": {
+      "title": "财务实验室",
+      "controls": {
+        "basisMonth": "基准月份",
+        "horizonYears": "时间范围（年）",
+        "reloadData": "重新加载数据",
+        "oneTimeNote": "一次性项目将计入所选的基准月份。"
+      },
+      "actuals": {
+        "title": "实际（按月）",
+        "breakdown": "明细",
+        "incomeHeader": "收入",
+        "expenseHeader": "支出",
+        "monthlyHeader": "月度"
+      },
+      "netWord": "净额",
+      "horizonWord": "范围",
+      "yearOne": "年",
+      "yearMany": "年",
+      "perMonthSuffix": "/月",
+      "totalsWord": "总计",
+      "errors": {
+        "analyticsLoad": "加载分析数据失败。"
+      },
+      "whatIf": {
+        "title": "假设分析",
+        "editNote": "在下方编辑数值以模拟变化。图表会实时更新。",
+        "incomeTitle": "收入（按月）",
+        "expensesTitle": "支出（按月）",
+        "sourceHeader": "来源",
+        "categoryHeader": "类别",
+        "amountHeader": "金额"
+      },
+      "horizonSummaryLabel": "范围汇总"
+    },
+    "auth": {
+      "welcome": "欢迎回来！",
+      "username": "用户名",
+      "password": "密码",
+      "loginButton": "登录",
+      "noAccount": "没有账户？",
+      "registerHere": "立即注册",
+      "fullName": "姓名",
+      "email": "电子邮件",
+      "passwordHint": "至少 8 个字符",
+      "emailHint": "请输入有效的电子邮件地址",
+      "registerButton": "注册",
+      "haveAccount": "已有账户？",
+      "loginHere": "在此登录"
+    }
+  }
+  

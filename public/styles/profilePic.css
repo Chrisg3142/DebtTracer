@@ -14,17 +14,23 @@ right of every page
 .content-containerP{
     display: flex;
     flex-direction: column;
-    background-color: antiquewhite;
+    background-color: rgb(162, 176, 214);
     border: 2px solid black;
     border-radius: 20px;
     margin: 10px auto;
     width: 800px;
     height: 100%;
     padding: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
 }
 .profilePictureSec{
     margin-top: 10px;
 }
+.profilePictureSec button {
+    border-radius: 6px; /* adjust to make it more round */
+    padding: 8px 16px; /* optional: for better shape */
+  }
 /* 
 hides the default file input 
 button that says choose file
@@ -107,3 +113,4 @@ background-color: #0056b3;
 .changePassword form input{
     margin-bottom: 10px;
 }
+

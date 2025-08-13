@@ -1,0 +1,169 @@
+{
+    "title": "Debt Tracer",
+    "nav": {
+      "home": "ホーム",
+      "earnings": "収入",
+      "expenses": "支出",
+      "profile": "プロフィール",
+      "results": "結果",
+      "logout": "ログアウト",
+      "playground": "ラボ"
+    },
+    "index": {
+      "login": "ログイン",
+      "register": "登録",
+      "welcome": "借金のストレスから成功へ",
+      "subtitle": "収入を記録し、支出のバランスを取り、本当に大切なことのためにお金を最適化。すべてを一つの場所で。",
+      "why": "なぜ選ぶのか",
+      "use": "お金の管理は複雑であるべきではなく、賢くあるべきです。Debt Tracer は、あなたの家計をシンプルにし、より速く債務を返済できるよう支援し、より良い将来を築くためのツールを一箇所で提供します。",
+      "use1": "複数の借入を同時に抱えている場合でも、大きな買い物のために貯蓄中でも、支出をもっと把握したいだけでも、Debt Tracer はお金をコントロールするための洞察とツールを提供します。",
+      "member": "メンバーの声：",
+      "member1": "「Debt Tracer は本当に人生を救ってくれました！お金の管理に役立つ素晴らしいツールです！」",
+      "member2": "「Debt Tracer はお金への向き合い方と、そのうまい管理の仕方を変えてくれました。」",
+      "member3": "「Debt Tracerはシンプルで使いやすくて最高！おかげで貯金計画もきちんと守れるんです。」",
+      "copyright": "無断複製・転載を禁じます。"
+    },
+    "login": "ログイン",
+    "register": "登録",
+    "dashboard": {
+      "financialSummary": "財務サマリー",
+      "totalIncome": "総収入",
+      "totalExpenses": "総支出",
+      "remainingBalance": "残高",
+      "recentTransactions": "最近の取引"
+    },
+    "earnings": {
+      "title": "収入トラッカー",
+      "addNew": "収入を追加",
+      "source": "収入源",
+      "selectSource": "収入源を選択",
+      "salary": "給与",
+      "freelance": "フリーランス",
+      "bonus": "ボーナス",
+      "investment": "投資",
+      "rental": "家賃収入",
+      "other": "その他（下に入力）",
+      "customPlaceholder": "カスタム収入源を入力",
+      "amount": "金額",
+      "date": "日付",
+      "frequency": "頻度",
+      "oneTime": "1回",
+      "weekly": "毎週",
+      "biweekly": "2週間ごと",
+      "monthly": "毎月",
+      "addIncome": "収入を追加",
+      "history": "収入履歴",
+      "total": "合計",
+      "table": {
+        "date": "日付",
+        "source": "収入源",
+        "amount": "金額",
+        "frequency": "頻度",
+        "actions": "操作"
+      },
+      "delete": "削除",
+      "noRecords": "収入の記録はありません。上で最初の収入を追加してください。"
+    },
+    "expenses": {
+      "title": "支出トラッカー",
+      "upcoming": "まもなく期限の定期支出が {{count}} 件あります:",
+      "addNew": "支出を追加",
+      "category": "カテゴリ",
+      "selectCategory": "カテゴリを選択",
+      "housing": "住居",
+      "food": "食費",
+      "transportation": "交通",
+      "utilities": "光熱費",
+      "entertainment": "娯楽",
+      "name": "支出名",
+      "namePlaceholder": "例：食料品、家賃",
+      "amount": "金額",
+      "date": "日付",
+      "recurring": "定期支出",
+      "frequency": "頻度",
+      "oneTime": "1回",
+      "weekly": "毎週",
+      "monthly": "毎月",
+      "overdue": "延滞",
+      "overdueSince": "いつから延滞",
+      "due": "期日",
+      "addExpense": "支出を追加",
+      "history": "支出履歴",
+      "total": "合計",
+      "table": {
+        "date": "日付",
+        "category": "カテゴリ",
+        "description": "説明",
+        "amount": "金額",
+        "recurrence": "周期",
+        "actions": "操作"
+      },
+      "delete": "削除",
+      "noRecords": "支出の記録はありません。上で最初の支出を追加してください。"
+    },
+    "results": {
+      "title": "結果"
+    },
+    "profile": {
+      "upload": "アップロード",
+      "selectFile": "プロフィール写真を選択",
+      "name": "名前",
+      "email": "メール",
+      "saveChanges": "変更を保存",
+      "updatePassword": "パスワードを更新",
+      "currentPassword": "現在のパスワード",
+      "newPassword": "新しいパスワード",
+      "confirmPassword": "新しいパスワードを確認"
+    },
+    "playground": {
+      "title": "ファイナンス・ラボ",
+      "controls": {
+        "basisMonth": "基準月",
+        "horizonYears": "期間（年）",
+        "reloadData": "データを再読み込み",
+        "oneTimeNote": "単発の項目は選択した基準月に計上されます。"
+      },
+      "actuals": {
+        "title": "実績（毎月）",
+        "breakdown": "内訳",
+        "incomeHeader": "収入",
+        "expenseHeader": "支出",
+        "monthlyHeader": "月次"
+      },
+      "netWord": "純額",
+      "horizonWord": "期間",
+      "yearOne": "年",
+      "yearMany": "年",
+      "perMonthSuffix": "/月",
+      "totalsWord": "合計",
+      "errors": {
+        "analyticsLoad": "分析データの読み込みに失敗しました。"
+      },
+      "whatIf": {
+        "title": "シミュレーション",
+        "editNote": "下の数値を編集して変更を試してください。グラフはリアルタイムで更新されます。",
+        "incomeTitle": "収入（毎月）",
+        "expensesTitle": "支出（毎月）",
+        "sourceHeader": "収入源",
+        "categoryHeader": "カテゴリ",
+        "amountHeader": "金額"
+      },
+      "horizonSummaryLabel": "期間のサマリー"
+    },
+    "auth": {
+      "welcome": "お帰りなさい！",
+      "username": "ユーザー名",
+      "password": "パスワード",
+      "loginButton": "ログイン",
+      "noAccount": "アカウントをお持ちではありませんか？",
+      "registerHere": "こちらで登録",
+      "fullName": "氏名",
+      "email": "メール",
+      "passwordHint": "8文字以上",
+      "emailHint": "有効なメールアドレスを入力してください",
+      "registerButton": "登録",
+      "haveAccount": "すでにアカウントをお持ちですか？",
+      "loginHere": "こちらでログイン"
+    }
+  }
+  

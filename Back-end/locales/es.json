@@ -6,28 +6,43 @@
     "expenses": "Gastos",
     "profile": "Perfil",
     "results": "Resultados",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "playground": "Laboratorio"
+  },
+  "index": {
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "welcome": "Del estrés de la deuda al éxito financiero",
+    "subtitle": "Registra tus ingresos, equilibra tus gastos y optimiza tu dinero para lo que realmente importa, todo en un solo lugar.",
+    "why": "Por qué usar",
+    "use": "Administrar el dinero no debería ser complicado, sino inteligente. Debt Tracer fue creado para simplificar tus finanzas, ayudarte a pagar deudas más rápido y darte las herramientas para construir un mejor futuro financiero, todo en un mismo lugar.",
+    "use1": "Ya sea que manejes varias deudas, ahorres para una compra importante o simplemente quieras controlar mejor tus gastos, Debt Tracer te ofrece los insights y las herramientas que necesitas para tomar el control de tu dinero.",
+    "member": "Testimonios de miembros:",
+    "member1": "¡Debt Tracer literalmente me salvó la vida! ¡Es una herramienta increíble que me ha ayudado a administrar mejor mi dinero!",
+    "member2": "“Debt Tracer cambió mi perspectiva sobre el dinero y cómo gestionarlo bien.”",
+    "member3": "Me encanta lo simple y bien diseñado que es Debt Tracer. La verdad es que me ayuda mucho a organizar mis finanzas.",
+    "copyright": "Todos los derechos reservados."
   },
   "login": "Iniciar sesión",
   "register": "Registrarse",
   "dashboard": {
-    "financialSummary": "Resumen Financiero",
-    "totalIncome": "Ingresos Totales",
-    "totalExpenses": "Gastos Totales",
-    "remainingBalance": "Saldo Restante",
-    "recentTransactions": "Transacciones Recientes"
+    "financialSummary": "Resumen financiero",
+    "totalIncome": "Ingresos totales",
+    "totalExpenses": "Gastos totales",
+    "remainingBalance": "Saldo restante",
+    "recentTransactions": "Transacciones recientes"
   },
   "earnings": {
-    "title": "Seguimiento de Ingresos",
-    "addNew": "Agregar Nuevo Ingreso",
-    "source": "Fuente de Ingreso",
+    "title": "Seguimiento de ingresos",
+    "addNew": "Agregar nuevo ingreso",
+    "source": "Fuente de ingreso",
     "selectSource": "Selecciona una fuente",
     "salary": "Salario",
     "freelance": "Freelance",
     "bonus": "Bono",
     "investment": "Inversión",
     "rental": "Ingreso por alquiler",
-    "other": "Otro (Especificar abajo)",
+    "other": "Otro (especificar abajo)",
     "customPlaceholder": "Ingresa una fuente personalizada",
     "amount": "Monto",
     "date": "Fecha",
@@ -36,8 +51,8 @@
     "weekly": "Semanal",
     "biweekly": "Quincenal",
     "monthly": "Mensual",
-    "addIncome": "Agregar Ingreso",
-    "history": "Historial de Ingresos",
+    "addIncome": "Agregar ingreso",
+    "history": "Historial de ingresos",
     "total": "Total",
     "table": {
       "date": "Fecha",
@@ -50,9 +65,9 @@
     "noRecords": "No se encontraron registros de ingresos. Agrega tu primer ingreso arriba."
   },
   "expenses": {
-    "title": "Seguimiento de Gastos",
+    "title": "Seguimiento de gastos",
     "upcoming": "Tienes {{count}} gastos recurrentes próximos:",
-    "addNew": "Agregar Nuevo Gasto",
+    "addNew": "Agregar nuevo gasto",
     "category": "Categoría",
     "selectCategory": "Selecciona una categoría",
     "housing": "Vivienda",
@@ -60,11 +75,11 @@
     "transportation": "Transporte",
     "utilities": "Servicios",
     "entertainment": "Entretenimiento",
-    "name": "Nombre del Gasto",
+    "name": "Nombre del gasto",
     "namePlaceholder": "p. ej., Comestibles, Renta",
     "amount": "Monto",
     "date": "Fecha",
-    "recurring": "Gasto Recurrente",
+    "recurring": "Gasto recurrente",
     "frequency": "Frecuencia",
     "oneTime": "Una vez",
     "weekly": "Semanal",
@@ -72,8 +87,8 @@
     "overdue": "ATRASADO",
     "overdueSince": "Atrasado desde",
     "due": "Vence",
-    "addExpense": "Agregar Gasto",
-    "history": "Historial de Gastos",
+    "addExpense": "Agregar gasto",
+    "history": "Historial de gastos",
     "total": "Total",
     "table": {
       "date": "Fecha",
@@ -99,6 +114,41 @@
     "currentPassword": "Contraseña actual",
     "newPassword": "Nueva contraseña",
     "confirmPassword": "Confirmar nueva contraseña"
+  },
+  "playground": {
+    "title": "Laboratorio financiero",
+    "controls": {
+      "basisMonth": "Mes de referencia",
+      "horizonYears": "Horizonte (años)",
+      "reloadData": "Recargar datos",
+      "oneTimeNote": "Los elementos de una sola vez cuentan en el mes de referencia elegido."
+    },
+    "actuals": {
+      "title": "Reales (mensual)",
+      "breakdown": "Desglose",
+      "incomeHeader": "Ingresos",
+      "expenseHeader": "Gasto",
+      "monthlyHeader": "Mensual"
+    },
+    "netWord": "Neto",
+    "horizonWord": "Horizonte",
+    "yearOne": "año",
+    "yearMany": "años",
+    "perMonthSuffix": "/mes",
+    "totalsWord": "totales",
+    "errors": {
+      "analyticsLoad": "Error al cargar los datos de análisis."
+    },
+    "whatIf": {
+      "title": "¿Qué pasaría si?",
+      "editNote": "Edita los números abajo para simular cambios. El gráfico se actualiza en vivo.",
+      "incomeTitle": "Ingresos (mensual)",
+      "expensesTitle": "Gastos (mensual)",
+      "sourceHeader": "Fuente",
+      "categoryHeader": "Categoría",
+      "amountHeader": "Monto"
+    },
+    "horizonSummaryLabel": "Resumen del horizonte"
   },
   "auth": {
     "welcome": "¡Bienvenido de nuevo!",

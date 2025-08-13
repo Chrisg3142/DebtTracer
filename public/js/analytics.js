@@ -1,4 +1,10 @@
-  (() => {
+(() => {
+  // Tiny i18n accessor
+  const I = (path, fallback = "") => {
+    const src = window.I18N || {};
+    return path.split(".").reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), src) ?? fallback;
+  };
+
   let actualsChart, whatIfChart;
   let actualIncome = [], actualExpenses = [];
   let editIncome = [], editExpenses = [];
@@ -8,28 +14,26 @@
   function getBasisParam() {
     const y = basis.getUTCFullYear();
     const m = String(basis.getUTCMonth() + 1).padStart(2, "0");
-    return `${y}-${m}-01`;
-    // server only requires YYYY-MM-01 to know the month
+    return `${y}-${m}-01`; // server expects YYYY-MM-01
   }
 
   function format(n) {
-    return Number(n).toLocaleString(undefined,{minimumFractionDigits:2, maximumFractionDigits:2});
+    return Number(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  function sumMonthly(list) {
-    return list.reduce((s, x) => s + (x.monthly ?? x.amountMonthly ?? 0), 0);
-  }
+  const sumMonthly = (list) => list.reduce((s, x) => s + (x.monthly ?? x.amountMonthly ?? 0), 0);
 
   async function loadData() {
-    const res = await fetch(`/results/data?basis=${encodeURIComponent(getBasisParam())}&years=${years}`);
-    if (!res.ok) throw new Error("Failed to fetch analytics data");
+    const url = `/results/data?basis=${encodeURIComponent(getBasisParam())}&years=${years}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("fetch-failed");
     const data = await res.json();
 
-    // Build "Actuals" data (monthly)
+    // Build Actuals (monthly)
     actualIncome = data.income.map(i => ({ label: i.label, monthly: i.monthly }));
     actualExpenses = data.expenses.map(e => ({ label: e.label, monthly: e.monthly }));
 
-    // Initialize "What-If" as a copy of actuals (monthly)
+    // What-If starts as a copy of actuals (monthly)
     editIncome = actualIncome.map(i => ({ label: i.label, amountMonthly: i.monthly }));
     editExpenses = actualExpenses.map(e => ({ label: e.label, amountMonthly: e.monthly }));
 
@@ -41,9 +45,11 @@
 
   function drawActuals() {
     const ctx = document.getElementById("actualsChart");
+    if (!ctx) return;
+
     const labels = [
-      ...actualIncome.map(i => `Income: ${i.label}`),
-      ...actualExpenses.map(e => `Expense: ${e.label}`)
+      ...actualIncome.map(i => `${I("income", "Income")}: ${i.label}`),
+      ...actualExpenses.map(e => `${I("expenses", "Expense")}: ${e.label}`)
     ];
     const dataVals = [
       ...actualIncome.map(i => i.monthly),
@@ -53,63 +59,68 @@
     if (actualsChart) actualsChart.destroy();
     actualsChart = new Chart(ctx, {
       type: "pie",
-      data: {
-        labels,
-        datasets: [{ data: dataVals }]
-      },
+      data: { labels, datasets: [{ data: dataVals }] },
       options: { responsive: true, plugins: { legend: { position: "bottom" } } }
     });
 
     // Fill tables
     const incomeBody = document.getElementById("incomeBody");
-    incomeBody.innerHTML = actualIncome.map(i =>
-      `<tr><td>${i.label}</td><td class="right">$${format(i.monthly)}</td></tr>`
-    ).join("");
-
     const expenseBody = document.getElementById("expenseBody");
-    expenseBody.innerHTML = actualExpenses.map(e =>
-      `<tr><td>${e.label}</td><td class="right">$${format(e.monthly)}</td></tr>`
-    ).join("");
+    if (incomeBody) {
+      incomeBody.innerHTML = actualIncome.map(i =>
+        `<tr><td>${i.label}</td><td class="right">$${format(i.monthly)}</td></tr>`
+      ).join("");
+    }
+    if (expenseBody) {
+      expenseBody.innerHTML = actualExpenses.map(e =>
+        `<tr><td>${e.label}</td><td class="right">$${format(e.monthly)}</td></tr>`
+      ).join("");
+    }
 
     const inc = sumMonthly(actualIncome);
     const exp = sumMonthly(actualExpenses);
-    document.getElementById("actuals-monthly-summary").textContent =
-      `Income: $${format(inc)} · Expenses: $${format(exp)} · Net: $${format(inc - exp)} /mo`;
+    const sumEl = document.getElementById("actuals-monthly-summary");
+    if (sumEl) {
+      sumEl.textContent = `${I("income","Income")}: $${format(inc)} · ${I("expenses","Expenses")}: $${format(exp)} · ${I("net","Net")}: $${format(inc - exp)} ${I("perMonthSuffix","/mo")}`;
+    }
   }
 
   function buildEditors() {
     const editIncomeBody = document.getElementById("editIncomeBody");
+    const editExpenseBody = document.getElementById("editExpenseBody");
+    if (!editIncomeBody || !editExpenseBody) return;
+
     editIncomeBody.innerHTML = editIncome.map((i, idx) =>
       `<tr>
          <td>${i.label}</td>
          <td class="right">
-            <input class="inline" type="number" min="0" step="0.01"
-                   value="${i.amountMonthly}"
-                   data-type="income" data-index="${idx}" />
+           <input class="inline" type="number" min="0" step="0.01"
+                  value="${i.amountMonthly}"
+                  data-type="income" data-index="${idx}" />
          </td>
        </tr>`
     ).join("");
 
-    const editExpenseBody = document.getElementById("editExpenseBody");
     editExpenseBody.innerHTML = editExpenses.map((e, idx) =>
       `<tr>
          <td>${e.label}</td>
          <td class="right">
-            <input class="inline" type="number" min="0" step="0.01"
-                   value="${e.amountMonthly}"
-                   data-type="expense" data-index="${idx}" />
+           <input class="inline" type="number" min="0" step="0.01"
+                  value="${e.amountMonthly}"
+                  data-type="expense" data-index="${idx}" />
          </td>
        </tr>`
     ).join("");
 
-    // delegate change events
-    document.getElementById("editIncomeTable").addEventListener("input", onEditChange);
-    document.getElementById("editExpenseTable").addEventListener("input", onEditChange);
+    const editIncomeTable = document.getElementById("editIncomeTable");
+    const editExpenseTable = document.getElementById("editExpenseTable");
+    if (editIncomeTable) editIncomeTable.addEventListener("input", onEditChange);
+    if (editExpenseTable) editExpenseTable.addEventListener("input", onEditChange);
   }
 
   function onEditChange(e) {
     const t = e.target;
-    if (t.tagName !== "INPUT") return;
+    if (!t || t.tagName !== "INPUT") return;
     const type = t.getAttribute("data-type");
     const index = Number(t.getAttribute("data-index"));
     const val = Number(t.value || 0);
@@ -118,82 +129,99 @@
     drawWhatIf();
     updateSummaries();
   }
+
   function drawWhatIf() {
-  const ctx = document.getElementById("whatIfChart");
-  const factor = 12 * years; // months in the selected horizon
+    const ctx = document.getElementById("whatIfChart");
+    if (!ctx) return;
 
-  const labels = [
-    ...editIncome.map(i => `Income: ${i.label}`),
-    ...editExpenses.map(e => `Expense: ${e.label}`)
-  ];
+    const factor = 12 * years; // months in the selected horizon
 
-  const dataVals = [
-    ...editIncome.map(i => i.amountMonthly * factor),
-    ...editExpenses.map(e => e.amountMonthly * factor)
-  ];
+    const labels = [
+      ...editIncome.map(i => `${I("income","Income")}: ${i.label}`),
+      ...editExpenses.map(e => `${I("expenses","Expense")}: ${e.label}`)
+    ];
+    const dataVals = [
+      ...editIncome.map(i => i.amountMonthly * factor),
+      ...editExpenses.map(e => e.amountMonthly * factor)
+    ];
 
-  if (whatIfChart) whatIfChart.destroy();
-  whatIfChart = new Chart(ctx, {
-    type: "pie",
-    data: { labels, datasets: [{ data: dataVals }] },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: "bottom" },
-        title: {
-          display: true,
-          text: `What-If • ${years} year${years > 1 ? "s" : ""} (totals)`
+    if (whatIfChart) whatIfChart.destroy();
+    whatIfChart = new Chart(ctx, {
+      type: "pie",
+      data: { labels, datasets: [{ data: dataVals }] },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "bottom" },
+          title: {
+            display: true,
+            text: `${I("whatIf","What-If")} • ${years} ${years === 1 ? I("yearOne","year") : I("yearMany","years")} (${I("totals","totals")})`
+          }
         }
       }
-    }
-  });
-}
-  function updateSummaries() {
-    const incA = sumMonthly(actualIncome);
-    const expA = sumMonthly(actualExpenses);
-    const netA = incA - expA;
+    });
+  }
 
+  function updateSummaries() {
     const incW = editIncome.reduce((s, x) => s + x.amountMonthly, 0);
     const expW = editExpenses.reduce((s, x) => s + x.amountMonthly, 0);
     const netW = incW - expW;
 
-    document.getElementById("whatif-monthly-summary").textContent =
-      `Income: $${format(incW)} · Expenses: $${format(expW)} · Net: $${format(netW)} /mo`;
+    const whatIfSum = document.getElementById("whatif-monthly-summary");
+    if (whatIfSum) {
+      whatIfSum.textContent = `${I("income","Income")}: $${format(incW)} · ${I("expenses","Expenses")}: $${format(expW)} · ${I("net","Net")}: $${format(netW)} ${I("perMonthSuffix","/mo")}`;
+    }
 
     const horizonIncome  = incW * 12 * years;
     const horizonExpense = expW * 12 * years;
-
-    document.getElementById("horizon-summary").textContent =
-      `Horizon: ${years} year(s) → Income: $${format(horizonIncome)} · Expenses: $${format(horizonExpense)} · Net: $${format(horizonIncome - horizonExpense)}`;
+    const hz = document.getElementById("horizon-summary");
+    if (hz) {
+      hz.textContent = `${I("horizon","Horizon")}: ${years} ${years === 1 ? I("yearOne","year") : I("yearMany","years")} → ${I("income","Income")}: $${format(horizonIncome)} · ${I("expenses","Expenses")}: $${format(horizonExpense)} · ${I("net","Net")}: $${format(horizonIncome - horizonExpense)}`;
+    }
   }
 
   // UI wiring
   function initControls() {
-    // default basis to current YYYY-MM
+    // basis month default = current
     const basisEl = document.getElementById("basis");
-    const now = new Date();
-    const ym = `${now.getUTCFullYear()}-${String(now.getUTCMonth()+1).padStart(2,"0")}`;
-    basisEl.value = ym;
-    basisEl.addEventListener("change", () => {
-      const [y,m] = basisEl.value.split("-").map(Number);
-      basis = new Date(Date.UTC(y, m - 1, 1));
-      loadData().catch(console.error);
-    });
+    if (basisEl) {
+      const now = new Date();
+      const ym = `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, "0")}`;
+      basisEl.value = ym;
+      basisEl.addEventListener("change", () => {
+        const [y, m] = (basisEl.value || ym).split("-").map(Number);
+        basis = new Date(Date.UTC(y, m - 1, 1));
+        loadData().catch(err => {
+          console.error(err);
+          alert(I("errors.analyticsLoad","Failed to load analytics data."));
+        });
+      });
+    }
 
     const yearsEl = document.getElementById("years");
-yearsEl.addEventListener("input", () => {
-  years = Math.max(1, parseInt(yearsEl.value || "1", 10));
-  drawWhatIf();          // <— add this line so the chart updates on year change
-  updateSummaries();
-});
+    if (yearsEl) {
+      yearsEl.addEventListener("input", () => {
+        years = Math.max(1, parseInt(yearsEl.value || "1", 10));
+        drawWhatIf();
+        updateSummaries();
+      });
+    }
 
+    const reloadBtn = document.getElementById("reload");
+    if (reloadBtn) {
+      reloadBtn.addEventListener("click", () => {
+        loadData().catch(err => {
+          console.error(err);
+          alert(I("errors.analyticsLoad","Failed to load analytics data."));
+        });
+      });
+    }
   }
 
   // Boot
   initControls();
   loadData().catch(err => {
     console.error(err);
-    alert("Failed to load analytics data.");
+    alert(I("errors.analyticsLoad","Failed to load analytics data."));
   });
 })();
-

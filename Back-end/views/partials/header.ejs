@@ -23,8 +23,6 @@
     <!-- chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
   </head>
   <body>
     <header class="header collapsedx" id="nav-Bar">
@@ -38,42 +36,43 @@
         </div>
         <div class="main-nav">
           <ul class="nav-links">
-              <li><a href="/dashboard"><%= t('nav.home') %></a></li>
-              <li><a href="/earnings"><%= t('nav.earnings') %></a></li>
-              <li><a href="/expenses"><%= t('nav.expenses') %></a></li>
-              <li><a href="/results"><%= t('nav.results') %></a></li>
-              <li><a href="/auth/logout"><%= t('nav.logout') %></a></li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-      <button class="open-nav" id="open-nav"><i class="fas fa-bars"></i></button>
+            <li><a href="/dashboard"><%= t('nav.home') %></a></li>
+            <li><a href="/earnings"><%= t('nav.earnings') %></a></li>
+            <li><a href="/expenses"><%= t('nav.expenses') %></a></li>
+            <li><a href="/results"><%= t('nav.results') %></a></li>
+            <li><a href="/auth/logout"><%= t('nav.logout') %></a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <button class="open-nav" id="open-nav"><i class="fas fa-bars"></i></button>
+
     <div class="profile-dark-bar" id="darkModebar">
       <div class="lang">
         <select id="language-select">
           <option value="en" <%= lang === 'en' ? 'selected' : '' %>>English</option>
           <option value="es" <%= lang === 'es' ? 'selected' : '' %>>Español</option>
+          <option value="fr" <%= lang === 'fr' ? 'selected' : '' %>>Français</option>
+          <option value="zh" <%= lang === 'zh' ? 'selected' : '' %>>中文</option>
+          <option value="ja" <%= lang === 'ja' ? 'selected' : '' %>>日本語</option>
         </select>
       </div>
+
       <div class="theme-switch">
         <i class="fas fa-sun"></i> 
-        <input type="checkbox" id="theme-toggle"/> <!-- Light mode icon -->
+        <input type="checkbox" id="theme-toggle"/>
         <label for="theme-toggle" class="theme-toggle-label"></label>
         <i class="fas fa-moon"></i>
       </div>
+
       <div class="profilePic">
         <a href="/profile">
-        <img id="siteProfile"
-          src="<%= (user && user.profilePic) ? user.profilePic : '/images/logo.png' %>"
-          alt="Profile Picture" width="150" 
-        />
-      </a>
+          <img id="siteProfile"
+            src="<%= (typeof user !== 'undefined' && user && user.profilePic) ? user.profilePic : '/images/logo.png' %>"
+            alt="Profile Picture" width="150" 
+          />
+
+        </a>
       </div>
-      <script>
-        document.getElementById('language-select').addEventListener('change', function () {
-          const params = new URLSearchParams(window.location.search);
-          params.set('lang', this.value);
-          window.location.search = params.toString();
-        });
-      </script>
     </div>

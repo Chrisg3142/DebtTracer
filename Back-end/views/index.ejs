@@ -17,6 +17,9 @@
           <select id="language-select">
             <option value="en" <%= lang === 'en' ? 'selected' : '' %>>English</option>
             <option value="es" <%= lang === 'es' ? 'selected' : '' %>>Español</option>
+            <option value="fr" <%= lang === 'fr' ? 'selected' : '' %>>Français</option>
+            <option value="zh" <%= lang === 'zh' ? 'selected' : '' %>>中文</option>
+            <option value="ja" <%= lang === 'ja' ? 'selected' : '' %>>日本語</option>
           </select>
         </div>
         <a href="/auth/login" class="btn login"><%= t('index.login') %></a>

@@ -6,7 +6,8 @@
     "expenses": "Expenses",
     "profile": "Profile",
     "results": "Results",
-    "logout": "Logout"
+    "logout": "Logout",
+    "playground": "Playground"
   },
   "index" : {
     "login": "Login",
@@ -113,6 +114,41 @@
     "currentPassword": "Current password",
     "newPassword": "New password",
     "confirmPassword": "Confirm new password"
+  },
+  "playground": {
+    "title": "Financial Playground",
+    "controls": {
+      "basisMonth": "Basis month",
+      "horizonYears": "Horizon (years)",
+      "reloadData": "Reload data",
+      "oneTimeNote": "One-time items count in the chosen basis month."
+    },
+    "actuals": {
+      "title": "Actuals (Monthly)",
+      "breakdown": "Breakdown",
+      "incomeHeader": "Income",
+      "expenseHeader": "Expense",
+      "monthlyHeader": "Monthly"
+    },
+    "netWord": "Net",
+    "horizonWord": "Horizon",
+    "yearOne": "year",
+    "yearMany": "years",
+    "perMonthSuffix": "/mo",
+    "totalsWord": "totals",
+    "errors": {
+      "analyticsLoad": "Failed to load analytics data."
+    },
+    "whatIf": {
+      "title": "What-If",
+      "editNote": "Edit the numbers below to simulate changes. Chart updates live.",
+      "incomeTitle": "Income (Monthly)",
+      "expensesTitle": "Expenses (Monthly)",
+      "sourceHeader": "Source",
+      "categoryHeader": "Category",
+      "amountHeader": "Amount"
+    },
+    "horizonSummaryLabel": "Horizon summary"
   },
   "auth": {
     "welcome": "Welcome back!",

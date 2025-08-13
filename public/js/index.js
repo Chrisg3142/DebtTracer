@@ -50,21 +50,35 @@ window.addEventListener("DOMContentLoaded", async () => {
     //this code is to save what language someone selects 
     //this makes it so it is retrieved from session storage and lets 
     //the language load up when the user starts up the page
-    const lang = document.getElementById("language-select");
-    if (lang){
-      const savedLang = localStorage.getItem("language");
-      if (savedLang){
-        lang.value = savedLang;
-        const params = new URLSearchParams(window.location.search);
-        if (params.get("lang") !== savedLang){
-          params.set("lang", savedLang);
-          window.location.search = params.toString();
-        }
+    const sel = document.getElementById("language-select");
+    if (sel) {
+      const supported = Array.from(sel.options).map(o => o.value);
+      const url = new URL(window.location.href);
+      const current = url.searchParams.get("lang");
+      const saved = localStorage.getItem("language");
+
+      const initial =
+        (current && supported.includes(current)) ? current :
+        (saved && supported.includes(saved)) ? saved :
+        sel.value;
+
+      if (sel.value !== initial) sel.value = initial;
+
+      if (current !== initial) {
+        url.searchParams.set("lang", initial);
+        window.location.replace(url.toString());
+        return;
       }
-      lang.addEventListener("change", () =>{
-        const language = lang.value;
-        localStorage.setItem("language", language);
-      })
+
+      sel.addEventListener("change", () => {
+        const chosen = sel.value;
+        localStorage.setItem("language", chosen);
+        const u = new URL(window.location.href);
+        if (u.searchParams.get("lang") !== chosen) {
+          u.searchParams.set("lang", chosen);
+          window.location.assign(u.toString());
+        }
+      });
     }
 
     openNav.addEventListener("click", () => {
@@ -89,11 +103,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         }
       };
       el.addEventListener("transitionend", handler);
-    }
-
-    function onTransitionEndOnce(el, cb){
-      const handler = (e)=>{ if(e.target === el){ el.removeEventListener('transitionend', handler); cb(); } };
-      el.addEventListener('transitionend', handler);
     }
     
     openNav.addEventListener("click", () => {

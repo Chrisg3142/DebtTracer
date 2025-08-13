@@ -37,6 +37,9 @@ const localesPath = join(__dirname, "Back-end", "locales");
 const translations = {
   en: JSON.parse(fs.readFileSync(join(localesPath, "en.json"), "utf-8")),
   es: JSON.parse(fs.readFileSync(join(localesPath, "es.json"), "utf-8")),
+  fr: JSON.parse(fs.readFileSync(join(localesPath, "fr.json"), "utf-8")),
+  zh: JSON.parse(fs.readFileSync(join(localesPath, "zh.json"), "utf-8")),
+  ja: JSON.parse(fs.readFileSync(join(localesPath, "ja.json"), "utf-8")),
 };
 
 app.use(express.json());
@@ -62,27 +65,50 @@ app.use(
   })
 );
 
-app.use((req, res, next) => {
-  let lang = req.session.lang;
-  if (req.query.lang && ["en", "es"].includes(req.query.lang)) {
-    lang = req.session.lang = req.query.lang;
+app.use(async (req, res, next) => {
+  res.locals.user = null; // always define it so EJS can reference it safely
+  if (req.session.userId) {
+    try {
+      // only select what you need to avoid pulling sensitive fields
+      res.locals.user = await User.findById(req.session.userId)
+        .select("profilePic name email")
+        .lean();
+    } catch (e) {
+      // optional: console.warn("Failed to load user for locals:", e);
+      res.locals.user = null;
+    }
   }
-  if (!lang) lang = req.session.lang = "en";
-  res.locals.lang = lang;
-  res.locals.t = (key) => {
-    return key
-      .split(".")
-      .reduce((obj, part) => (obj && obj[part] !== undefined ? obj[part] : key), translations[lang]);
-  };
   next();
 });
 
-app.use(async (req, res, next) => {
-  if (req.session.userId) {
-    res.locals.user = await User.findById(req.session.userId);
-  }
+const DEFAULT_LANG = "en";
+
+app.use((req, res, next) => {
+  const supported = Object.keys(translations);
+  const q = String(req.query.lang || "").toLowerCase();
+  if (q && supported.includes(q)) req.session.lang = q;
+
+  let lang = (req.session.lang || DEFAULT_LANG).toLowerCase();
+  if (!supported.includes(lang)) lang = DEFAULT_LANG;
+
+  res.locals.lang = lang;
+  res.locals.t = (key, vars = {}) => {
+    // look in selected language, then fall back to default, else return the key
+    const deepGet = (obj, k) =>
+      k.split(".").reduce((o, p) => (o && o[p] !== undefined ? o[p] : undefined), obj);
+
+    let val =
+      deepGet(translations[lang], key) ??
+      deepGet(translations[DEFAULT_LANG] || {}, key) ??
+      key;
+
+    // simple {{var}} interpolation (e.g., {{count}})
+    return String(val).replace(/{{\s*(\w+)\s*}}/g, (_, k) => (vars[k] ?? ""));
+  };
+
   next();
 });
+
 
 // Route middleware
 app.use("/auth", authRoutes);
@@ -159,7 +185,7 @@ app.post("/ask", async (req, res) => {
         const chatHistory = [...req.session.chatHistory];
 
         if (req.session.userId) {
-            const [incomes, expenses, debts] = await Promise.all([
+            const [incomes, expenses] = await Promise.all([
                 Income.find({ userId: req.session.userId }).select("source amount frequency -_id"),
                 Expense.find({ userId: req.session.userId }).select("category name amount -_id"),
                 Debt.find({ userId: req.session.userId }).select("type remainingAmount interestRate minimumPayment dueDate -_id"),

@@ -1,10 +1,19 @@
 <%- include('partials/header') %>
 <main class="content-container">
   <% function formatCurrency(amount) { 
-  return amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); 
-} %>
+       return amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); 
+     } 
+     // map stored frequency codes -> localized labels
+     const freqLabel = (code) => ({
+       'one-time': t('earnings.oneTime'),
+       'weekly':   t('earnings.weekly'),
+       'biweekly': t('earnings.biweekly'),
+       'monthly':  t('earnings.monthly'),
+     }[code] || code);
+  %>
+
   <section class="earnings-section">
-    <h1 class="mb-4" id="top-title-h1">Income Management</h1>
+    <h1 class="mb-4" id="top-title-h1"><%= t('earnings.title') %></h1>
 
     <% if (typeof alert !== 'undefined' && alert) { %>
       <div class="alert alert-<%= alert.type %> alert-dismissible fade show mb-4">
@@ -16,30 +25,37 @@
 
     <div class="card mb-4">
       <div class="card-header">
-        <h2 class="card-title">Add New Income</h2>
+        <h2 class="card-title"><%= t('earnings.addNew') %></h2>
       </div>
       <div class="card-body">
         <form action="/earnings" method="POST" class="income-form">
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="source" class="form-label">Income Source*</label>
+              <label for="source" class="form-label"><%= t('earnings.source') %>*</label>
               <div class="input-group">
                 <select class="form-select" id="source-select" name="source-select" required onchange="handleSourceChange(this)">
-                  <option value="" disabled selected>Select a source</option>
-                  <option value="Salary">Salary</option>
-                  <option value="Freelance">Freelance</option>
-                  <option value="Bonus">Bonus</option>
-                  <option value="Investment">Investment</option>
-                  <option value="Rental">Rental Income</option>
-                  <option value="Other">Other (Specify Below)</option>
+                  <option value="" disabled selected><%= t('earnings.selectSource') %></option>
+                  <!-- Keep canonical values; localize visible labels -->
+                  <option value="Salary"><%= t('earnings.salary') %></option>
+                  <option value="Freelance"><%= t('earnings.freelance') %></option>
+                  <option value="Bonus"><%= t('earnings.bonus') %></option>
+                  <option value="Investment"><%= t('earnings.investment') %></option>
+                  <option value="Rental"><%= t('earnings.rental') %></option>
+                  <option value="Other"><%= t('earnings.other') %></option>
                 </select>
-                <input type="text" class="form-control d-none" id="source-custom" name="source-custom" placeholder="Enter custom source">
+                <input
+                  type="text"
+                  class="form-control d-none"
+                  id="source-custom"
+                  name="source-custom"
+                  placeholder="<%= t('earnings.customPlaceholder') %>"
+                >
               </div>
               <input type="hidden" id="source" name="source" required>
             </div>
             
             <div class="col-md-6">
-              <label for="amount" class="form-label">Amount*</label>
+              <label for="amount" class="form-label"><%= t('earnings.amount') %>*</label>
               <div class="input-group">
                 <span class="input-group-text">$</span>
                 <input type="number" class="form-control" id="amount" name="amount" step="0.01" min="0.01" placeholder="0.00" required>
@@ -47,24 +63,24 @@
             </div>
 
             <div class="col-md-4">
-              <label for="date" class="form-label">Date*</label>
-                <input type="date" class="form-control" id="date" name="date" required>
-                <input type="hidden" id="timezoneOffset" name="timezoneOffset">
+              <label for="date" class="form-label"><%= t('earnings.date') %>*</label>
+              <input type="date" class="form-control" id="date" name="date" required>
+              <input type="hidden" id="timezoneOffset" name="timezoneOffset">
             </div>
 
             <div class="col-md-4">
-              <label for="frequency" class="form-label">Frequency*</label>
+              <label for="frequency" class="form-label"><%= t('earnings.frequency') %>*</label>
               <select class="form-select" id="frequency" name="frequency" required>
-                <option value="one-time">One-time</option>
-                <option value="weekly">Weekly</option>
-                <option value="biweekly">Bi-weekly</option>
-                <option value="monthly">Monthly</option>
+                <option value="one-time"><%= t('earnings.oneTime') %></option>
+                <option value="weekly"><%= t('earnings.weekly') %></option>
+                <option value="biweekly"><%= t('earnings.biweekly') %></option>
+                <option value="monthly"><%= t('earnings.monthly') %></option>
               </select>
             </div>
 
             <div class="col-md-4 d-flex align-items-end">
               <button type="submit" class="btn btn-primary w-100">
-                <i class="fas fa-plus-circle me-2"></i>Add Income
+                <i class="fas fa-plus-circle me-2"></i><%= t('earnings.addIncome') %>
               </button>
             </div>
           </div>
@@ -74,9 +90,9 @@
 
     <div class="card" id="income-history-card">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <h2 class="card-title mb-0">Income History</h2>
+        <h2 class="card-title mb-0"><%= t('earnings.history') %></h2>
         <span class="badge bg-success fs-6">
-          Total: $<%= earnings.reduce((sum, e) => sum + e.amount, 0).toFixed(2) %>
+          <%= t('earnings.total') %>: $<%= earnings.reduce((sum, e) => sum + e.amount, 0).toFixed(2) %>
         </span>
       </div>
       
@@ -86,36 +102,42 @@
             <table class="table table-hover mb-0">
               <thead class="table-light">
                 <tr>
-                  <th>Date</th>
-                  <th>Source</th>
-                  <th>Amount</th>
-                  <th>Frequency</th>
-                  <th>Actions</th>
+                  <th><%= t('earnings.table.date') %></th>
+                  <th><%= t('earnings.table.source') %></th>
+                  <th><%= t('earnings.table.amount') %></th>
+                  <th><%= t('earnings.table.frequency') %></th>
+                  <th><%= t('earnings.table.actions') %></th>
                 </tr>
               </thead>
               <tbody>
                 <% earnings.forEach(income => { %>
                   <tr id="income-row-<%= income._id %>">
                     <td>
-                        <% const utcDate = new Date(income.date);const localDate = new Date(utcDate.getUTCFullYear(),utcDate.getUTCMonth(),utcDate.getUTCDate());%>
-                        <%= localDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %>
+                      <% 
+                        const utcDate = new Date(income.date);
+                        const localDate = new Date(utcDate.getUTCFullYear(), utcDate.getUTCMonth(), utcDate.getUTCDate());
+                      %>
+                      <%= localDate.toLocaleDateString(lang || 'en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %>
                     </td>
                     <td>
                       <span id="source-display-<%= income._id %>"><%= income.source %></span>
                       <div class="d-none" id="source-edit-container-<%= income._id %>">
+                        <!-- Keep canonical values; localize visible labels -->
                         <select class="form-select mb-2" id="source-edit-<%= income._id %>" onchange="handleEditSourceChange(this, '<%= income._id %>')">
-                          <option value="Salary" <%= income.source === 'Salary' ? 'selected' : '' %>>Salary</option>
-                          <option value="Freelance" <%= income.source === 'Freelance' ? 'selected' : '' %>>Freelance</option>
-                          <option value="Bonus" <%= income.source === 'Bonus' ? 'selected' : '' %>>Bonus</option>
-                          <option value="Investment" <%= income.source === 'Investment' ? 'selected' : '' %>>Investment</option>
-                          <option value="Rental" <%= income.source === 'Rental' ? 'selected' : '' %>>Rental Income</option>
-                          <option value="Other" <%= income.source === 'Other' || !['Salary','Freelance','Bonus','Investment','Rental'].includes(income.source) ? 'selected' : '' %>>Other</option>
+                          <option value="Salary"   <%= income.source === 'Salary' ? 'selected' : '' %>  ><%= t('earnings.salary') %></option>
+                          <option value="Freelance"<%= income.source === 'Freelance' ? 'selected' : '' %>><%= t('earnings.freelance') %></option>
+                          <option value="Bonus"    <%= income.source === 'Bonus' ? 'selected' : '' %>    ><%= t('earnings.bonus') %></option>
+                          <option value="Investment"<%= income.source === 'Investment' ? 'selected' : '' %>><%= t('earnings.investment') %></option>
+                          <option value="Rental"   <%= income.source === 'Rental' ? 'selected' : '' %>   ><%= t('earnings.rental') %></option>
+                          <option value="Other"    <%= income.source === 'Other' || !['Salary','Freelance','Bonus','Investment','Rental'].includes(income.source) ? 'selected' : '' %>><%= t('earnings.other') %></option>
                         </select>
-                        <input type="text" 
-                               class="form-control <%= income.source === 'Other' || !['Salary','Freelance','Bonus','Investment','Rental'].includes(income.source) ? '' : 'd-none' %>" 
-                               id="source-custom-edit-<%= income._id %>" 
-                               placeholder="Specify custom source"
-                               value="<%= income.source === 'Other' || !['Salary','Freelance','Bonus','Investment','Rental'].includes(income.source) ? income.source : '' %>">
+                        <input
+                          type="text"
+                          class="form-control <%= income.source === 'Other' || !['Salary','Freelance','Bonus','Investment','Rental'].includes(income.source) ? '' : 'd-none' %>"
+                          id="source-custom-edit-<%= income._id %>"
+                          placeholder="<%= t('earnings.customPlaceholder') %>"
+                          value="<%= (income.source === 'Other' || !['Salary','Freelance','Bonus','Investment','Rental'].includes(income.source)) ? income.source : '' %>"
+                        >
                       </div>
                     </td>
                     <td class="fw-bold">
@@ -126,17 +148,20 @@
                       </div>
                     </td>
                     <td>
-                      <span id="frequency-display-<%= income._id %>" class="badge bg-<%= 
-                        income.frequency === 'one-time' ? 'secondary' : 
-                        income.frequency === 'weekly' ? 'info' :
-                        income.frequency === 'biweekly' ? 'primary' : 'warning' %>">
-                        <%= income.frequency.charAt(0).toUpperCase() + income.frequency.slice(1) %>
+                      <%
+                        const badgeClass =
+                          income.frequency === 'one-time' ? 'secondary' :
+                          income.frequency === 'weekly'   ? 'info'      :
+                          income.frequency === 'biweekly' ? 'primary'   : 'warning';
+                      %>
+                      <span id="frequency-display-<%= income._id %>" class="badge bg-<%= badgeClass %>">
+                        <%= freqLabel(income.frequency) %>
                       </span>
                       <select class="form-select d-none" id="frequency-edit-<%= income._id %>">
-                        <option value="one-time" <%= income.frequency === 'one-time' ? 'selected' : '' %>>One-time</option>
-                        <option value="weekly" <%= income.frequency === 'weekly' ? 'selected' : '' %>>Weekly</option>
-                        <option value="biweekly" <%= income.frequency === 'biweekly' ? 'selected' : '' %>>Bi-weekly</option>
-                        <option value="monthly" <%= income.frequency === 'monthly' ? 'selected' : '' %>>Monthly</option>
+                        <option value="one-time" <%= income.frequency === 'one-time' ? 'selected' : '' %>><%= t('earnings.oneTime') %></option>
+                        <option value="weekly"   <%= income.frequency === 'weekly'   ? 'selected' : '' %>><%= t('earnings.weekly') %></option>
+                        <option value="biweekly" <%= income.frequency === 'biweekly' ? 'selected' : '' %>><%= t('earnings.biweekly') %></option>
+                        <option value="monthly"  <%= income.frequency === 'monthly'  ? 'selected' : '' %>><%= t('earnings.monthly') %></option>
                       </select>
                     </td>
                     <td>
@@ -147,7 +172,7 @@
                         </button>
                         <button class="btn btn-outline-danger delete-income" data-id="<%= income._id %>">
                           <i class="fas fa-trash-alt"></i>
-                          <span class="d-none d-sm-inline">Delete</span>
+                          <span class="d-none d-sm-inline"><%= t('earnings.delete') %></span>
                         </button>
                       </div>
                       <div class="btn-group btn-group-sm d-none" id="save-buttons-<%= income._id %>">
@@ -168,7 +193,7 @@
           </div>
         <% } else { %>
           <div class="alert alert-info m-3">
-            <i class="fas fa-info-circle me-2"></i>No income records found. Add your first income above.
+            <i class="fas fa-info-circle me-2"></i><%= t('earnings.noRecords') %>
           </div>
         <% } %>
       </div>

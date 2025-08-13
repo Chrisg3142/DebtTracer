@@ -458,6 +458,8 @@ which includes the profile picture
   border-radius: 25px;
   height: 30px;
   width: 85px;
+  text-align: center;
+  
 }
 
 #language-select:hover{
@@ -823,4 +825,17 @@ body.dark-mode .content-containerP {
 .goHome{
 display: flex;
 gap:10px;
+}
+
+.langl select{
+        border-radius: 25px;
+        height: 30px;
+        width: 85px;
+        text-align: center;
+       
+}
+.langl{
+ position:fixed;
+ right: 25px;
+ top: 25px;
 }

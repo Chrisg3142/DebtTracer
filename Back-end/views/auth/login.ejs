@@ -8,7 +8,15 @@
     <link rel="stylesheet" href="/styles/styles.css" />
   </head>
   <body class="auth-container">
-    
+            <div class="langl">
+          <select id="language-select">
+            <option value="en" <%= lang === 'en' ? 'selected' : '' %>>English</option>
+            <option value="es" <%= lang === 'es' ? 'selected' : '' %>>Español</option>
+            <option value="fr" <%= lang === 'fr' ? 'selected' : '' %>>Français</option>
+            <option value="zh" <%= lang === 'zh' ? 'selected' : '' %>>中文</option>
+            <option value="ja" <%= lang === 'ja' ? 'selected' : '' %>>日本語</option>
+          </select>
+        </div>
     <div class="login_logo">
       <a href="/"><img src="/images/logo.png" alt="Logo" /></a>
       <h1 id="logo_title">Debt Tracer</h1>
@@ -45,5 +53,12 @@
           </p>
         </div>
     </div>
+    <script>
+  document.getElementById('language-select').addEventListener('change', function () {
+    const params = new URLSearchParams(window.location.search);
+    params.set('lang', this.value);
+    window.location.search = params.toString();
+  });
+</script>
   </body>
 </html>

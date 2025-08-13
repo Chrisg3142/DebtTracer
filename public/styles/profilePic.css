@@ -11,7 +11,7 @@ right of every page
     width: 100px;
 } */
 
-.content-container{
+.content-containerP{
     display: flex;
     flex-direction: column;
     background-color: antiquewhite;

@@ -477,6 +477,13 @@ body.dark-mode {
   background-size: 20px 20px;
 }
 
+body.light-mode {
+  background-color: rgb(255, 255, 255);
+  color: #3b3b3b;
+  background-image: radial-gradient(rgba(18, 18, 18, 0.759) 1px, transparent 2px);
+  background-size: 20px 20px;
+}
+
 .dark-mode .header {
   background: #000;
 }

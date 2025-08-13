@@ -718,3 +718,15 @@ main > .recent-activity{
 }
   
   
+.card {
+  background-color: var(--card-bg, #1e293b); /* or your chosen navy/grey */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}

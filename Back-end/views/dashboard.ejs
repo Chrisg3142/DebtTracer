@@ -8,15 +8,15 @@
         <div class="summary-cards">
           <div class="card" id="expense1">
               <h3><%= t('dashboard.totalIncome') %></h3>
-            <p>$<%= totalIncome.toFixed(2) %></p>
+            <p>$<%= formatCurrency(totalIncome) %></p>
           </div>
           <div class="card" id="expense2">
               <h3><%= t('dashboard.totalExpenses') %></h3>
-            <p>$<%= totalExpenses.toFixed(2) %></p>
+            <p>$<%= formatCurrency(totalExpenses) %></p>
           </div>
           <div class="card" id="expense3">
               <h3><%= t('dashboard.remainingBalance') %></h3>
-            <p>$<%= (totalIncome - totalExpenses).toFixed(2) %></p>
+            <p>$<%= formatCurrency((totalIncome - totalExpenses)) %></p>
           </div>
         </div>
       </section>

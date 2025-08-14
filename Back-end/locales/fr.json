@@ -170,6 +170,9 @@
       },
       "horizonSummaryLabel": "Résumé de l’horizon"
     },
+    "chat": {
+      "welcome": "👋 Salut ! Je suis Sena. Je suis là pour vous aider à comprendre et gérer votre dette. Posez-moi toutes vos questions !"
+    },  
     "auth": {
       "welcome": "Bon retour !",
       "username": "Nom d’utilisateur",

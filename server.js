@@ -105,7 +105,6 @@ app.use((req, res, next) => {
     // simple {{var}} interpolation (e.g., {{count}})
     return String(val).replace(/{{\s*(\w+)\s*}}/g, (_, k) => (vars[k] ?? ""));
   };
-
   next();
 });
 
@@ -188,13 +187,11 @@ app.post("/ask", async (req, res) => {
             const [incomes, expenses] = await Promise.all([
                 Income.find({ userId: req.session.userId }).select("source amount frequency -_id"),
                 Expense.find({ userId: req.session.userId }).select("category name amount -_id"),
-                Debt.find({ userId: req.session.userId }).select("type remainingAmount interestRate minimumPayment dueDate -_id"),
             ]);
 
             const summary = {
                 incomes,
                 expenses,
-                debts,
             };
 
             chatHistory.push({
@@ -299,9 +296,9 @@ app.get("/chart-data", async (req, res) => {
 
 //starting message for when the user first opens the ai
 app.get("/welcome", (req, res) => {
-res.json({
-    response: "👋 Hi! I'm Sena. I'm here to help you understand and manage your debt. Ask me anything!"
-});
+  res.json({
+    response: res.locals.t("chat.welcome")
+  });
 });
 
 app.use((err, req, res, next) => {

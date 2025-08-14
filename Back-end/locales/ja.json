@@ -170,6 +170,9 @@
       },
       "horizonSummaryLabel": "期間のサマリー"
     },
+    "chat": {
+      "welcome": "👋 こんにちは、Senaです。あなたの負債の理解と管理をお手伝いします。何でも聞いてください！"
+    },
     "auth": {
       "welcome": "お帰りなさい！",
       "username": "ユーザー名",
